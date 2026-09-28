@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+
+# Build- en frameworkoutput
+dist/
+build/
+.astro/
+.vite/
+.cache/
+out/
+
+# Omgevingsvariabelen en secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# Testoutput
+test-output/
+coverage/
+
+# Besturingssysteem
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp

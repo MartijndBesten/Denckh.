@@ -1,0 +1,17 @@
+# Tekstbestanden in de repo altijd met LF, ook bij werken op Windows
+* text=auto eol=lf
+
+# Binaire bestanden
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.avif binary
+*.ico binary
+*.pdf binary
+*.woff binary
+*.woff2 binary
+*.mp4 binary
+*.webm binary
+*.glb binary
