@@ -58,6 +58,14 @@ const browser = await chromium.launch();
   await p.fill("#punt-idee", "een uitleg bij een machine");
   await p.getByRole("button", { name: "Vertel", exact: true }).click();
   check("vraag: voorbeeldreactie noemt het idee", /een uitleg bij een machine/.test((await p.locator(".punt__reply").textContent()) ?? ""));
+  await p.waitForTimeout(900);
+  check("idee: vorm krijgt een kader met onderwerp", ((await p.locator(".idea-title").textContent()) ?? "") === "Machine");
+  check("idee: knop regelt iets uit het idee", /detailniveau/.test((await slider.getAttribute("aria-valuetext")) ?? ""), (await slider.getAttribute("aria-valuetext")) ?? "");
+  check("idee: drie aantekeningen bij drie delen", (await p.locator(".punt__notes li").count()) === 3);
+  await p.fill("#punt-idee", "een webshop voor mijn bakkerij");
+  await p.getByRole("button", { name: "Vertel", exact: true }).click();
+  await p.waitForTimeout(300);
+  check("idee: ander idee, andere vorm", ((await p.locator(".idea-title").textContent()) ?? "") === "Bakkerij" && /aantal/.test((await slider.getAttribute("aria-valuetext")) ?? ""));
   const href = await p.locator(".contact-return__form").evaluate((f) => f.closest("section") !== null);
   check("contact: sectie aanwezig", href);
   const sketchNote = await p.locator(".contact-return__sketch").count();
@@ -115,7 +123,32 @@ const browser = await chromium.launch();
   await ctx.close();
 }
 
-// 6 · geen horizontale overflow
+// 6 · projecten: vormen starten pas als het beeld in zicht is, stappen zijn klikbaar, Loflijn is speelbaar
+{
+  const { p, ctx, errors } = await page(browser, { width: 390, height: 844, mobile: true });
+  const fig = p.locator(".construct").first();
+  const box = await fig.evaluate((el) => { const r = el.getBoundingClientRect(); return { top: r.top + scrollY, h: r.height }; });
+  await p.evaluate(({ top, h }) => scrollTo(0, top + h / 2 - innerHeight * 0.8), box);
+  await p.waitForTimeout(400);
+  check("construct: nog een lijn zolang het beeld binnenkomt", (await fig.locator(".construct__line.is-sketch").count()) === 1);
+  await p.evaluate(({ top, h }) => scrollTo(0, top + h / 2 - innerHeight * 0.55), box);
+  await p.waitForTimeout(900);
+  const pizza = fig.getByRole("button", { name: "een pizza" });
+  await pizza.click();
+  await p.waitForTimeout(1200);
+  check("construct: stap is klikbaar", (await pizza.getAttribute("aria-current")) === "step");
+  await p.locator(".turn").scrollIntoViewIfNeeded();
+  await p.getByRole("button", { name: "Leg de kaart tussen 1936 en 2004" }).click();
+  check("loflijn: beurt geeft antwoord", /Goed/.test((await p.locator(".turn__say").textContent()) ?? ""));
+  check("loflijn: kaart blijft op de tijdlijn", (await p.locator(".turn__line .turn__card").count()) === 4);
+  for (let i = 0; i < 3; i++) { await p.locator(".more__item").nth(i).scrollIntoViewIfNeeded(); await p.waitForTimeout(300); }
+  await p.waitForTimeout(1200);
+  check("ook gemaakt: drie vormen krijgen vorm", (await p.locator(".more__details").count()) === 3);
+  check("projecten: geen console-errors", errors.length === 0, errors.join(" | "));
+  await ctx.close();
+}
+
+// 7 · geen horizontale overflow
 for (const width of [320, 390, 768, 1024, 1440]) {
   const { p, ctx } = await page(browser, { width, height: 800, mobile: width < 500 });
   const ov = await p.evaluate(() => document.documentElement.scrollWidth - innerWidth);

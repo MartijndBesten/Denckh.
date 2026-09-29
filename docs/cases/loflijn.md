@@ -24,6 +24,15 @@ Loflijn is een fysiek christelijk muziekspel met een eigen online productpresent
 - Eigenaar: Loflijn mag als case met naam en link. De site toont een schematische constructie, geen kaartontwerpen of productfoto's.
 - Rol op de site: "de website en webshop", onderbouwd door de vermelding "Website gemaakt door Denckh." in de footer van loflijn.nl.
 
+## Ronde 2 (2026-09-29, branch `creatief/ronde-2`)
+
+- Feedback eigenaar: "Loflijn … lijkt nu hetzelfde als deegh.nl." Beide constructies eindigden in een webshop.
+- Nieuw: de constructie volgt een **beurt in het spel** (kaart met QR → lied → plek op de tijdlijn) en eindigt in een
+  tijdlijn "van psalm tot praise", niet in een webshop. Daaronder een speelbare voorbeeldbeurt.
+- De voorbeeldbeurt gebruikt verzonnen jaartallen zonder liedtitels en zegt dat er ook bij: "Voorbeeld van het
+  spelprincipe. De jaartallen zijn ter illustratie, niet van echte kaarten."
+- Eigenaar na het zien van de voorbeeldbeurt, 2026-09-29: "Loflijn is top". De beurt blijft zoals gebouwd.
+
 ## Nog te bevestigen
 
 - [TE BEVESTIGEN] Van wie is het spel? Is het spel ook door Martijn/Denckh bedacht of ontworpen, of alleen de webshop?

@@ -9,18 +9,20 @@ De homepage volgt nu de interactieve grammatica uit `docs/creative-direction.md`
 
 | # | Blok | Interactie |
 |---|---|---|
-| 1 | **Heb je een idee? Mooi.** | De punt uit "Mooi." trekken en tekenen → Denckh kijkt → lezing → eerste vorm → één vraag |
+| 1 | **Heb je een idee? Mooi.** | De punt uit "Mooi." trekken en tekenen → Denckh kijkt → lezing → eerste vorm → één vraag → het idee maakt de vorm concreet (onderwerp, drie delen, aantekeningen; opnieuw te proberen) |
 | 2 | overgang | jouw lijn, uitgerold |
 | 3 | **Van idee naar vorm.** | letters vinden hun plek tijdens het scrollen |
-| 4 | **Wat er al vorm kreeg.** | drie projecten, elk uit jouw lijn opgebouwd: Deegh (product → merk → webshop), een demokoffer (techniek → uitleg; zonder merknaam), een spel (fysiek → uitleg en verkoop; zonder naam) |
-| 5 | **Wat kan eruit komen?** | één lijn, tien vormen, kiesbaar |
-| 6 | **Zo werkt het.** | Vertel → Denckh → Vorm met jouw eigen lijn |
-| 7 | **Denckh is klein. Bewust.** | plek voor een echte foto |
-| 8 | overgang | jouw lijn |
-| 9 | **En wat zit er bij jou in je hoofd?** | de punt komt terug; je schets en zin reizen mee; mailto naar info@denckh.nl |
+| 4 | **Wat er al vorm kreeg.** | drie projecten, elk uit jouw lijn opgebouwd; scroll bepaalt de stand, de stappen eronder zijn klikbaar. Deegh (deegbol → pizza → webshop), een demokoffer (techniek → uitleg; zonder merknaam), Loflijn (kaart → lied → tijdlijn, plus een speelbare voorbeeldbeurt) |
+| 5 | **Ook gemaakt.** | drie kleinere projecten, elk één vorm waar jouw lijn in overloopt: Autowasdag Sionkerk (agenda), een presentatie (scherm; anoniem), een werkdag in 3D (gebouw; anoniem) |
+| 6 | **Wat kan eruit komen?** | één lijn, tien vormen, kiesbaar |
+| 7 | **Zo werkt het.** | Vertel → Denckh → Vorm met jouw eigen lijn |
+| 8 | **Denckh is klein. Bewust.** | plek voor een echte foto |
+| 9 | overgang | jouw lijn |
+| 10 | **En wat zit er bij jou in je hoofd?** | de punt komt terug; je schets en zin reizen mee; mailto naar info@denckh.nl |
 
-Contact werkt via het eigen mailprogramma (GitHub Pages kan niets verzenden). Namen en beelden van IntuSens/TRILUX,
-Loflijn en de TRILUX 3D-demo blijven weg tot er toestemming is.
+Contact werkt via het eigen mailprogramma (GitHub Pages kan niets verzenden). Deegh en Loflijn staan er met naam en
+link (B-029). De demokoffer, de presentatie en de 3D-werkdag blijven zonder merknaam, beelden of link. Autowasdag
+Sionkerk staat er met naam en link (akkoord eigenaar, B-038).
 
 ---
 

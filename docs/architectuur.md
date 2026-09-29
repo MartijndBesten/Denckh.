@@ -24,7 +24,7 @@ is een bewuste livegang en gebeurt alleen na akkoord van de eigenaar.
 | Styling | Eén globale stylesheet met tokens (`src/app/globals.css`); Tailwind 4 is aanwezig, maar wordt nauwelijks gebruikt |
 | Interactie | Eigen code, geen animatiebibliotheek: canvas (live tekenen), SVG (analyse, vormen), CSS (overgangen) |
 | Fonts | Fraunces (display, eigen instantie: SOFT 100, WONK 0, opsz 72–144, wght 400–700) en Manrope, **zelf gehost en gesubset** (samen 50 KB) |
-| Tests | `npm run test:e2e` (Playwright, 23 controles), `lint`, `typecheck` |
+| Tests | `npm run test:e2e` (Playwright, 33 controles), `lint`, `typecheck` |
 
 ## 3. Interactie-architectuur
 
@@ -72,7 +72,7 @@ in `sessionStorage` van de eigen browser en verdwijnen met het tabblad. Privacyv
 | JavaScript homepage | 192 KB gzip, waarvan ca. 150 KB Next.js/React-runtime en ca. 40 KB eigen code |
 | Fonts | 50 KB (2 bestanden, preload) |
 | axe (WCAG 2.2 AA + best practices) | 0 overtredingen op home (1440 en 390 px), Deegh-case en privacy |
-| e2e | 23/23: tekenen (muis, touch, toetsenbord), voorbeeld, reduced motion, geen overflow van 320 tot 1440 px, geen console-errors |
+| e2e | 33/33: tekenen (muis, touch, toetsenbord), voorbeeld, idee maakt de vorm concreet, reduced motion, projecten (late start, klikbare stappen, Loflijn-beurt, "Ook gemaakt"), geen overflow van 320 tot 1440 px, geen console-errors |
 
 **Kanttekening:** de JS-bundel ligt boven het eerdere budget van 130 KB. Het verschil zit bijna helemaal in de
 Next.js-runtime. Astro zou hier ca. 100 KB lichter zijn; zie open punt in `HANDOFF.md`.

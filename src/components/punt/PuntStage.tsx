@@ -5,8 +5,9 @@
 // Alles gebeurt in de browser. Er wordt niets verstuurd.
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type FormEvent, type KeyboardEvent, type PointerEvent } from "react";
 import { analyze, classify, measureLabels, type Features, type FormKind } from "@/lib/ink/analyze";
+import { conceptReply, makeConcept, type Concept } from "@/lib/ink/concept";
 import { buildForm, N, type Form } from "@/lib/ink/forms";
-import { clamp, dist, easeInOut, easeOut, lerp, linePath, outlinePath, resample, smooth, type InkPt, type Pt } from "@/lib/ink/geometry";
+import { bbox, clamp, dist, easeInOut, easeOut, lerp, linePath, outlinePath, resample, smooth, type InkPt, type Pt } from "@/lib/ink/geometry";
 import { READINGS, readingFor } from "@/lib/ink/interpret";
 import { normalize, place, setSketch } from "@/lib/ink/store";
 import { useReducedMotion } from "@/lib/ink/useReducedMotion";
@@ -41,6 +42,7 @@ export function PuntStage() {
   const [morph, setMorph] = useState(0);
   const [idea, setIdea] = useState("");
   const [reply, setReply] = useState("");
+  const [concept, setConcept] = useState<Concept | null>(null);
   const [keyboard, setKeyboard] = useState(false);
   const [size, setSize] = useState({ w: 0, h: 0 });
   const phaseRef = useRef<Phase>("idle");
@@ -145,7 +147,7 @@ export function PuntStage() {
   // --- start, bewegen, loslaten
   function reset(keepFocus = true) {
     raw.current = [];
-    setInk([]); setForm(null); setFeatures(null); setMorph(0); setReply(""); setKeyboard(false);
+    setInk([]); setForm(null); setFeatures(null); setMorph(0); setReply(""); setConcept(null); setKeyboard(false);
     setPhase("idle");
     paint();
     placeDot(home.current);
@@ -270,7 +272,9 @@ export function PuntStage() {
   // --- vorm geven: de schets verandert punt voor punt in de vorm
   function giveForm() {
     if (!features || phase !== "lezen") return;
-    const z = zone.current;
+    // houd ruimte vrij voor het kader dat het idee er later omheen tekent (titel boven, drie delen onder)
+    const z0 = zone.current;
+    const z = { x: z0.x + 18, y: z0.y + 44, w: z0.w - 36, h: z0.h - 96 };
     const f = buildForm(kind, features.core, features, z);
     setForm(f);
     setPhase("vormen");
@@ -293,8 +297,12 @@ export function PuntStage() {
   function submitIdea(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const text = idea.trim().slice(0, 140);
-    if (!text) return;
-    setReply(READINGS[kind].reply(text));
+    if (!text || !form) return;
+    // het idee maakt de vorm concreet: onderdelen, onderwerp en aantekeningen (vaste regels, zie concept.ts)
+    const c = makeConcept(text);
+    const count = form.kind === "route" || form.kind === "kaart" ? form.nodes.length : 3;
+    setConcept(c);
+    setReply(conceptReply(c, kind, count) || READINGS[kind].reply(text));
     setSketch({ idea: text });
   }
 
@@ -337,7 +345,8 @@ export function PuntStage() {
         {phase === "vorm" && form && (
           <>
             <path d={linePath(form.outline, form.closed)} className="punt__form" />
-            <FormWidget form={form} />
+            <FormWidget form={form} concept={concept ?? undefined} />
+            {concept && <IdeaMarks form={form} concept={concept} zone={zone.current} stage={size} />}
           </>
         )}
       </svg>
@@ -374,16 +383,18 @@ export function PuntStage() {
         {phase === "vorm" && (
           <div className="punt__reading">
             <p className="punt__say">{READINGS[kind].caption}</p>
-            {!reply ? (
-              <form className="punt__ask" onSubmit={submitIdea}>
-                <label htmlFor="punt-idee">Wat zat er ongeveer in je hoofd?</label>
-                <div className="punt__ask-row">
-                  <input id="punt-idee" value={idea} onChange={(e) => setIdea(e.target.value)} maxLength={140} placeholder="bijvoorbeeld: een uitleg bij ons product" autoComplete="off" />
-                  <button type="submit" className="ink-button" disabled={!idea.trim()}>Vertel</button>
-                </div>
-              </form>
-            ) : (
-              <p className="punt__reply">{reply}</p>
+            <form className="punt__ask" onSubmit={submitIdea}>
+              <label htmlFor="punt-idee">{concept ? "Iets anders in je hoofd? Probeer maar." : "Wat zat er ongeveer in je hoofd?"}</label>
+              <div className="punt__ask-row">
+                <input id="punt-idee" value={idea} onChange={(e) => setIdea(e.target.value)} maxLength={140} placeholder="bijvoorbeeld: een uitleg bij ons product" autoComplete="off" />
+                <button type="submit" className="ink-button" disabled={!idea.trim()}>Vertel</button>
+              </div>
+            </form>
+            {reply && <p className="punt__reply">{reply}</p>}
+            {concept && (
+              <ol className="punt__notes" aria-label="Aantekeningen van Denckh">
+                {concept.notes.map((n, i) => <li key={`${concept.idea}-${n}`}><strong>{concept.tiles[i]}</strong> {n}</li>)}
+              </ol>
             )}
             <div className="punt__actions">
               <a className="link-draw" href="#contact">Neem dit mee naar een gesprek</a>
@@ -422,6 +433,70 @@ function buildAnnotations(f: Features) {
       </text>
     </g>
   );
+}
+
+/** Het idee maakt de vorm concreet. Een scherm heeft zijn delen al (tegels); elke andere vorm krijgt een kader
+ *  met het onderwerp als titel en de drie delen van het idee als tabs. Oker = het idee, rood = Denckh kijkt. */
+function IdeaMarks({ form, concept, zone, stage }: { form: Form; concept: Concept; zone: Zone; stage: { w: number; h: number } }) {
+  const text = concept.idea.length > 44 ? `${concept.idea.slice(0, 42).trimEnd()}…` : concept.idea;
+  const mark = (x: number, y: number, i: number) => (
+    <g key={`m${i}`} className="idea-mark" style={{ animationDelay: `${500 + i * 160}ms` }}>
+      <circle cx={x} cy={y} r={8.5} />
+      <text x={x} y={y + 3.8}>{i + 1}</text>
+    </g>
+  );
+
+  if (form.kind === "scherm") {
+    const { x, y, w } = form;
+    const pad = Math.max(14, w * 0.07), tileY = y + pad + 26, tileW = (w - pad * 2 - 16) / 3;
+    const cy = y - 16 > zone.y + 4 ? y - 14 : y + form.h + 24;
+    return (
+      <g className="punt__idea" key={concept.idea} aria-hidden="true">
+        <text x={x} y={cy} className="idea-text">“{text}”</text>
+        {[0, 1, 2].map((i) => mark(x + pad + i * (tileW + 8) + tileW - 2, tileY + 2, i))}
+      </g>
+    );
+  }
+
+  // hoe ver de vorm met streepjes en labels reikt
+  const r = reach(form);
+  const pad = 16, bar = 32, foot = 34;
+  let x0 = r.x0 - pad, x1 = r.x1 + pad;
+  // breed genoeg voor drie tabs; op een smal scherm gewoon de hele breedte
+  const minW = Math.min(stage.w - 8, 340);
+  if (x1 - x0 < minW) { const m = clamp((x0 + x1) / 2, minW / 2 + 4, stage.w - minW / 2 - 4); x0 = m - minW / 2; x1 = m + minW / 2; }
+  x0 = Math.max(4, x0); x1 = Math.min(stage.w - 4, x1);
+  const y0 = Math.max(4, r.y0 - pad - bar), y1 = Math.min(stage.h - 4, r.y1 + pad + foot);
+  const W = x1 - x0, slot = W / 3;
+  const d = `M${x0 + 14} ${y0} H${x1 - 14} Q${x1} ${y0} ${x1} ${y0 + 14} V${y1 - 14} Q${x1} ${y1} ${x1 - 14} ${y1} H${x0 + 14} Q${x0} ${y1} ${x0} ${y1 - 14} V${y0 + 14} Q${x0} ${y0} ${x0 + 14} ${y0} Z`;
+  const longest = Math.max(...concept.tiles.map((t) => t.length));
+  const fs = clamp((slot - 34) / (longest * 0.56), 9, 11.5);
+  return (
+    <g className="punt__idea" key={concept.idea} aria-hidden="true">
+      {y0 - 14 > zone.y && <text x={x0} y={y0 - 12} className="idea-text">“{text}”</text>}
+      <path d={d} pathLength={1} className="idea-frame" />
+      <path d={`M${x0} ${y0 + bar} H${x1} M${x0} ${y1 - foot} H${x1}`} pathLength={1} className="idea-frame idea-frame--thin" />
+      <text x={x0 + 14} y={y0 + 21} className="idea-title">{concept.title}</text>
+      {concept.tiles.map((t, i) => (
+        <g key={t}>
+          {mark(x0 + slot * i + 16, y1 - foot / 2, i)}
+          <text x={x0 + slot * i + 29} y={y1 - foot / 2 + 3.8} className="idea-tab" style={{ fontSize: fs }}>{t}</text>
+        </g>
+      ))}
+      <path d={`M${x0 + 29} ${y1 - foot / 2 + 8} h${Math.min(slot - 36, concept.tiles[0].length * fs * 0.58)}`} className="idea-active" />
+    </g>
+  );
+}
+
+/** Het gebied dat een vorm inclusief streepjes en labels inneemt. */
+function reach(form: Form) {
+  switch (form.kind) {
+    case "knop": { const { center: c, r } = form, e = r + 36; return { x0: c.x - e, x1: c.x + e, y0: c.y - r - 24, y1: c.y + r * 0.72 + 36 }; }
+    case "schuif": { const b = bbox([form.a, form.b]); return { x0: b.x0 - 46, x1: b.x1 + 46, y0: b.y0 - 46, y1: b.y1 + 52 }; }
+    case "grafiek": return { x0: form.x0 - 22, x1: form.x1 + 18, y0: form.top - 44, y1: form.base + 24 };
+    case "route": case "kaart": { const b = bbox(form.nodes); return { x0: b.x0 - 40, x1: b.x1 + 40, y0: b.y0 - 28, y1: b.y1 + 44 }; }
+    default: { const b = bbox(form.outline); return { x0: b.x0, x1: b.x1, y0: b.y0, y1: b.y1 }; }
+  }
 }
 
 /** Een potloodspoor van de punt naar het tekenvlak: zo zie je zonder uitleg wat de bedoeling is. */

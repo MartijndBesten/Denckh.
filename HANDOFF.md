@@ -4,7 +4,7 @@ Overdrachtsdocument voor de Denckh-website. Hier staan de actuele stand, alle be
 beslissingen, open punten en de volgende stappen. **Bijwerken aan het eind van elke werksessie.**
 
 - Laatst bijgewerkt: 2026-09-29
-- Live (`main`): de interactieve versie "begin met een punt" (gemerged uit `creatief/het-punt`, B-031)
+- Live (`main`): "begin met een punt" (B-031) plus ronde 2 (gemerged uit `creatief/ronde-2`, B-038)
 
 ---
 
@@ -33,6 +33,17 @@ niets gewijzigd.
 
 Nieuw werk: op een aparte branch; merge naar `main` = livegang.
 
+**Ronde 2 (live sinds 2026-09-29, B-038).** Verwerkt de feedback van 2026-09-29:
+
+- Projectvormen beginnen later: pas als het beeld helemaal in zicht is, met eerst een korte rust (B-032).
+- De stappen onder elk project zijn knoppen: klik en de lijn loopt naar die stap (B-033).
+- Loflijn heeft een eigen verhaal: een beurt in het spel in plaats van nog een webshop, plus een speelbare
+  voorbeeldbeurt (B-034).
+- Nieuwe sectie **Ook gemaakt**: Autowasdag Sionkerk (naam en link), een presentatie en een werkdag in 3D (beide
+  anoniem) (B-035).
+- 33/33 e2e-controles, axe 0 overtredingen op `/`, `/projecten/deegh/`, `/privacy/` en de hero met vorm en idee.
+- Hero: je idee maakt de eerste vorm concreet (onderwerp, drie delen, labels en aantekeningen) (B-037).
+
 ## Repositorygegevens
 
 | Onderwerp | Waarde |
@@ -40,7 +51,7 @@ Nieuw werk: op een aparte branch; merge naar `main` = livegang.
 | Remote | `https://github.com/MartijndBesten/denckh` |
 | Zichtbaarheid | Publiek |
 | Hoofdbranch | `main` (live) |
-| Laatste werkbranch | `creatief/het-punt` (gemerged) |
+| Laatste werkbranch | `creatief/ronde-2` (gemerged, B-038) |
 
 ---
 
@@ -82,6 +93,13 @@ Pas de oude regel niet aan. *Voorstel* = wacht op akkoord van de eigenaar.
 | B-029 | 2026-09-29 | Rechten: **TRILUX niet** (IntuSens en 3D-demo zonder naam, beelden of link; demokoffer blijft alleen als anonieme, schematische case). **Loflijn wel** en **Deegh wel** (naam en link). | Antwoord eigenaar. Loflijn- en Deegh-beelden alleen na aanlevering; de live sites zijn vanuit de werkomgeving niet te screenshotten. | Vast |
 | B-030 | 2026-09-29 | Bedrijfsgegevens gelijk aan deegh.nl, naam Denckh: Vlierweg 54, Houten · KvK 83176896 · btw NL003791952B15. In footer, privacy en structured data. | Antwoord eigenaar; gegevens staan ook publiek op deegh.nl. | Vast |
 | B-031 | 2026-09-29 | Branch `creatief/het-punt` naar `main` gemerged: livegang. | Akkoord eigenaar ("ja zet live"). | Vast |
+| B-032 | 2026-09-29 | Projectconstructies starten later: voortgang gemeten op het midden van het beeld (van 78% naar 22% van de schermhoogte), de eerste 8% blijft de lijn een lijn, 20% rust per vorm. | Feedback eigenaar: "de vormen starten iets te vroeg met aanpassen". | Vast |
+| B-033 | 2026-09-29 | Stappen onder een project zijn knoppen (`aria-current="step"`). Klik = de lijn glijdt naar die stap; wie daarna een kwart van de scrollweg verder scrolt, krijgt de scrollstand terug. Geen scroll-kaping. | Feedback eigenaar: "leuk als je op de stappen ook zelf kan klikken". | Vast |
+| B-034 | 2026-09-29 | Loflijn volgt een beurt in het spel (kaart met QR → lied → tijdlijn) en eindigt in een tijdlijn "van psalm tot praise", niet in een webshop. Eronder een speelbare voorbeeldbeurt met verzonnen jaartallen zonder liedtitels, zo gelabeld. | Feedback eigenaar: Loflijn leek op Deegh. Het spel zelf is het onderscheidende idee. Label voorkomt dat het als echte spelinhoud leest. | Vast (akkoord eigenaar, B-038) |
+| B-035 | 2026-09-29 | Sectie "Ook gemaakt" met drie kleinere projecten, elk één vorm uit jouw lijn (nieuwe vormen `agenda` en `gebouw`). Autowasdag Sionkerk met naam en link; presentatie en 3D-werkdag zonder merknaam, beelden of link. | Eigenaar meldde deze projecten. TRILUX niet noemen (B-029). | Vast (akkoord eigenaar, B-038) |
+| B-036 | 2026-09-29 | Het publieke caseregister noemt geen werkgever- of productnamen meer voor de 3D-werkdag; dossiers van privé-repo's bevatten alleen wat ook op de site staat. | Publieke repo (`CLAUDE.md`, regel 6). | Vast |
+| B-037 | 2026-09-29 | Hero: na "Vertel" maakt het idee de eerste vorm concreet. Trefwoorden bepalen het soort ding (plannen, verkopen, spel, leren, inzicht, uitleg, samen, eten, techniek), het onderwerp komt uit de zin. De vorm krijgt concrete labels (knop "tijd 08:00–18:00", scherm met onderwerp, drie delen en mini-schetsen), een kader met titel en drie delen, en drie genummerde aantekeningen van Denckh. Opnieuw vertellen tekent de vorm opnieuw. Vaste regels, geen AI (`src/lib/ink/concept.ts`). | Feedback eigenaar: "nog mooier als die iets concreter zou zijn met het idee en de lijnen die hij daarna maakt". Kleurrollen blijven: oker = idee (zin, titel), rood = Denckh kijkt (aantekeningen), inkt = vorm. | Werkversie |
+| B-038 | 2026-09-29 | `creatief/ronde-2` naar `main` gemerged: livegang. Autowasdag Sionkerk met naam en link; presentatie en 3D-werkdag anoniem; Loflijn-voorbeeldbeurt zoals gebouwd. | Eigenaar: "ja live", daarna "Sionkerk mag erbij", "presentatie 3D-werkdag anoniem is prima", "Loflijn is top". | Vast |
 
 ---
 
@@ -118,12 +136,13 @@ Pas de oude regel niet aan. *Voorstel* = wacht op akkoord van de eigenaar.
 | O-02 | Repo is publiek. | Op privé zetten kan alleen met betaald GitHub-plan voor Pages; anders bewust publiek laten en niets vertrouwelijks opnemen. |
 
 Afgehandeld: O-01 (repo hernoemd naar `denckh`), O-08 (live sites via geautoriseerde browsersessie bekeken, zie
-cases), O-14 (domein actief op GitHub Pages).
+cases), O-14 (domein actief op GitHub Pages), O-31/O-32/O-33 (B-038).
 
 ---
 
 ## Volgende stappen
 
+0. Live controle van ronde 2 op `denckh.nl` en een echte iPhone.
 1. Live controle op `denckh.nl` en op een echte iPhone (vanuit de werkomgeving niet bereikbaar).
 2. Beslissen over O-23 (AI) en O-24 (contact).
 3. Definitieve woordmerktekening en favicon/OG-beelden in de nieuwe stijl.

@@ -18,9 +18,16 @@ export function useInView<T extends Element>(ref: RefObject<T | null>, rootMargi
   return seen;
 }
 
-/** Scrollvoortgang van een element: 0 als de bovenkant onderaan het scherm binnenkomt, 1 als het midden het bovenste derde passeert. Geen scroll-kaping: we lezen alleen. */
-export function useScrollProgress<T extends Element>(ref: RefObject<T | null>, enabled = true) {
+/** Scrollvoortgang van een element (0..1). Geen scroll-kaping: we lezen alleen.
+ *  Standaard: 0 als de bovenkant onderaan binnenkomt, 1 als het midden het bovenste derde passeert.
+ *  Met `center`: 0 als het midden van het element op `from` × schermhoogte staat, 1 op `to` × schermhoogte. */
+export function useScrollProgress<T extends Element>(
+  ref: RefObject<T | null>,
+  enabled = true,
+  center?: { from: number; to: number },
+) {
   const [p, setP] = useState(0);
+  const from = center?.from, to = center?.to;
   useEffect(() => {
     if (!enabled) return;
     let raf = 0;
@@ -30,6 +37,11 @@ export function useScrollProgress<T extends Element>(ref: RefObject<T | null>, e
       if (!el) return;
       const r = el.getBoundingClientRect();
       const vh = window.innerHeight;
+      if (from !== undefined && to !== undefined) {
+        const c = r.top + r.height / 2;
+        setP(clamp((vh * from - c) / (vh * (from - to)), 0, 1));
+        return;
+      }
       const start = vh * 0.95, end = vh * 0.3 - r.height * 0.5;
       setP(clamp((start - r.top) / (start - end), 0, 1));
     };
@@ -38,7 +50,7 @@ export function useScrollProgress<T extends Element>(ref: RefObject<T | null>, e
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     return () => { window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onScroll); cancelAnimationFrame(raf); };
-  }, [ref, enabled]);
+  }, [ref, enabled, from, to]);
   return enabled ? p : 1;
 }
 
