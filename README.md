@@ -28,8 +28,9 @@ npm ci
 npm run dev            # ontwikkelen op http://localhost:3000
 npm run build          # statische export naar out/
 npx serve out -l 8711  # build bekijken
-npm run test:e2e       # 98 interactiecontroles (vereist de server op poort 8711)
+npm run test:e2e       # 100 interactiecontroles (vereist de server op poort 8711)
 npm run brand          # merkbestanden en merkoverzicht opnieuw exporteren naar public/brand/ (SVG, PNG, PDF, zip)
+npm run prijslijst     # prijslijst-PDF opnieuw maken uit src/lib/prices.ts (na elke prijswijziging)
 ```
 
 ## Uitgangspunten

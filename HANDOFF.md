@@ -54,7 +54,8 @@ Nieuw werk: op een aparte branch; merge naar `main` = livegang.
   elf vormen met vanafprijs (€95 t/m €795) waarbij één lijn de vorm aanneemt van de rij waar je leest of op wijst,
   wat standaard wel en niet inbegrepen is, webadres en hosting, los vervolgwerk (€45 per uur), en *Vertel je idee*.
 - Bereikbaar via het homepageblok, de footer (*Prijzen*) en de sitemap. De kopnavigatie is ongewijzigd (B-065).
-- De prijslijst-PDF verschijnt pas als `public/downloads/denckh-prijslijst.pdf` bestaat (B-066).
+- Prijslijst-PDF (B-067): `public/downloads/denckh-prijslijst.pdf`, twee pagina's A4, gemaakt met `npm run prijslijst`
+  uit `src/lib/prices.ts`. Na elke prijswijziging opnieuw draaien; de e2e-test meldt het als dat vergeten is.
 
 **Portret en merkbestanden (B-058, B-059):** achtergrondgasten uit het portret geretoucheerd; merkbestanden in
 `public/brand/` (`npm run brand`).
@@ -164,6 +165,7 @@ Pas de oude regel niet aan. *Voorstel* = wacht op akkoord van de eigenaar.
 | B-064 | 2026-09-29 | `/prijzen/`: de elf vormen als lijst met één morphende lijn (`FormPrices`) die de vorm aanneemt van de rij waar je leest (scroll) of met de muis op wijst; een punt op een okerrail loopt mee. Op mobiel staat de figuur als smalle vaste balk bovenaan. Nieuwe vormen in `shapes.ts`: `websitePlus` en `webshopPlus`. Iets zonder naam gebruikt de lijn van de bezoeker zelf. Tik op een telefoon zet geen rij vast (alleen muis). | Geen gewone prijstabel; de vorm maakt zichtbaar wat je voor de prijs krijgt. Figuur is `aria-hidden`, alle informatie staat in de lijst. | Vast |
 | B-065 | 2026-09-29 | *Prijzen* niet in de kopnavigatie, wel in de footer, de sitemap en via het homepageblok. | Een vierde item laat de kop op 390 px teruglopen naar twee regels; briefing: alleen toevoegen als het de navigatie niet slechter maakt. | Vast |
 | B-066 | 2026-09-29 | Prijslijst-PDF: blok *Liever alles even op een rij?* / *Download de prijslijst* staat klaar, maar verschijnt alleen als `public/downloads/denckh-prijslijst.pdf` bij de build bestaat. Domeinregel ("eerste jaar inbegrepen, tot maximaal €20 excl. btw") alleen bij Website, Website Plus en Webshop, zoals in de briefing. | Nooit een kapotte link; niets toezeggen wat niet gevraagd is. | Vast |
+| B-067 | 2026-09-29 | Prijslijst-PDF als merkversie, gebouwd door `npm run prijslijst` (`scripts/price-list.mjs`): bedragen en teksten uit `src/lib/prices.ts` (dus gelijk aan de site, alle 11 vormen), echt woordmerk en krul uit `public/brand/`, Fraunces en Manrope ingesloten, de prijslijn punt → schets → vorm zoals op de homepage, geen kaarten. Intro en de zes stappen van *Zo werkt het* letterlijk uit de prijslijst van de eigenaar (v2). Kop: *Wat kan een idee kosten?* (titel van `/prijzen/`). Het script stopt als een pagina overloopt of een bedrag ontbreekt; `scripts/prijslijst.bron.txt` bewaart de vingerafdruk van `prices.ts` voor de test. | De aangeleverde PDF (ChatGPT, ReportLab) had een getypt woordmerk in Times, Helvetica/Times, prijskaarten, een andere krul, miste Website Plus en Uitgebreidere webshop, en droeg een ondertekend Content Credentials-label "gemaakt door ChatGPT". Eigenaar koos de merkversie. | Vast |
 
 ---
 
@@ -201,11 +203,10 @@ Pas de oude regel niet aan. *Voorstel* = wacht op akkoord van de eigenaar.
 | O-36 | **GitHub Pages meldt `http://denckh.nl/` als omgeving-URL.** Mogelijk staat "Enforce HTTPS" uit. | Eigenaar controleert in GitHub → Settings → Pages; niet door Claude aangepast (buiten scope). |
 | O-37 | **Prijzen exclusief btw en consumenten.** Voor prijzen die je aan consumenten laat zien, vraagt de wet (Besluit prijsaanduiding, ACM) een prijs inclusief btw. De site toont nu alles exclusief btw, zoals gevraagd. | Kiezen: (a) zo laten als Denckh zich op ondernemers richt, eventueel met "voor ondernemers"; of (b) incl. btw erbij tonen (bijv. €45 wordt €54,45). |
 | O-38 | **Domeinnaam bij Uitgebreidere webshop.** Staat nu alleen bij Website, Website Plus en Webshop (briefing). | Bevestigen, of ook bij Uitgebreidere webshop zetten (één regel in `prices.ts`). |
-| O-39 | **Prijslijst-PDF** aanleveren of laten maken. | Bestand als `public/downloads/denckh-prijslijst.pdf`; de link verschijnt dan vanzelf bij de volgende build. |
 | O-02 | Repo is publiek. | Op privé zetten kan alleen met betaald GitHub-plan voor Pages; anders bewust publiek laten en niets vertrouwelijks opnemen. |
 
 Afgehandeld: O-01 (repo hernoemd naar `denckh`), O-08 (live sites via geautoriseerde browsersessie bekeken, zie
-cases), O-14 (domein actief op GitHub Pages), O-31/O-32/O-33 (B-038), O-35 (B-053).
+cases), O-14 (domein actief op GitHub Pages), O-31/O-32/O-33 (B-038), O-35 (B-053), O-39 (B-067).
 
 ---
 
