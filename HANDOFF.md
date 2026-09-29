@@ -44,6 +44,19 @@ Nieuw werk: op een aparte branch; merge naar `main` = livegang.
 - 33/33 e2e-controles, axe 0 overtredingen op `/`, `/projecten/deegh/`, `/privacy/` en de hero met vorm en idee.
 - Hero: je idee maakt de eerste vorm concreet (onderwerp, drie delen, labels en aantekeningen) (B-037).
 
+**Voorbeeldreeks (B-054 t/m B-057):** zes voorbeelden via "nog een voorbeeld", Deegh-voorbeeld (proef C), compactere
+mobiele hulplijn, hero-intro met de positionering.
+
+**Inventaris tekenengine (stand 2026-09-29).** Meet: lengte, kader, open/gesloten (lus aan het eind), rechtheid,
+hoeken, kruisingen, lussen (totale draaiing), rondheid, cirkelvormigheid (4πA/P²), richting (monotoon in x).
+Uitkomsten (`classify`): *punt* (korter dan 36 px) · *kaart* (≥ 3 kruisingen of ≥ 2,2 lussen) · *draaiknop*
+(gesloten, cirkelvormigheid > 0,86) · *scherm* (gesloten, anders) · *regelaar* (rechtheid > 0,86) · *verloop*
+(monotoon in x, breder dan hoog) · *route* (al het andere). Eerste vormen: draaiknop (draaibaar, toetsen), regelaar
+(schuifbaar, toetsen), scherm (drie tegels, knop), verloop (meetpunten aanklikbaar), route (stappen aanklikbaar), kaart
+(punten aanklikbaar, namen uit de krabbel, één vraag per punt). Na "Vertel" krijgt elke vorm onderdelen uit het idee
+(B-037) en gaat een voorstel mee naar de mail (B-041). Route zit niet in de voorbeeldreeks: hij ontstaat vanzelf bij
+veel vrije tekeningen en lijkt in een voorbeeld op het verloop.
+
 **Afwerking krul (B-048 t/m B-053):** de krul uit het OG-beeld als merkelement, als hulplijn in de hero, rustiger
 voorbeeld op basis van de Deegh-cirkel, één vraag per kaartpunt, favicon blijft de punt, logo-lab als merkproefpagina,
 dossiers Deegh en demokoffer gesloten.
@@ -123,6 +136,10 @@ Pas de oude regel niet aan. *Voorstel* = wacht op akkoord van de eigenaar.
 | B-051 | 2026-09-29 | Ideeënkaart: een aangeraakt punt toont één korte vraag op de plek van het bijschrift ("de kern → Is dit waar het eigenlijk om draait?", enz.). Alleen zolang er nog geen idee is verteld; daarna zijn de punten de delen van het idee. | Proef uit de opdracht; blijft rustig (één regel, geen extra UI), dus toegepast. | Vast |
 | B-052 | 2026-09-29 | Favicon blijft de punt. De krul-proef (`public/favicon-krul.svg`, vergelijking in `/logo-lab/` §5) is op 32 en 48 px herkenbaar, maar op 16 px een onduidelijk kronkeltje. | Regel uit de opdracht: alleen vervangen als de krul op 16 px rustig herkenbaar blijft. | Vast |
 | B-053 | 2026-09-29 | Deegh: logo en merk zijn eigen werk van de eigenaar (destijds samen met zijn broers); Denckh presenteert "deegbol → merk → webshop" als eigen werk. Demokoffer: de eigenaar was initiatiefnemer en formuleerde zelf de ontwerpvraag ("een demokoffer vol sensortechniek moest ook zonder uitgebreide uitleg snel te begrijpen en te gebruiken zijn"). Beide dossiers bijgewerkt; sitetekst ongewijzigd. | Bevestiging eigenaar 2026-09-29. Sluit O-35 en het open punt "aanleiding" in het koffer-dossier. | Vast |
+| B-054 | 2026-09-29 | "Bekijk een voorbeeld" is een vaste reeks van zes tekeningen (`src/lib/ink/examples.ts`); na elke lezing verschijnt rustig "nog een voorbeeld", na de laatste begint de reeks opnieuw. De punt tekent elk voorbeeld echt; daarna lopen ze door dezelfde engine als een eigen tekening (geen uitzonderingen per voorbeeld). Uitkomst op desktop, 390 en 320 px: cirkel → draaiknop, lijn → regelaar, rechthoek → scherm, golf → verloop, krullen → kaart, Deegh → kaart. Op mobiel beginnen voorbeelden bovenaan het tekenvlak en loopt de lijn in het verlengde van de beweging vanaf de punt (`orient: "entry"`); dat is plaatsing, geen analyse. | Eigenaar: laten ontdekken dat één handeling tot heel verschillende vormen leidt. Vóór deze ronde bestond er maar één voorbeeld (de cirkel). Zonder de mobiele plaatsing werden lijn en golf op mobiel een route en de rechthoek een draaiknop, doordat de verticale aanloop vanaf de punt meetelt. | Vast |
+| B-055 | 2026-09-29 | Deegh-voorbeeld: proef A (alleen de cirkel van het logo), B (d + cirkel) en C ("deegh" als doorlopend handschrift in de cirkel), alle drie gemeten tegen `public/images/deegh-logo.jpg`. Gekozen: C. A verwijst nergens naar en B leest als een losse haak; bovendien maakt de engine van A en B een draaiknop, net als de gewone cirkel. C is herkenbaar en de engine leest hem zelf als kaart ("gesloten · 5–7 kruisingen · rond"). Eén doorlopende streek, omdat een bezoeker ook maar één streek kan zetten. | Eigenaar: rustig, herkenbaar, geen hardcoded uitkomst. | Vast |
+| B-056 | 2026-09-29 | Mobiele hulplijn compacter: tekenvlak op mobiel `minmax(240px, 38svh)` (was 46svh), kleinere krul hoog in het vlak, aanloop die direct na de punt afbuigt. Op 390 px: hulplijn 380 px hoog (was 478), "begin met een punt" 95 px hoger. Desktop ongewijzigd. De aanloop kruist op mobiel nog steeds de intro (de punt staat boven de tekst en de krul begint linksonder); de krul zelf overlapt de intro niet. | Eigenaar: aanloop te lang en te verticaal. | Vast |
+| B-057 | 2026-09-29 | Hero-intro: "Denckh is een kleine conceptstudio. Weet je nog niet wat het moet worden? Ook goed. Ik denk mee en maak het concreet." De oude intro was nooit vervangen: de goedgekeurde tekst van ronde 3 (B-044) stond vanaf het begin in "Van idee naar vorm", niet in de hero. Hier als vraag geformuleerd, zodat hij de zin in "Van idee naar vorm" niet letterlijk herhaalt. | Eigenaar wilde de positionering ook in de hero. | Vast |
 
 ---
 
