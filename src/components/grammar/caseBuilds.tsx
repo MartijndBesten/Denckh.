@@ -7,7 +7,8 @@ import { rr, type Build } from "./Construct";
 const D = (d: string, key: number) => <path key={key} d={d} pathLength={1} className="c-anim" />;
 
 /** Deegh: product → merk → webshop. Namen uit de broncode van de webshop (menu en producten).
- *  Het logo is aangeleverd door de eigenaar (docs/cases/deegh.md); de deegbol rijst en wordt de cirkel van het logo. */
+ *  Het logo is eigen werk van de eigenaar (docs/cases/deegh.md); de deegbol rijst, de lijn wordt een cirkel en maakt
+ *  plaats voor het echte logo. */
 export const deeghBuild: Build = (w, h) => {
   const bol = SHAPES.deegbol({ w, h });
   const shop = SHAPES.webshop({ w, h });
@@ -16,7 +17,9 @@ export const deeghBuild: Build = (w, h) => {
     const a = -Math.PI / 2 + (i / 128) * Math.PI * 2;
     return { x: lcx + Math.cos(a) * lr, y: lcy + Math.sin(a) * lr };
   }), 128);
-  const S = (lr * 356) / 130; // logocirkel in het bronbeeld (356 px): straal ca. 138 px; iets ruimer zodat de rafelrand buiten de lijn valt
+  // het echte logo (public/images/deegh-logo.png, 626 × 640, transparant): schijf met middelpunt (318,5; 320) en straal
+  // ca. 241 px; de spetters eromheen horen erbij. De schijf komt precies op de cirkel die de lijn net getekend heeft.
+  const ls = lr / 241, logo = { x: lcx - 318.5 * ls, y: lcy - 320 * ls, w: 626 * ls, h: 640 * ls };
   const W = Math.min(w * 0.86, h * 1.5), H = W / 1.5, x = (w - W) / 2, y = (h - H) / 2;
   const tw = (W - 56) / 3;
   const nav = ["Webshop", "Zo werkt Deegh", "Verkooppunten", "Zakelijk"];
@@ -25,9 +28,8 @@ export const deeghBuild: Build = (w, h) => {
   return {
     stages: [
       { ...bol, caption: "een deegbol", details: bol.details.map(D) },
-      { outline: merk, closed: true, caption: "een merk", details: [
-        <clipPath key="clip" id="deegh-logo-clip"><circle cx={lcx} cy={lcy} r={lr - 1} /></clipPath>,
-        <image key="logo" href="/images/deegh-logo.jpg" x={lcx - S / 2} y={lcy - S / 2} width={S} height={S} clipPath="url(#deegh-logo-clip)" className="c-logo" />,
+      { outline: merk, closed: true, caption: "een merk", hideLine: true, details: [
+        <image key="logo" href="/images/deegh-logo.png" x={logo.x} y={logo.y} width={logo.w} height={logo.h} className="c-logo" />,
       ] },
       { ...shop, caption: "een plek om te bestellen", details: shop.details.map(D) },
     ],

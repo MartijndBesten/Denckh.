@@ -183,7 +183,7 @@ for (const [w, h] of [[390, 844], [320, 640]]) {
 // 3c · broncode: Deegh-voorbeeld volgt het echte logo, en de engine kent geen voorbeeld-uitzonderingen
 {
   const ex = fs.readFileSync(new URL("../src/lib/ink/examples.ts", import.meta.url), "utf8");
-  check("voorbeelden: Deegh-geometrie verwijst naar het echte logo", ex.includes("public/images/deegh-logo.jpg") && fs.existsSync(new URL("../public/images/deegh-logo.jpg", import.meta.url)) && /key: "deegh"/.test(ex));
+  check("voorbeelden: Deegh-geometrie verwijst naar het echte logo", ex.includes("public/images/deegh-logo.png") && fs.existsSync(new URL("../public/images/deegh-logo.png", import.meta.url)) && /key: "deegh"/.test(ex));
   const engine = ["src/lib/ink/analyze.ts", "src/lib/ink/forms.ts", "src/lib/ink/interpret.ts", "src/lib/ink/concept.ts", "src/components/punt/PuntStage.tsx", "src/components/punt/FormWidget.tsx"]
     .map((f) => fs.readFileSync(new URL(`../${f}`, import.meta.url), "utf8")).join("\n");
   check("voorbeelden: geen Deegh- of voorbeeldspecifieke analyse in de engine", !/deegh/i.test(engine) && !/example\.key/.test(engine));
@@ -231,6 +231,7 @@ for (const [w, h] of [[390, 844], [320, 640]]) {
   await p.waitForTimeout(1200);
   check("construct: stap is klikbaar", (await merk.getAttribute("aria-current")) === "step");
   check("construct: Deegh-logo in de stap merk", (await fig.locator(".construct__details.is-on image").count()) === 1);
+  check("construct: echt Deegh-logo (PNG), lijn maakt plaats", (await fig.locator('.construct__details.is-on image[href="/images/deegh-logo.png"]').count()) === 1 && (await fig.locator(".construct__line").evaluate((e) => getComputedStyle(e).opacity)) === "0");
   for (let i = 0; i < 3; i++) { await p.locator(".more__item").nth(i).scrollIntoViewIfNeeded(); await p.waitForTimeout(300); }
   await p.waitForTimeout(1200);
   check("ook gemaakt: drie vormen krijgen vorm", (await p.locator(".more__details").count()) === 3);

@@ -38,9 +38,9 @@ function handCircle(cx: number, cy: number, r: number, from = -0.62, n = 96): Pt
   });
 }
 
-// ---- Deegh: gebaseerd op public/images/deegh-logo.jpg (uitsnede 356 × 356 px). Daarin: cirkel met middelpunt
-//      (178, 178) en straal ~138 px; het woord "deegh" van x ≈ 70 tot 290, basislijn y ≈ 195, x-hoogte ≈ 148,
-//      stokken van d en h tot ≈ 120. Hieronder omgerekend naar het eenheidsvak (÷ 356).
+// ---- Deegh: gebaseerd op het echte logo, public/images/deegh-logo.png (626 × 640). Daarin: schijf met middelpunt
+//      (318,5; 320) en straal ~241 px; het woord "deegh" van ongeveer −0,8 tot +0,8 straal rond het midden, basislijn
+//      ~0,1 straal onder het midden. Hieronder uitgedrukt in een eenheidsvak met de schijf op (0,5; 0,5), straal 0,388.
 const LOGO = { cx: 0.5, cy: 0.5, r: 0.388, base: 0.548, xh: 0.416, asc: 0.337 };
 
 /** De letter d zoals je hem snel met pen schrijft: buik tegen de klok in, dicht tegen de stok, stok hoog op en omlaag. */

@@ -76,10 +76,11 @@ Juist bij een site die "geen nep" als principe heeft, ondermijnt één gegeneree
 ## Logo (2026-09-29)
 
 - Eigenaar: "het logo van Deegh mag je er ook op zetten" (2026-09-29), met het logo als afbeelding aangeleverd.
-- Bestand: `public/images/deegh-logo.jpg` (uitsnede 356×356 rond de cirkel, metadata verwijderd). Herkomst: eigenaar.
+- Bestand: `public/images/deegh-logo.png` (626×640, transparant, met de spetterrand): het logobestand uit het eigen
+  Deegh-thema van de eigenaar. Vervangt sinds 2026-09-29 de eerdere uitsnede van een screenshot (`deegh-logo.jpg`),
+  die wazig was en in een cirkel werd geknipt.
 - Gebruik: in de projectconstructie als stap "een merk": de deegbol rijst en wordt de cirkel van het logo.
-- Wens: een scherpere versie (SVG of groter bestand); het huidige beeld is 429×571 en wordt op grote schermen iets
-  vergroot.
+- Gebruik op de site: het volledige logo, niet geknipt; de lijn van de constructie maakt plaats zodra het logo staat.
 
 ## Eigen werk (2026-09-29)
 

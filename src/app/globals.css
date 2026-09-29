@@ -296,7 +296,7 @@ nav .link-draw:hover, nav .link-draw:focus-visible { background-size: 100% 6px, 
 
 .construct { margin: 0; }
 .construct svg { display: block; width: 100%; height: auto; overflow: visible; }
-.construct__line { fill: none; stroke: var(--ink); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.construct__line { fill: none; stroke: var(--ink); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: opacity 0.45s var(--ease); }
 .construct__line.is-sketch { stroke: var(--idea); }
 .construct__details path, .construct__details circle, .construct__details rect { fill: none; stroke: var(--ink); stroke-width: 1.4; stroke-linecap: round; }
 .construct__details .c-anim { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 0.6s var(--ease); }
