@@ -43,7 +43,11 @@ const browser = await chromium.launch();
 {
   const { p, ctx, errors } = await page(browser);
   check("hero: punt staat in de kop", (await p.locator(".punt--idle").count()) === 1);
+  const ghost = await p.locator(".punt__ghost").getAttribute("d");
+  check("hero: hulplijn is de Denckh-krul (vier bochten na de aanloop)", (ghost?.match(/C /g) ?? []).length === 5, `${(ghost?.match(/C /g) ?? []).length} bochten`);
+  check("hero: favicon en OG-beeld ongewijzigd", (await p.locator('link[rel="icon"]').getAttribute("href")) === "/favicon.svg" && (await p.locator('meta[property="og:image"]').getAttribute("content")) === "https://denckh.nl/og.png");
   await drawCircle(p);
+  check("hero: hulplijn verdwijnt zodra je tekent", (await p.locator(".punt__ghost").count()) === 0);
   await p.waitForTimeout(400);
   check("kijken: meetlijnen verschijnen", (await p.locator(".punt__look .look-line").count()) >= 4);
   await p.waitForTimeout(1800);
@@ -78,6 +82,22 @@ const browser = await chromium.launch();
   await ctx.close();
 }
 
+// 1b · ideeënkaart: één korte vraag bij een aangeraakt punt
+{
+  const { p, ctx } = await page(browser);
+  const dot = await p.locator(".punt__dot").boundingBox(); const zone = await p.locator(".punt__zone").boundingBox();
+  const cx = zone.x + zone.width / 2, cy = zone.y + zone.height / 2, r = Math.min(zone.width, zone.height) * 0.25;
+  await p.mouse.move(dot.x + dot.width / 2, dot.y + dot.height / 2); await p.mouse.down();
+  for (let i = 0; i <= 160; i++) { const t = (i / 160) * Math.PI * 6; await p.mouse.move(cx + Math.cos(t) * r * (0.5 + 0.5 * Math.sin(i / 13)) + (i - 80) * 1.2, cy + Math.sin(t * 1.3) * r * 0.8, { steps: 1 }); await p.waitForTimeout(3); }
+  await p.mouse.up(); await p.waitForTimeout(2300);
+  await p.getByRole("button", { name: "Zal ik er vorm aan geven?" }).click(); await p.waitForTimeout(1600);
+  const kern = p.getByRole("button", { name: "de kern" });
+  check("kaart: krabbel wordt een kaart met 'de kern'", (await kern.count()) === 1);
+  if (await kern.count()) { await kern.click(); await p.waitForTimeout(200); }
+  check("kaart: aanraken toont één korte vraag", ((await p.locator(".punt__say").textContent()) ?? "") === "Is dit waar het eigenlijk om draait?");
+  await ctx.close();
+}
+
 // 2 · toetsenbord: Enter pakt de punt, pijltjes tekenen, Enter laat los
 {
   const { p, ctx, errors } = await page(browser);
@@ -97,7 +117,8 @@ const browser = await chromium.launch();
   const { p, ctx } = await page(browser);
   await p.getByRole("button", { name: "of bekijk een voorbeeld" }).click();
   await p.waitForTimeout(3500);
-  check("voorbeeld: speelt af tot een lezing", (await p.locator(".punt__say").count()) === 1);
+  const exSay = (await p.locator(".punt__say").textContent()) ?? "";
+  check("voorbeeld: één rustige cirkel, gelezen als rond en gesloten", /rond/i.test(exSay), exSay);
   await ctx.close();
 }
 
@@ -166,7 +187,7 @@ const browser = await chromium.launch();
   const p = await ctx.newPage();
   await p.goto(new URL("logo-lab/", BASE).href, { waitUntil: "networkidle" });
   check("logo-lab: noindex", /noindex/.test((await p.locator('meta[name="robots"]').getAttribute("content")) ?? ""));
-  check("logo-lab: huidig plus zeven varianten", (await p.locator(".lab__row").count()) === 8);
+  check("logo-lab: vijf merkproeven en de favicon-vergelijking", (await p.locator(".lab__row:not(.lab__row--old)").count()) === 5 && (await p.locator('img[src="/favicon-krul.svg"]').count()) === 4);
   const sitemap = await (await p.request.get(new URL("sitemap.xml", BASE).href)).text();
   check("logo-lab: niet in de sitemap", !sitemap.includes("logo-lab"));
   await ctx.close();
