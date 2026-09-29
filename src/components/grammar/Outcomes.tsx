@@ -1,6 +1,6 @@
 "use client";
 
-// "Wat kan eruit komen?" Eén stuk materiaal (jouw lijn) dat steeds een andere vorm aanneemt.
+// "Wat kan een idee worden?" Eén stuk materiaal (jouw lijn) dat steeds een andere vorm aanneemt. Voorbeelden, geen dienstenlijst.
 import { useEffect, useMemo, useRef, useState } from "react";
 import { linePath, resample } from "@/lib/ink/geometry";
 import { useInView, useMorph, useWidth } from "@/lib/ink/hooks";
@@ -48,7 +48,8 @@ export function Outcomes() {
         <p className="outcomes__now" aria-live="polite">
           <span className="visually-hidden">Getoond: </span>{isSketch ? "Of iets waar nog geen naam voor is." : outcome.word}
         </p>
-        <ul className="outcomes__list" aria-label="Mogelijke vormen">
+        <p className="outcomes__eg" id="outcomes-eg">bijvoorbeeld</p>
+        <ul className="outcomes__list" aria-labelledby="outcomes-eg">
           {OUTCOMES.map((o, i) => (
             <li key={o.word}>
               <button type="button" aria-pressed={i === index} className={i === index ? "is-on" : undefined}

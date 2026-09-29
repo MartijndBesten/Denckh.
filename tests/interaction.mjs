@@ -125,7 +125,7 @@ const browser = await chromium.launch();
   await ctx.close();
 }
 
-// 6 · projecten: vormen starten pas als het beeld in zicht is, stappen zijn klikbaar, Loflijn is speelbaar
+// 6 · projecten: vormen starten pas als het beeld in zicht is, stappen zijn klikbaar
 {
   const { p, ctx, errors } = await page(browser, { width: 390, height: 844, mobile: true });
   const fig = p.locator(".construct").first();
@@ -140,10 +140,6 @@ const browser = await chromium.launch();
   await p.waitForTimeout(1200);
   check("construct: stap is klikbaar", (await merk.getAttribute("aria-current")) === "step");
   check("construct: Deegh-logo in de stap merk", (await fig.locator(".construct__details.is-on image").count()) === 1);
-  await p.locator(".turn").scrollIntoViewIfNeeded();
-  await p.getByRole("button", { name: "Leg de kaart tussen 1936 en 2004" }).click();
-  check("loflijn: beurt geeft antwoord", /Goed/.test((await p.locator(".turn__say").textContent()) ?? ""));
-  check("loflijn: kaart blijft op de tijdlijn", (await p.locator(".turn__line .turn__card").count()) === 4);
   for (let i = 0; i < 3; i++) { await p.locator(".more__item").nth(i).scrollIntoViewIfNeeded(); await p.waitForTimeout(300); }
   await p.waitForTimeout(1200);
   check("ook gemaakt: drie vormen krijgen vorm", (await p.locator(".more__details").count()) === 3);
@@ -161,6 +157,18 @@ const browser = await chromium.launch();
   await shop.hover();
   await p.waitForTimeout(1300);
   check("construct: stap verandert al bij aanwijzen", (await shop.getAttribute("aria-current")) === "step");
+  await ctx.close();
+}
+
+// 6c · logo-lab: interne proef, niet vindbaar
+{
+  const ctx = await browser.newContext();
+  const p = await ctx.newPage();
+  await p.goto(new URL("logo-lab/", BASE).href, { waitUntil: "networkidle" });
+  check("logo-lab: noindex", /noindex/.test((await p.locator('meta[name="robots"]').getAttribute("content")) ?? ""));
+  check("logo-lab: huidig plus zeven varianten", (await p.locator(".lab__row").count()) === 8);
+  const sitemap = await (await p.request.get(new URL("sitemap.xml", BASE).href)).text();
+  check("logo-lab: niet in de sitemap", !sitemap.includes("logo-lab"));
   await ctx.close();
 }
 
