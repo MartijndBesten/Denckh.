@@ -72,3 +72,11 @@ Juist bij een site die "geen nep" als principe heeft, ondermijnt één gegeneree
 - Kop, optie A: **"Van deegbol tot merk."** (briefing; klopt alleen als de merkrol bevestigd is)
 - Kop, optie B: **"Van deegbol tot webshop, en alles daartussen."**
 - Kern: eigen product, eigen merk, eigen shop. Een idee dat Martijn zelf verder heeft gebracht dan een website.
+
+## Logo (2026-09-29)
+
+- Eigenaar: "het logo van Deegh mag je er ook op zetten" (2026-09-29), met het logo als afbeelding aangeleverd.
+- Bestand: `public/images/deegh-logo.jpg` (uitsnede 356×356 rond de cirkel, metadata verwijderd). Herkomst: eigenaar.
+- Gebruik: in de projectconstructie als stap "een merk": de deegbol rijst en wordt de cirkel van het logo.
+- Wens: een scherpere versie (SVG of groter bestand); het huidige beeld is 429×571 en wordt op grote schermen iets
+  vergroot.

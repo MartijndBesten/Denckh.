@@ -1,10 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Footer, Header } from "@/components/Header";
 import { PuntStage } from "@/components/punt/PuntStage";
 import { ContactReturn } from "@/components/grammar/ContactReturn";
 import { Construct } from "@/components/grammar/Construct";
 import { InkRule } from "@/components/grammar/InkRule";
-import { LoflijnTurn } from "@/components/grammar/LoflijnTurn";
 import { MoreWork } from "@/components/grammar/MoreWork";
 import { Outcomes } from "@/components/grammar/Outcomes";
 import { SettleTitle } from "@/components/grammar/SettleTitle";
@@ -24,7 +24,7 @@ export default function Home() {
         <SettleTitle id="idee-titel" text="Van idee naar vorm." className="story__title" />
         <div className="story__text">
           <p className="story__lead">Soms weet je precies wat je wilt. Soms heb je alleen een gedachte waarvan je denkt: hier zit iets in.</p>
-          <p>Denckh denkt mee, maakt het zichtbaar en bouwt een eerste vorm. Van website tot prototype. Van interactieve uitleg tot iets waarvoor nog geen goede naam bestaat.</p>
+          <p>Je hoeft nog niet te weten wat het moet worden. Denckh denkt mee, zoekt de vorm die bij het idee past en maakt die concreet. Dat kan een website zijn, een prototype of een interactieve uitleg. Of iets waarvoor nog geen goede naam bestaat.</p>
         </div>
       </section>
 
@@ -59,7 +59,7 @@ export default function Home() {
             <h3>Een koffer die zichzelf uitlegt</h3>
             <p className="case__lead">Een demokoffer vol sensortechniek kreeg een digitale gids die je opent met een QR-code op de koffer.</p>
             <dl className="case__facts">
-              <div><dt>Aanleiding</dt><dd>Wie de koffer openmaakt, moet snel snappen wat erin zit en hoe je het bedient.</dd></div>
+              <div><dt>Aanleiding</dt><dd>Hoe snapt iemand die de koffer openmaakt meteen wat erin zit en hoe je het bedient?</dd></div>
               <div><dt>Denckh</dt><dd>Een verkenner van de koffer, de bediening stap voor stap nagebootst en een demomodus om mee te presenteren. In drie talen, ook offline.</dd></div>
               <div><dt>Vorm</dt><dd>Een interactieve uitleg die naast het echte product werkt.</dd></div>
             </dl>
@@ -67,7 +67,7 @@ export default function Home() {
           </div>
         </article>
 
-        <article className="case case--flip case--play">
+        <article className="case case--flip">
           <Construct project="spel" label="Loflijn, schematisch: een beurt van kaart tot tijdlijn" end="van psalm tot praise" ratio={0.62} />
           <div className="case__text">
             <p className="case__kind">spel op tafel → uitleg in drie tellen</p>
@@ -80,7 +80,6 @@ export default function Home() {
             </dl>
             <p className="case__links"><a className="link-draw" href="https://loflijn.nl" rel="noopener">loflijn.nl</a></p>
           </div>
-          <LoflijnTurn />
         </article>
       </section>
 
@@ -93,7 +92,10 @@ export default function Home() {
       </section>
 
       <section className="shell outcomes-section" aria-labelledby="uitkomst-titel">
-        <h2 id="uitkomst-titel">Wat kan eruit komen?</h2>
+        <header className="projects__head">
+          <h2 id="uitkomst-titel">Wat kan een idee worden?</h2>
+          <p>Dat weet je niet altijd vooraf. De vorm volgt uit wat het idee nodig heeft.</p>
+        </header>
         <Outcomes />
       </section>
 
@@ -107,11 +109,13 @@ export default function Home() {
 
       <section className="shell small" aria-labelledby="klein-titel">
         <figure className="small__photo">
-          <span className="small__photo-note">hier komt een echte foto. geen gegenereerde.</span>
+          <Image src="/images/portret.jpg" width={600} height={750} sizes="(max-width: 760px) 260px, 360px"
+            alt="De maker van Denckh aan tafel in een restaurant, armen over elkaar, kijkend naar de menukaart." />
         </figure>
         <div className="small__text">
           <h2 id="klein-titel">Denckh is klein. Bewust.</h2>
-          <p>Achter Denckh zit één persoon. Je werkt rechtstreeks met degene die meedenkt en maakt. Geen accountmanager, geen doorgeefluik.</p>
+          <p>Achter Denckh zit één persoon. Je werkt rechtstreeks met degene die meedenkt én maakt. Geen accountmanager, geen doorgeefluik.</p>
+          <p>Ik werk graag aan ideeën die nog niet vaststaan: techniek die uitgelegd moet worden, een product dat een plek nodig heeft, iets wat geregeld moet worden. Of gewoon uitzoeken wat de goede vorm is.</p>
           <p>Naast Denckh maak ik Deegh, ambachtelijk pizzadeeg. Ook dat begon als een idee.</p>
         </div>
       </section>
@@ -120,6 +124,7 @@ export default function Home() {
 
       <section className="shell contact" id="contact" aria-labelledby="contact-titel">
         <h2 id="contact-titel">En wat zit er bij jou in je hoofd?</h2>
+        <p className="contact__lead">Het hoeft nog geen plan te zijn. Een half idee, een vraag of een probleem is genoeg om mee te beginnen.</p>
         <ContactReturn />
       </section>
 

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     default: "Denckh · van idee naar vorm",
     template: "%s · Denckh",
   },
-  description: "Kleine conceptstudio. Van website tot prototype, van interactieve uitleg tot iets waar nog geen naam voor is.",
+  description: "Kleine conceptstudio. Je hoeft nog niet te weten wat het moet worden: Denckh zoekt de vorm die bij je idee past en maakt die.",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",

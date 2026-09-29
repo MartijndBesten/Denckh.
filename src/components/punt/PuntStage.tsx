@@ -5,7 +5,7 @@
 // Alles gebeurt in de browser. Er wordt niets verstuurd.
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type FormEvent, type KeyboardEvent, type PointerEvent } from "react";
 import { analyze, classify, measureLabels, type Features, type FormKind } from "@/lib/ink/analyze";
-import { conceptReply, makeConcept, type Concept } from "@/lib/ink/concept";
+import { conceptPlan, conceptReply, makeConcept, type Concept } from "@/lib/ink/concept";
 import { buildForm, N, type Form } from "@/lib/ink/forms";
 import { bbox, clamp, dist, easeInOut, easeOut, lerp, linePath, outlinePath, resample, smooth, type InkPt, type Pt } from "@/lib/ink/geometry";
 import { READINGS, readingFor } from "@/lib/ink/interpret";
@@ -303,7 +303,7 @@ export function PuntStage() {
     const count = form.kind === "route" || form.kind === "kaart" ? form.nodes.length : 3;
     setConcept(c);
     setReply(conceptReply(c, kind, count) || READINGS[kind].reply(text));
-    setSketch({ idea: text });
+    setSketch({ idea: text, plan: conceptPlan(c, kind, count) });
   }
 
   // --- afgeleide weergave

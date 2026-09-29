@@ -1,6 +1,7 @@
 // De lijn van de bezoeker reist mee door de site. Alles blijft in de browser (sessionStorage); er wordt niets verstuurd.
 import { useSyncExternalStore } from "react";
 import type { FormKind } from "./analyze";
+import type { Plan } from "./concept";
 import { bbox, resample, type Pt } from "./geometry";
 
 export type Sketch = {
@@ -10,6 +11,8 @@ export type Sketch = {
   kind: FormKind;
   name: string;
   idea?: string;
+  /** wat Denckh van het idee maakte; gaat mee naar de mail */
+  plan?: Plan;
   own: boolean;
 };
 

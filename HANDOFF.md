@@ -44,6 +44,10 @@ Nieuw werk: op een aparte branch; merge naar `main` = livegang.
 - 33/33 e2e-controles, axe 0 overtredingen op `/`, `/projecten/deegh/`, `/privacy/` en de hero met vorm en idee.
 - Hero: je idee maakt de eerste vorm concreet (onderwerp, drie delen, labels en aantekeningen) (B-037).
 
+**Branch `creatief/ronde-3` (niet live).** Eerder en vloeiender starten, stappen bij aanwijzen, Deegh-logo als stap
+"een merk", concreet voorstel in de mail, kaartlabels uit de krabbel (B-039 t/m B-042), echt portret (B-043),
+aangescherpte positionering (B-044), Loflijn-beurt verwijderd (B-045) en de interne logo-proef (B-046, open).
+
 ## Repositorygegevens
 
 | Onderwerp | Waarde |
@@ -100,6 +104,14 @@ Pas de oude regel niet aan. *Voorstel* = wacht op akkoord van de eigenaar.
 | B-036 | 2026-09-29 | Het publieke caseregister noemt geen werkgever- of productnamen meer voor de 3D-werkdag; dossiers van privé-repo's bevatten alleen wat ook op de site staat. | Publieke repo (`CLAUDE.md`, regel 6). | Vast |
 | B-037 | 2026-09-29 | Hero: na "Vertel" maakt het idee de eerste vorm concreet. Trefwoorden bepalen het soort ding (plannen, verkopen, spel, leren, inzicht, uitleg, samen, eten, techniek), het onderwerp komt uit de zin. De vorm krijgt concrete labels (knop "tijd 08:00–18:00", scherm met onderwerp, drie delen en mini-schetsen), een kader met titel en drie delen, en drie genummerde aantekeningen van Denckh. Opnieuw vertellen tekent de vorm opnieuw. Vaste regels, geen AI (`src/lib/ink/concept.ts`). | Feedback eigenaar: "nog mooier als die iets concreter zou zijn met het idee en de lijnen die hij daarna maakt". Kleurrollen blijven: oker = idee (zin, titel), rood = Denckh kijkt (aantekeningen), inkt = vorm. | Werkversie |
 | B-038 | 2026-09-29 | `creatief/ronde-2` naar `main` gemerged: livegang. Autowasdag Sionkerk met naam en link; presentatie en 3D-werkdag anoniem; Loflijn-voorbeeldbeurt zoals gebouwd. | Eigenaar: "ja live", daarna "Sionkerk mag erbij", "presentatie 3D-werkdag anoniem is prima", "Loflijn is top". | Vast |
+| B-039 | 2026-09-29 | Projectconstructies starten eerder (midden van het beeld van 92% naar 28% van de schermhoogte, 4% rust vooraf, 12% rust per vorm) en volgen de scroll met een korte, gladde vertraging (90 ms; na een stapkeuze 170 ms). Stappen reageren ook op aanwijzen (muis) en focus, niet alleen op klikken. | Feedback eigenaar op iPhone: "beginnen te laat en nog niet helemaal vloeiend"; "als je eroverheen gaat al verandert". | Vast |
+| B-040 | 2026-09-29 | Deegh: de stap "een pizza" is vervangen door "een merk": de deegbol rijst en wordt de cirkel van het echte Deegh-logo. Nu klopt de reeks met "product → merk → webshop". | Eigenaar gaf het logo vrij en leverde het aan. | Vast |
+| B-041 | 2026-09-29 | "Neem dit mee naar een gesprek": het contactblok en de mail bevatten een concreet voorstel uit het idee (eerste vorm, drie delen met aantekening, twee dingen die het zou kunnen worden, de vraag van Denckh), met de zin "Een begin, geen offerte." | Eigenaar: "mag mee naar de e-mail, maar dan moeten we wel heel concreet zijn wat het zou kunnen zijn". | Vast |
+| B-042 | 2026-09-29 | Ideeënkaart zonder idee: geen "functie a / functie b" meer; Denckh noemt de punten naar de krabbel zelf ("waar je begon", "de kern", "waar je eindigde", "een zijsprong"). | Eigenaar: "functie a, functie b … niet echt heel creatief". | Vast |
+| B-043 | 2026-09-29 | Echt portret in "Denckh is klein. Bewust." (`public/images/portret.jpg`): originele telefoonfoto van de eigenaar, uitsnede 4:5, kleur licht ingepast (iets lichter, minder oranje), twee andere gasten op de achtergrond onherkenbaar vervaagd. Geen naam erbij. Een eerder aangeleverde AI-bewerkte versie (met TRILUX-koffer en niet-bestaande verpakkingen) is bewust niet gebruikt. | De site belooft op die plek een echte foto; TRILUX niet tonen (B-029); geen verzonnen producten. Privacy van derden. | Vast |
+| B-044 | 2026-09-29 | Positionering aangescherpt, zonder nieuwe claims. "Van idee naar vorm": je hoeft nog niet te weten wat het moet worden; Denckh zoekt de vorm die bij het idee past en maakt die. "Wat kan eruit komen?" heet nu "Wat kan een idee worden?", met "De vorm volgt uit wat het idee nodig heeft" en "bijvoorbeeld" boven de vormen (voorbeelden, geen dienstenlijst). Werkwijze: Vertel (idee, probleem of losse gedachte), Denckh (samen uitzoeken wat nodig is en welke vorm past), Vorm (zichtbaar, testbaar of bruikbaar; waar nodig verder uitgebouwd). "Klein, bewust": concreet waar Denckh graag aan werkt, afgeleid uit de cases (techniek uitleggen, een product een plek geven, iets regelen). Contact: één regel dat een half idee, vraag of probleem genoeg is. Demokoffer-aanleiding als vraag geformuleerd. Metabeschrijving mee aangepast. Geen "we": Denckh of "ik". | Review eigenaar (via ChatGPT): het belangrijkste onderscheid is dat je je oplossing nog niet hoeft te kennen. Tekst mag niet als dienstenmenu of bureau lezen. | Vast |
+| B-045 | 2026-09-29 | Speelbare Loflijn-voorbeeldbeurt verwijderd (component, styles, tests). De Loflijn-case eindigt bij de constructie kaart → lied → tijdlijn, de uitleg en de link. Vervangt het tweede deel van B-034. | Review eigenaar: de beurt trekt de aandacht naar het spel in plaats van naar wat Denckh deed. De constructie is zelf al onderscheidend genoeg. | Vast |
+| B-046 | 2026-09-29 | Interne logo-proef op `/logo-lab/` (noindex, niet gelinkt, niet in de sitemap): het huidige woordmerk plus zeven varianten met elk één ingreep aan de onderkant (naad d, snede e, inkeping n, open c, onderbreking k, voet h, spoor punt). Het woordmerk op de site is niet veranderd. | Eigenaar wil eerst zelf vergelijken. | Open (O-34) |
 
 ---
 
@@ -128,11 +140,13 @@ Pas de oude regel niet aan. *Voorstel* = wacht op akkoord van de eigenaar.
 | O-21 | **Definitieve woordmerktekening** (B-028): de ligatuur is nu opgebouwd uit fontcontouren plus een balk. | Laten tekenen/verfijnen voor print en groot formaat. |
 | O-23 | **Echte AI:** publiek, alleen demo, of niet? Model, endpoint, budget. | Eerst niet publiek; besluit na `docs/ai-onderzoek.md`. |
 | O-24 | **Contact:** mailto volstaat, of een echte verzendroute (serverless)? | Mailto voor nu. |
-| O-25 | **Beelden Loflijn en Deegh** (naam en link mogen, B-029). | Screenshots of foto's aanleveren; de schematische constructie eindigt dan in het echte beeld. |
+| O-25 | **Beelden Loflijn en Deegh** (naam en link mogen, B-029). Deegh-logo is binnen (B-040). | Scherpere logoversie (SVG) en screenshots of foto's aanleveren; de schematische constructie eindigt dan in het echte beeld. |
 | O-30 | **Handelsnaam Denckh bij KvK.** De site noemt KvK 83176896 (de inschrijving van Deegh). | Controleren dat Denckh als handelsnaam bij deze inschrijving staat; zo niet, laten toevoegen bij KvK. |
 | O-26 | **Deegh-beelden:** welke foto's zijn echt en van jou? | Pas daarna echte beelden in de Deegh-case. |
-| O-27 | **Portret en naam** in "klein, bewust". | Echte foto aanleveren; naam tonen. |
+| O-27 | **Naam** in "klein, bewust" (portret staat er sinds B-043). | Naam tonen, of bewust weglaten. |
 | O-28 | **JS-gewicht:** 192 KB gzip, waarvan ca. 150 KB Next.js-runtime. Accepteren, of later naar Astro? | Accepteren; herzien als de site groeit. |
+| O-34 | **Logo-lab** (`/logo-lab/`, B-046): welke variant, of het huidige woordmerk houden? | Zelf vergelijken; daarna één variant uitwerken of `/logo-lab/` weghalen vóór livegang (anders staat hij publiek, al is hij niet vindbaar). |
+| O-35 | **Deegh als merk:** de stap "een merk" suggereert dat Denckh het Deegh-logo maakte. | Bevestigen dat het logo van jou is; anders de stap anders noemen. |
 | O-02 | Repo is publiek. | Op privé zetten kan alleen met betaald GitHub-plan voor Pages; anders bewust publiek laten en niets vertrouwelijks opnemen. |
 
 Afgehandeld: O-01 (repo hernoemd naar `denckh`), O-08 (live sites via geautoriseerde browsersessie bekeken, zie

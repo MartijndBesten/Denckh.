@@ -45,3 +45,10 @@ een lijntje met een schuif. Zonder schets is het gewoon een punt. Het merk laat 
   nog niet verfijnd voor print of groot formaat).
 - Keuze kleine letter of hoofdletter (open punt eigenaar).
 - Check bij 16 px (favicon): alleen de punt.
+
+## Logo-lab (2026-09-29, open)
+
+Op branch `creatief/ronde-3` staat een interne proefpagina `/logo-lab/` (noindex, niet gelinkt, niet in de sitemap):
+het huidige woordmerk naast zeven varianten met elk één ingreep aan de onderkant: naad d, snede e, inkeping n, open c,
+onderbreking k, voet h en spoor punt. Per variant groot, headerformaat, ca. 100 px en licht op donker. Er is geen
+winnaar gekozen (HANDOFF B-046, O-34). De contouren staan sindsdien in `src/components/wordmarkPaths.ts`.
