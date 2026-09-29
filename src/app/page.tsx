@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Footer, Header } from "@/components/Header";
 import { PuntStage } from "@/components/punt/PuntStage";
@@ -107,7 +108,8 @@ export default function Home() {
 
       <section className="shell small" aria-labelledby="klein-titel">
         <figure className="small__photo">
-          <span className="small__photo-note">hier komt een echte foto. geen gegenereerde.</span>
+          <Image src="/images/portret.jpg" width={600} height={750} sizes="(max-width: 760px) 260px, 360px"
+            alt="De maker van Denckh aan tafel in een restaurant, armen over elkaar, kijkend naar de menukaart." />
         </figure>
         <div className="small__text">
           <h2 id="klein-titel">Denckh is klein. Bewust.</h2>

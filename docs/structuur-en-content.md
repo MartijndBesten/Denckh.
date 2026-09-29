@@ -16,7 +16,7 @@ De homepage volgt nu de interactieve grammatica uit `docs/creative-direction.md`
 | 5 | **Ook gemaakt.** | drie kleinere projecten, elk één vorm waar jouw lijn in overloopt: Autowasdag Sionkerk (agenda), een presentatie (scherm; anoniem), een werkdag in 3D (gebouw; anoniem) |
 | 6 | **Wat kan eruit komen?** | één lijn, tien vormen, kiesbaar |
 | 7 | **Zo werkt het.** | Vertel → Denckh → Vorm met jouw eigen lijn |
-| 8 | **Denckh is klein. Bewust.** | plek voor een echte foto |
+| 8 | **Denckh is klein. Bewust.** | echt portret van de eigenaar (B-043) |
 | 9 | overgang | jouw lijn |
 | 10 | **En wat zit er bij jou in je hoofd?** | de punt komt terug; je schets en zin reizen mee; mailto naar info@denckh.nl |
 

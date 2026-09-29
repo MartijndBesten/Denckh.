@@ -371,11 +371,11 @@ nav .link-draw:hover, nav .link-draw:focus-visible { background-size: 100% 6px, 
 
 /* ---------------- klein, bewust ---------------- */
 .small { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 6fr); gap: 2rem clamp(2rem, 6vw, 6rem); align-items: center; padding-block: clamp(3rem, 8vw, 6rem); }
-.small__photo { margin: 0; aspect-ratio: 4 / 5; max-width: 360px; width: 100%; border: 1.5px dashed var(--pencil); display: grid; place-items: end start; padding: 1rem; }
-.small__photo-note { font-size: 0.8rem; color: var(--menie); letter-spacing: 0.04em; }
+.small__photo { margin: 0; max-width: 360px; width: 100%; }
+.small__photo img { display: block; width: 100%; height: auto; border-radius: 2px; background: var(--paper-2); }
 .small__text h2 { margin-bottom: 1.4rem; }
 .small__text p:first-of-type { font-size: 1.2rem; }
-@media (max-width: 760px) { .small { grid-template-columns: 1fr; } .small__photo { max-width: 220px; aspect-ratio: 1; } }
+@media (max-width: 760px) { .small { grid-template-columns: 1fr; } .small__photo { max-width: 260px; } }
 
 /* ---------------- contact: nieuw begin ---------------- */
 .contact { padding-block: clamp(3rem, 8vw, 6rem) 2rem; }

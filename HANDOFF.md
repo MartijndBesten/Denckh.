@@ -104,6 +104,7 @@ Pas de oude regel niet aan. *Voorstel* = wacht op akkoord van de eigenaar.
 | B-040 | 2026-09-29 | Deegh: de stap "een pizza" is vervangen door "een merk": de deegbol rijst en wordt de cirkel van het echte Deegh-logo. Nu klopt de reeks met "product → merk → webshop". | Eigenaar gaf het logo vrij en leverde het aan. | Vast |
 | B-041 | 2026-09-29 | "Neem dit mee naar een gesprek": het contactblok en de mail bevatten een concreet voorstel uit het idee (eerste vorm, drie delen met aantekening, twee dingen die het zou kunnen worden, de vraag van Denckh), met de zin "Een begin, geen offerte." | Eigenaar: "mag mee naar de e-mail, maar dan moeten we wel heel concreet zijn wat het zou kunnen zijn". | Vast |
 | B-042 | 2026-09-29 | Ideeënkaart zonder idee: geen "functie a / functie b" meer; Denckh noemt de punten naar de krabbel zelf ("waar je begon", "de kern", "waar je eindigde", "een zijsprong"). | Eigenaar: "functie a, functie b … niet echt heel creatief". | Vast |
+| B-043 | 2026-09-29 | Echt portret in "Denckh is klein. Bewust." (`public/images/portret.jpg`): originele telefoonfoto van de eigenaar, uitsnede 4:5, kleur licht ingepast (iets lichter, minder oranje), twee andere gasten op de achtergrond onherkenbaar vervaagd. Geen naam erbij. Een eerder aangeleverde AI-bewerkte versie (met TRILUX-koffer en niet-bestaande verpakkingen) is bewust niet gebruikt. | De site belooft op die plek een echte foto; TRILUX niet tonen (B-029); geen verzonnen producten. Privacy van derden. | Vast |
 
 ---
 
@@ -135,7 +136,7 @@ Pas de oude regel niet aan. *Voorstel* = wacht op akkoord van de eigenaar.
 | O-25 | **Beelden Loflijn en Deegh** (naam en link mogen, B-029). Deegh-logo is binnen (B-040). | Scherpere logoversie (SVG) en screenshots of foto's aanleveren; de schematische constructie eindigt dan in het echte beeld. |
 | O-30 | **Handelsnaam Denckh bij KvK.** De site noemt KvK 83176896 (de inschrijving van Deegh). | Controleren dat Denckh als handelsnaam bij deze inschrijving staat; zo niet, laten toevoegen bij KvK. |
 | O-26 | **Deegh-beelden:** welke foto's zijn echt en van jou? | Pas daarna echte beelden in de Deegh-case. |
-| O-27 | **Portret en naam** in "klein, bewust". | Echte foto aanleveren; naam tonen. |
+| O-27 | **Naam** in "klein, bewust" (portret staat er sinds B-043). | Naam tonen, of bewust weglaten. |
 | O-28 | **JS-gewicht:** 192 KB gzip, waarvan ca. 150 KB Next.js-runtime. Accepteren, of later naar Astro? | Accepteren; herzien als de site groeit. |
 | O-02 | Repo is publiek. | Op privé zetten kan alleen met betaald GitHub-plan voor Pages; anders bewust publiek laten en niets vertrouwelijks opnemen. |
 
