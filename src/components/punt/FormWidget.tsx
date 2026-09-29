@@ -95,7 +95,7 @@ function Screen({ form }: { form: Extract<Form, { kind: "scherm" }> }) {
           <g key={label} role="button" tabIndex={0} aria-pressed={picked === i} aria-label={`Kies ${label}`} className={`fw-tile${picked === i ? " is-picked" : ""}`}
             onClick={() => setPicked(i)} onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setPicked(i); } }}>
             <rect x={tx} y={tileY} width={tileW} height={tileH} rx={6} className="fw-draw" style={{ animationDelay: `${120 + i * 90}ms` }} />
-            <text x={tx + 10} y={tileY + 20} className="fw-label">{label}</text>
+            <text x={tx + 8} y={tileY + 18} className="fw-label" style={{ fontSize: Math.min(11, tileW / 5.5) }}>{label}</text>
             <line x1={tx + 10} y1={tileY + tileH - 22} x2={tx + tileW * 0.75} y2={tileY + tileH - 22} className="fw-draw fw-soft" />
             <line x1={tx + 10} y1={tileY + tileH - 12} x2={tx + tileW * 0.5} y2={tileY + tileH - 12} className="fw-draw fw-soft" />
           </g>

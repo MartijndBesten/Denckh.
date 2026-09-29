@@ -59,8 +59,9 @@ export function analyze(raw: Pt[]): Features {
     if (d > Math.PI) d = 2 * Math.PI - d;
     if (d > 0.95) corners.push(b);
   }
-  const crossings = selfIntersections(resample(core, 64));
-  const loops = Math.abs(totalTurning(pts)) / (2 * Math.PI);
+  // kruisingen en lussen over de hele lijn: een wilde krabbel blijft een krabbel, ook als hij ergens sluit
+  const crossings = Math.max(selfIntersections(resample(core, 64)), selfIntersections(resample(all, 80)));
+  const loops = Math.max(Math.abs(totalTurning(pts)), Math.abs(totalTurning(resample(all, 120)))) / (2 * Math.PI);
   const c = centroid(pts);
   const radii = pts.map((p) => dist(p, c));
   const mean = radii.reduce((s, r) => s + r, 0) / radii.length;
