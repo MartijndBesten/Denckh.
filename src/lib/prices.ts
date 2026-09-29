@@ -41,10 +41,14 @@ export const START_STOPS: PriceStop[] = [
   { glyph: "vorm", label: "Project", price: "vaste prijs", meta: "vooraf afgesproken", text: "Na de intake weet je wat jouw idee kost. Dat bedrag verandert niet zonder overleg." },
 ];
 
-export const DOMAIN_NOTE = "Je eigen domeinnaam is het eerste jaar inbegrepen, tot maximaal €20 excl. btw.";
+export const DOMAIN_NOTE = "Je eigen domeinnaam is het eerste jaar inbegrepen, tot maximaal €20 excl. btw. Hosting is niet inbegrepen.";
+
+export type FormGroup = "zichtbaar" | "digitaal" | "online";
+export const FORM_GROUPS: Record<FormGroup, string> = { zichtbaar: "Zichtbaar maken", digitaal: "Digitaal maken", online: "Online zetten" };
 
 export type FormPrice = {
   key: string;
+  group: FormGroup;
   name: string;
   price: number; // vanaf, excl. btw
   text: string;
@@ -53,25 +57,27 @@ export type FormPrice = {
   aside?: string;
 };
 
+// per groep aaneengesloten (de pagina zet de groepsnaam boven de eerste vorm van elke groep)
 export const FORM_PRICES: FormPrice[] = [
-  { key: "visual", name: "Visual / eerste vorm", price: 125, shape: "visualisatie", text: "Een schema, conceptbeeld, visueel verhaal of andere compacte uitwerking." },
-  { key: "presentatie", name: "Presentatie", price: 195, shape: "presentatie", text: "Een compacte presentatie met een duidelijke lijn en eigen vormgeving. Inhoud grotendeels aangeleverd." },
-  { key: "prototype", name: "Prototype", price: 295, shape: "prototype", text: "Een eerste klikbare of werkende versie om een idee zichtbaar en testbaar te maken." },
-  { key: "spel", name: "Spel / spelconcept", price: 295, shape: "spel", text: "Basisconcept, spelmechaniek en een eerste speelbare proef. Productie niet inbegrepen." },
-  { key: "website", name: "Website", price: 295, shape: "website", domain: true, text: "Een compacte responsive website voor een helder aanbod of idee." },
-  { key: "uitleg", name: "Interactieve uitleg / tool", price: 395, shape: "uitleg", text: "Een product, proces of technisch verhaal begrijpelijk en interactief maken, of een kleine tool met één duidelijke functie." },
-  { key: "demo", name: "Interactieve demo", price: 495, shape: "demo", text: "Maatwerk waarmee iemand iets kan ontdekken, bedienen of ervaren." },
-  { key: "website-plus", name: "Website Plus", price: 495, shape: "websitePlus", domain: true, text: "Meer pagina’s, meer eigen ontwerp of extra interactie dan de compacte website." },
-  { key: "webshop", name: "Webshop", price: 595, shape: "webshop", domain: true, text: "Een kleine webshop op een bestaand platform, met basisinrichting en een geteste mobiele checkout." },
-  { key: "webshop-plus", name: "Uitgebreidere webshop", price: 795, shape: "webshopPlus", text: "Meer eigen uitstraling, extra inrichting of interactie en uitgebreidere oplevering." },
   {
     key: "zonder-naam",
+    group: "zichtbaar",
     name: "Iets zonder naam",
     price: 95,
     shape: "schets",
-    text: "Eerst samen uitzoeken wat het idee eigenlijk nodig heeft. Daarna spreken we een vaste vervolgprijs af.",
-    aside: "Anders dan Even Denckh: na het gesprek zoek ik het ook uit en krijg je een concrete richting mee.",
+    text: "Eerst een gesprek over je idee. Daarna zoek ik het zelf kort uit en lever ik een concrete richting of voorstel op, met een vaste prijs voor het vervolg.",
+    aside: "Anders dan Even Denckh (€45): dat is 60 minuten samen denken, zonder uitzoekwerk achteraf.",
   },
+  { key: "visual", group: "zichtbaar", name: "Visual / eerste vorm", price: 125, shape: "visualisatie", text: "Een schema, conceptbeeld, visueel verhaal of andere compacte uitwerking." },
+  { key: "presentatie", group: "zichtbaar", name: "Presentatie", price: 195, shape: "presentatie", text: "Een compacte presentatie met een duidelijke lijn en eigen vormgeving. Inhoud grotendeels aangeleverd." },
+  { key: "prototype", group: "digitaal", name: "Prototype", price: 295, shape: "prototype", text: "Een eerste klikbare of werkende versie om een idee zichtbaar en testbaar te maken." },
+  { key: "spel", group: "digitaal", name: "Spel / spelconcept", price: 295, shape: "spel", text: "Basisconcept, spelmechaniek en een eerste speelbare proef. Productie niet inbegrepen." },
+  { key: "uitleg", group: "digitaal", name: "Interactieve uitleg / tool", price: 395, shape: "uitleg", text: "Een product, proces of technisch verhaal begrijpelijk en interactief maken, of een kleine tool met één duidelijke functie." },
+  { key: "demo", group: "digitaal", name: "Interactieve demo", price: 495, shape: "demo", text: "Maatwerk waarmee iemand iets kan ontdekken, bedienen of ervaren." },
+  { key: "website", group: "online", name: "Website", price: 295, shape: "website", domain: true, text: "Een compacte responsive website voor één helder aanbod of idee, op basis van inhoud die jij aanlevert." },
+  { key: "website-plus", group: "online", name: "Uitgebreidere website", price: 495, shape: "websitePlus", domain: true, text: "Meer pagina’s, meer eigen ontwerp of extra interactie dan de compacte website." },
+  { key: "webshop", group: "online", name: "Webshop", price: 595, shape: "webshop", domain: true, text: "Een compacte webshop op een bestaand platform, met basisinrichting en een geteste mobiele checkout. Geen complexe maatwerk e-commerce." },
+  { key: "webshop-plus", group: "online", name: "Uitgebreidere webshop", price: 795, shape: "webshopPlus", text: "Meer eigen uitstraling, extra inrichting of interactie en uitgebreidere oplevering." },
 ];
 
 export const INCLUDED = [

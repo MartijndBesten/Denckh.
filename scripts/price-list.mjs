@@ -84,7 +84,7 @@ p { margin: 0; }
 .top { display: flex; align-items: flex-start; justify-content: space-between; }
 .top .mark svg { height: 7.5mm; width: auto; display: block; }
 .top .label { margin: 1.5mm 0 0; }
-.hero { position: relative; margin: 7mm 0 5mm; padding-right: 42mm; }
+.hero { position: relative; margin: 6mm 0 4mm; padding-right: 42mm; }
 .hero .sub { font-family: "Fraunces Denckh", serif; font-size: 12.5pt; letter-spacing: -0.01em; margin-bottom: 3mm; }
 .hero .lead { color: ${C.graphite}; font-size: 9.8pt; max-width: 118mm; }
 .hero .curl { position: absolute; right: 2mm; top: -4mm; }
@@ -104,7 +104,7 @@ p { margin: 0; }
 .forms-head { display: flex; align-items: baseline; justify-content: space-between; margin: 5mm 0 1mm; padding-top: 4mm; border-top: 0.3mm solid ${C.rule}; }
 .forms-head p { font-size: 8pt; color: ${C.graphite}; }
 .forms { column-count: 2; column-gap: 10mm; }
-.form { padding: 2mm 0 2.1mm; border-bottom: 0.3mm solid ${C.rule}; break-inside: avoid; }
+.form { padding: 1.8mm 0 1.9mm; border-bottom: 0.3mm solid ${C.rule}; break-inside: avoid; }
 .form__top { display: flex; align-items: baseline; justify-content: space-between; gap: 4mm; margin-bottom: 0.8mm; }
 .form__price { font-family: "Fraunces Denckh", serif; font-weight: 560; font-size: 12pt; letter-spacing: -0.02em; white-space: nowrap; }
 .form__price .from { margin-right: 0.6mm; }
@@ -172,7 +172,7 @@ footer span:last-child { margin-left: auto; }
       <p class="small">Heb je iets hiervan nodig? Dan spreken we het vooraf apart af.</p></div>
   </div>
   <div class="block">
-    <h3>Je eigen webadres en hosting</h3><p class="small" style="color:${C.ochreDeep}">Website, Website Plus en Webshop: ${esc(DOMAIN_NOTE.charAt(0).toLowerCase() + DOMAIN_NOTE.slice(1))}</p>
+    <h3>Je eigen webadres en hosting</h3><p class="small" style="color:${C.ochreDeep}">Website, Uitgebreidere website en Webshop: ${esc(DOMAIN_NOTE.charAt(0).toLowerCase() + DOMAIN_NOTE.slice(1))}</p>
     <ul class="not two">${WEB_ADDRESS.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>
   </div>
   <div class="close"><h2>Benieuwd wat jouw idee kost?</h2><p>Vertel je idee: <b>info@denckh.nl</b> · denckh.nl</p></div>

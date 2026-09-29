@@ -10,7 +10,7 @@ import { useMorph } from "@/lib/ink/hooks";
 import { SHAPES, SN } from "@/lib/ink/shapes";
 import { place, useSketch } from "@/lib/ink/store";
 import { useReducedMotion } from "@/lib/ink/useReducedMotion";
-import { DOMAIN_NOTE, type FormPrice } from "@/lib/prices";
+import { DOMAIN_NOTE, FORM_GROUPS, type FormPrice } from "@/lib/prices";
 
 export function FormPrices({ items }: { items: FormPrice[] }) {
   const figRef = useRef<HTMLDivElement>(null);
@@ -106,8 +106,9 @@ export function FormPrices({ items }: { items: FormPrice[] }) {
       <ul className="fp__list" ref={listRef}>
         {items.map((it, i) => (
           <li key={it.key} className={`fp__row${i === active ? " is-on" : ""}`} onPointerEnter={(e) => e.pointerType === "mouse" && setHover(i)} onPointerLeave={(e) => e.pointerType === "mouse" && setHover(null)}>
+            {(i === 0 || items[i - 1].group !== it.group) && <h3 className="fp__group">{FORM_GROUPS[it.group]}</h3>}
             <div className="fp__top">
-              <h3 className="fp__name">{it.name}</h3>
+              <h4 className="fp__name">{it.name}</h4>
               <p className="fp__price"><span className="fp__from">vanaf</span> €{it.price}</p>
             </div>
             <p className="fp__text">{it.text}</p>
