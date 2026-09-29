@@ -10,10 +10,11 @@ beslissingen, open punten en de volgende stappen. **Bijwerken aan het eind van e
 
 ## Huidige stand
 
-**Productie.** `denckh.nl` draait op GitHub Pages vanaf `main` (laatste commit `2f9a7a2`). Mail via Cloud86/Plesk
-(`info@denckh.nl`). Deze ronde is niets aan productie, DNS, Plesk of mail gewijzigd.
+**Productie.** `denckh.nl` draait op GitHub Pages vanaf `main`. Op 2026-09-29 is `creatief/het-punt` na akkoord van
+de eigenaar gemerged (merge `960251b`, B-031). Mail via Cloud86/Plesk (`info@denckh.nl`). Aan DNS, Plesk en mail is
+niets gewijzigd.
 
-**Branch `creatief/het-punt`** (samengevoegd uit `main` en `codex/interactieve-kern`):
+**Wat er live staat** (uit branch `creatief/het-punt`, zelf samengevoegd uit `main` en `codex/interactieve-kern`):
 
 - **Fase A · typografie:** echte proef met 13 letters en 5 uitgewerkte richtingen, als contouren gezet.
   Werkhypothese: Fraunces met eigen ck-ligatuur. `docs/typografie-proef.md`, `docs/typografie/`.
@@ -26,9 +27,11 @@ beslissingen, open punten en de volgende stappen. **Bijwerken aan het eind van e
 - **Fase D · homepage:** volledig omgezet. Deegh-casepagina en privacyverklaring bijgewerkt.
 - **Kwaliteit:** 23/23 e2e-controles, axe 0 overtredingen, Lighthouse mobiel 93/100/100/100 (met gzip). Zie
   `docs/architectuur.md` §6.
+- **Cases:** Deegh en Loflijn met naam en link; de demokoffer anoniem (geen toestemming TRILUX, B-029).
+- **Bedrijfsgegevens** in footer, privacy en structured data (B-030); OpenGraph-beeld met het nieuwe woordmerk.
 - **AI:** alleen onderzoek, niets gebouwd: `docs/ai-onderzoek.md`.
 
-Bekijken zonder live te zetten: `git checkout creatief/het-punt && npm ci && npm run build && npx serve out`.
+Nieuw werk: op een aparte branch; merge naar `main` = livegang.
 
 ## Repositorygegevens
 
@@ -37,7 +40,7 @@ Bekijken zonder live te zetten: `git checkout creatief/het-punt && npm ci && npm
 | Remote | `https://github.com/MartijndBesten/denckh` |
 | Zichtbaarheid | Publiek |
 | Hoofdbranch | `main` (live) |
-| Werkbranch | `creatief/het-punt` |
+| Laatste werkbranch | `creatief/het-punt` (gemerged) |
 
 ---
 
