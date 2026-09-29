@@ -260,3 +260,43 @@ p { max-width: 42rem; }
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
   .idea-canvas__shape { opacity: 1; }.idea-orb::after { display: none; }
 }
+
+
+/* Eerste publieke versie */
+.development-note {
+  width: 100%;
+  padding: 0.72rem var(--gutter);
+  color: var(--graphite);
+  background: var(--paper-2);
+  border-bottom: 1px solid var(--line);
+  font-size: 0.76rem;
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+
+.development-note span {
+  color: var(--ink);
+  font-weight: 750;
+}
+
+.contact-placeholder {
+  align-self: end;
+  max-width: 32rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border: 1px solid var(--line);
+  background: var(--paper-2);
+}
+
+.contact-placeholder p {
+  margin-bottom: 2rem;
+  color: var(--graphite);
+  font-size: 1rem;
+}
+
+.contact-placeholder span {
+  color: var(--ochre-deep);
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
