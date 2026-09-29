@@ -2,6 +2,7 @@
 // Gebruik: npm run build && npx http-server out -p 8711 -s  (tweede terminal)  →  node tests/interaction.mjs
 // Vereist Playwright (globaal of via npx). Geen testdata verlaat de browser.
 import { chromium } from "playwright";
+import fs from "node:fs";
 
 const BASE = process.env.BASE_URL ?? "http://localhost:8711/";
 const results = [];
@@ -43,6 +44,7 @@ const browser = await chromium.launch();
 {
   const { p, ctx, errors } = await page(browser);
   check("hero: punt staat in de kop", (await p.locator(".punt--idle").count()) === 1);
+  check("hero: goedgekeurde intro", /Weet je nog niet wat het moet worden\? Ook goed\./.test((await p.locator(".punt__intro").textContent()) ?? ""));
   const ghost = await p.locator(".punt__ghost").getAttribute("d");
   check("hero: hulplijn is de Denckh-krul (vier bochten na de aanloop)", (ghost?.match(/C /g) ?? []).length === 5, `${(ghost?.match(/C /g) ?? []).length} bochten`);
   check("hero: favicon en OG-beeld ongewijzigd", (await p.locator('link[rel="icon"]').getAttribute("href")) === "/favicon.svg" && (await p.locator('meta[property="og:image"]').getAttribute("content")) === "https://denckh.nl/og.png");
@@ -122,9 +124,77 @@ const browser = await chromium.launch();
   await ctx.close();
 }
 
+// 3b · voorbeeldreeks: elke klik tekent de volgende tekening, en dezelfde engine maakt er iets anders van
+{
+  const { p, ctx, errors } = await page(browser);
+  const forms = [], inks = [];
+  await p.getByRole("button", { name: "of bekijk een voorbeeld" }).click();
+  for (let i = 0; i < 7; i++) {
+    await p.waitForTimeout(3600);
+    inks.push(await p.locator(".punt__ink").getAttribute("d"));
+    await p.getByRole("button", { name: "Zal ik er vorm aan geven?" }).click();
+    await p.waitForTimeout(1500);
+    const kind = await p.locator(".punt__svg .fw").first().getAttribute("class");
+    forms.push((kind ?? "").replace("fw fw--", ""));
+    if (i === 1) { // regelaar: echt schuifbaar
+      const s = p.getByRole("slider", { name: "Regelaar" }); await s.focus(); await p.keyboard.press("ArrowRight");
+      check("voorbeelden: regelaar is echt schuifbaar", (await s.getAttribute("aria-valuenow")) === "52");
+    }
+    if (i === 4) { // kaart: punten echt aanklikbaar, met één korte vraag
+      const kern = p.getByRole("button", { name: "de kern" });
+      if (await kern.count()) await kern.click();
+      check("voorbeelden: kaartpunten zijn aanklikbaar", /\?$/.test((await p.locator(".punt__say").textContent()) ?? ""));
+    }
+    if (i < 6) await p.getByRole("button", { name: "nog een voorbeeld" }).click();
+  }
+  check("voorbeelden: reeks laat zes verschillende kanten zien", forms.slice(0, 6).join(",") === "knob,slider,screen,chart,map,map", forms.join(","));
+  check("voorbeelden: na de laatste weer de eerste", forms[6] === "knob", forms[6]);
+  check("voorbeelden: elk voorbeeld heeft eigen geometrie", new Set(inks.slice(0, 6)).size === 6);
+  check("voorbeelden: geen console-errors", errors.length === 0, errors.join(" | "));
+  // eigen tekening daarna: voorbeeldstatus lekt niet
+  await p.getByRole("button", { name: "Nog een idee" }).click();
+  await p.evaluate(() => scrollTo({ top: 0, behavior: "instant" }));
+  await p.waitForTimeout(300);
+  const dot = await p.locator(".punt__dot").boundingBox(), zone = await p.locator(".punt__zone").boundingBox();
+  await p.mouse.move(dot.x + dot.width / 2, dot.y + dot.height / 2); await p.mouse.down();
+  for (let i = 0; i <= 40; i++) await p.mouse.move(zone.x + zone.width * (0.15 + 0.7 * (i / 40)), zone.y + zone.height * 0.5, { steps: 2 });
+  await p.mouse.up(); await p.waitForTimeout(2300);
+  check("eigen tekening na voorbeelden: eigen lezing, geen voorbeeldknop", /schaal|rechte/i.test((await p.locator(".punt__say").textContent()) ?? "") && (await p.getByRole("button", { name: "nog een voorbeeld" }).count()) === 0);
+  await ctx.close();
+}
+
+// 3d · dezelfde reeks op mobiel (touch), ook op een smal scherm
+for (const [w, h] of [[390, 844], [320, 640]]) {
+  const { p, ctx, errors } = await page(browser, { width: w, height: h, mobile: true });
+  const forms = [];
+  await p.getByRole("button", { name: "of bekijk een voorbeeld" }).tap();
+  for (let i = 0; i < 6; i++) {
+    await p.waitForTimeout(3600);
+    await p.getByRole("button", { name: "Zal ik er vorm aan geven?" }).tap();
+    await p.waitForTimeout(1500);
+    forms.push(((await p.locator(".punt__svg .fw").first().getAttribute("class")) ?? "").replace("fw fw--", ""));
+    if (i < 5) await p.getByRole("button", { name: "nog een voorbeeld" }).tap();
+  }
+  check(`voorbeelden op ${w}px: dezelfde zes kanten`, forms.join(",") === "knob,slider,screen,chart,map,map", forms.join(","));
+  check(`voorbeelden op ${w}px: geen overflow, geen errors`, (await p.evaluate(() => document.documentElement.scrollWidth - innerWidth)) <= 0 && errors.length === 0, errors.join(" | "));
+  await ctx.close();
+}
+
+// 3c · broncode: Deegh-voorbeeld volgt het echte logo, en de engine kent geen voorbeeld-uitzonderingen
+{
+  const ex = fs.readFileSync(new URL("../src/lib/ink/examples.ts", import.meta.url), "utf8");
+  check("voorbeelden: Deegh-geometrie verwijst naar het echte logo", ex.includes("public/images/deegh-logo.jpg") && fs.existsSync(new URL("../public/images/deegh-logo.jpg", import.meta.url)) && /key: "deegh"/.test(ex));
+  const engine = ["src/lib/ink/analyze.ts", "src/lib/ink/forms.ts", "src/lib/ink/interpret.ts", "src/lib/ink/concept.ts", "src/components/punt/PuntStage.tsx", "src/components/punt/FormWidget.tsx"]
+    .map((f) => fs.readFileSync(new URL(`../${f}`, import.meta.url), "utf8")).join("\n");
+  check("voorbeelden: geen Deegh- of voorbeeldspecifieke analyse in de engine", !/deegh/i.test(engine) && !/example\.key/.test(engine));
+}
+
 // 4 · mobiel met touch
 {
   const { p, ctx, errors } = await page(browser, { width: 390, height: 844, mobile: true });
+  await p.waitForTimeout(1500);
+  const g = await p.locator(".punt__ghost").boundingBox(), hint = await p.locator(".punt__hint-main").boundingBox();
+  check("mobiel: compacte hulplijn, 'begin met een punt' eerder in beeld", g.height < 420 && g.y + g.height < hint.y && hint.y < 700, `h ${Math.round(g.height)}, hint ${Math.round(hint.y)}`);
   const before = await p.evaluate(() => scrollY);
   await drawCircle(p, true, ctx);
   await p.waitForTimeout(400);

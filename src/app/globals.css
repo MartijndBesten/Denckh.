@@ -246,7 +246,7 @@ nav .link-draw:hover, nav .link-draw:focus-visible { background-size: 100% 6px, 
 .fw-edge.is-active { stroke: var(--ochre-deep); stroke-width: 2.5; }
 
 @media (max-width: 860px) {
-  .punt { grid-template-columns: minmax(0, 1fr); grid-template-areas: "copy" "zone" "panel"; grid-template-rows: auto minmax(260px, 46svh) auto; min-height: 0; gap: 1rem; }
+  .punt { grid-template-columns: minmax(0, 1fr); grid-template-areas: "copy" "zone" "panel"; grid-template-rows: auto minmax(240px, 38svh) auto; min-height: 0; gap: 1rem; }
   .punt__copy { padding-top: 0.5rem; }
   .punt__title { margin-bottom: 1rem; }
   .punt__panel { min-height: 9rem; align-self: start; }

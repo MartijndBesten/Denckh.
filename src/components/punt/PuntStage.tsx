@@ -9,8 +9,9 @@ import { conceptPlan, conceptReply, makeConcept, type Concept } from "@/lib/ink/
 import { buildForm, N, type Form } from "@/lib/ink/forms";
 import { bbox, clamp, dist, easeInOut, easeOut, lerp, linePath, outlinePath, resample, smooth, type InkPt, type Pt } from "@/lib/ink/geometry";
 import { READINGS, readingFor } from "@/lib/ink/interpret";
-import { KRUL_START, krulFit, krulPath } from "@/lib/ink/krul";
-import { normalize, place, setSketch } from "@/lib/ink/store";
+import { EXAMPLES, placeExample } from "@/lib/ink/examples";
+import { KRUL_BOX, KRUL_START, krulFit, krulPath } from "@/lib/ink/krul";
+import { normalize, setSketch } from "@/lib/ink/store";
 import { useReducedMotion } from "@/lib/ink/useReducedMotion";
 import { FormWidget } from "./FormWidget";
 
@@ -55,6 +56,9 @@ export function PuntStage() {
   const [reply, setReply] = useState("");
   const [concept, setConcept] = useState<Concept | null>(null);
   const [nodeQuestion, setNodeQuestion] = useState<string | null>(null);
+  // alleen voor de bediening ("nog een voorbeeld"); de analyse weet niet of een tekening een voorbeeld was
+  const [fromExample, setFromExample] = useState(false);
+  const nextExample = useRef(0);
   const [keyboard, setKeyboard] = useState(false);
   const [size, setSize] = useState({ w: 0, h: 0 });
   const phaseRef = useRef<Phase>("idle");
@@ -159,7 +163,7 @@ export function PuntStage() {
   // --- start, bewegen, loslaten
   function reset(keepFocus = true) {
     raw.current = [];
-    setInk([]); setForm(null); setFeatures(null); setMorph(0); setReply(""); setConcept(null); setNodeQuestion(null); setKeyboard(false);
+    setInk([]); setForm(null); setFeatures(null); setMorph(0); setReply(""); setConcept(null); setNodeQuestion(null); setFromExample(false); setKeyboard(false);
     setPhase("idle");
     paint();
     placeDot(home.current);
@@ -173,6 +177,7 @@ export function PuntStage() {
     const start = home.current;
     raw.current = [{ x: start.x, y: start.y, w: MAX_W }];
     pen.current = { x: start.x, y: start.y, w: MAX_W, t: e.timeStamp };
+    setFromExample(false);
     setPhase("drawing");
     addPoint(localPoint(e), e.timeStamp, e.pressure);
   }
@@ -232,6 +237,7 @@ export function PuntStage() {
       e.preventDefault();
       raw.current = [{ ...home.current, w: MAX_W }];
       pen.current = { ...home.current, w: MAX_W, t: performance.now() };
+      setFromExample(false);
       setKeyboard(true);
       setPhase("drawing");
       return;
@@ -256,20 +262,15 @@ export function PuntStage() {
     }
   }
 
-  // --- voorbeeld afspelen (voor wie niet wil of kan tekenen): een uit de hand getekende cirkel, met de verhoudingen
-  //     van de cirkel in het Deegh-logo (public/images/deegh-logo.jpg). Eén rustige streek; daarna leest de engine
-  //     hem zoals elke eigen tekening.
+  // --- voorbeeld afspelen (voor wie niet wil of kan tekenen). Een vaste reeks tekeningen (src/lib/ink/examples.ts);
+  //     elke klik tekent de volgende. De punt tekent ze echt, daarna leest de engine ze als elke eigen tekening.
   function playExample() {
     if (phase !== "idle") reset(false);
     const z = zone.current;
-    const shape: Pt[] = [];
-    for (let i = 0; i <= 96; i++) {
-      const t = i / 96;
-      const a = t * Math.PI * 2 * 1.03 - Math.PI * 0.62;
-      const r = 0.42 * (1 + 0.035 * Math.sin(t * Math.PI * 2 * 1.5 + 0.8) + 0.02 * Math.sin(t * Math.PI * 2 * 3.2));
-      shape.push({ x: 0.5 + Math.cos(a) * r, y: 0.5 + Math.sin(a) * r * 0.98 });
-    }
-    const target = place(shape, z.x + z.w * 0.2, z.y + z.h * 0.16, z.w * 0.6, z.h * 0.68);
+    const example = EXAMPLES[nextExample.current % EXAMPLES.length];
+    nextExample.current += 1;
+    setFromExample(true);
+    const target = placeExample(example, z, home.current);
     const start = home.current;
     const path = [start, ...resample([start, target[0]], 12).slice(1), ...target];
     raw.current = [{ ...start, w: MAX_W }];
@@ -346,7 +347,7 @@ export function PuntStage() {
           Mooi<span ref={homeRef} className="punt__home" aria-hidden="true" /><span className="visually-hidden">.</span>
         </h1>
         <p className="punt__intro">
-          Denckh is een kleine conceptstudio. Ik denk mee en maak het concreet: een website, een demo, een prototype, of iets waar nog geen naam voor is.
+          Denckh is een kleine conceptstudio. Weet je nog niet wat het moet worden? Ook goed. Ik denk mee en maak het concreet.
         </p>
       </div>
 
@@ -393,6 +394,7 @@ export function PuntStage() {
             <div className="punt__actions">
               {kind !== "punt" && <button type="button" className="ink-button" onClick={giveForm}>Zal ik er vorm aan geven?</button>}
               <button type="button" className="link-button" onClick={() => reset()}>Teken opnieuw</button>
+              {fromExample && <button type="button" className="link-button" onClick={playExample}>nog een voorbeeld</button>}
             </div>
           </div>
         )}
@@ -415,6 +417,7 @@ export function PuntStage() {
             <div className="punt__actions">
               <a className="link-draw" href="#contact">Neem dit mee naar een gesprek</a>
               <button type="button" className="link-button" onClick={() => reset()}>Nog een idee</button>
+              {fromExample && <button type="button" className="link-button" onClick={playExample}>nog een voorbeeld</button>}
             </div>
             <p className="punt__note">Dit prototype reageert met vaste regels in je browser. Er wordt niets verstuurd of bewaard.</p>
           </div>
@@ -518,13 +521,26 @@ function reach(form: Form) {
 /** De hulplijn vóór het tekenen: van de punt naar het tekenvlak, en daar de Denckh-krul (dezelfde lijn als in het
  *  Open Graph-beeld). Gestippeld en potloodgrijs: een voorstel, geen opdracht om over te trekken. */
 function GhostHint({ from, zone }: { from: Pt; zone: Zone }) {
-  const m = Math.min(zone.w, zone.h) * 0.08;
-  const fit = krulFit(zone.x + m, zone.y + m, zone.w - m * 2, zone.h - m * 2);
+  // mobiel: het tekenvlak ligt onder de intro. Dan een kleinere krul hoog in het vlak en een aanloop die na ~90 px al
+  // afbuigt, zodat punt en krul dicht bij elkaar blijven en "begin met een punt" eerder in beeld komt.
+  const stacked = zone.y > from.y + 40;
+  let fit, c1: Pt, c2: Pt;
+  const p0 = { x: from.x + (stacked ? 14 : 18), y: from.y + (stacked ? 6 : 0) };
+  if (stacked) {
+    const kh = zone.h * 0.86, kw = (kh * KRUL_BOX.w) / KRUL_BOX.h;
+    fit = krulFit(zone.x + (zone.w - kw) * 0.62, zone.y + zone.h * 0.04, kw, kh);
+    const a = fit(KRUL_START);
+    c1 = { x: p0.x + 80, y: p0.y + 40 };
+    c2 = { x: a.x - 60, y: a.y - 12 };
+  } else {
+    const m = Math.min(zone.w, zone.h) * 0.08;
+    fit = krulFit(zone.x + m, zone.y + m, zone.w - m * 2, zone.h - m * 2);
+    const a = fit(KRUL_START);
+    // aanloop: eerst weg van de kop, dan met een boog van linksonder de krul in
+    c1 = { x: p0.x + (a.x - p0.x) * 0.15, y: p0.y + (a.y - p0.y) * 0.55 };
+    c2 = { x: a.x - Math.max(40, (a.x - p0.x) * 0.3), y: a.y + 24 };
+  }
   const a = fit(KRUL_START);
-  const p0 = { x: from.x + 18, y: from.y };
-  // aanloop: eerst weg van de kop, dan met een boog van linksonder de krul in
-  const c1 = { x: p0.x + (a.x - p0.x) * 0.15, y: p0.y + (a.y - p0.y) * 0.55 };
-  const c2 = { x: a.x - Math.max(40, (a.x - p0.x) * 0.3), y: a.y + 24 };
   const d = `M${p0.x.toFixed(1)} ${p0.y.toFixed(1)} C ${c1.x.toFixed(1)} ${c1.y.toFixed(1)}, ${c2.x.toFixed(1)} ${c2.y.toFixed(1)}, ${a.x.toFixed(1)} ${a.y.toFixed(1)} ${krulPath(fit).replace(/^M[^C]*/, "")}`;
   return <path d={d} pathLength={1} className="punt__ghost" />;
 }
