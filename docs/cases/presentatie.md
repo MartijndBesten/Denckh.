@@ -21,6 +21,6 @@ waar je doorheen klikt en een PDF om achter te laten." Met de notitie "Zonder me
 Onderwerp, merknamen, aantallen schermen, doelgroepen en alle inhoud van de dia's. Deze repository is publiek
 (`CLAUDE.md`, regel 6).
 
-## Te bevestigen
+## Toestemming
 
-- [TE BEVESTIGEN] Mag deze presentatie überhaupt (anoniem) genoemd worden? Het is werk binnen een werkgever.
+- Akkoord eigenaar voor anonieme vermelding, 2026-09-29 ("presentatie 3D-werkdag anoniem is prima").

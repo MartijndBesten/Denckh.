@@ -22,7 +22,7 @@ De homepage volgt nu de interactieve grammatica uit `docs/creative-direction.md`
 
 Contact werkt via het eigen mailprogramma (GitHub Pages kan niets verzenden). Deegh en Loflijn staan er met naam en
 link (B-029). De demokoffer, de presentatie en de 3D-werkdag blijven zonder merknaam, beelden of link. Autowasdag
-Sionkerk staat er met naam en link zodra de kerk akkoord is (O-31).
+Sionkerk staat er met naam en link (akkoord eigenaar, B-038).
 
 ---
 

@@ -4,7 +4,7 @@
 - **Gecontroleerd op / door:** 2026-09-29 · Claude
 - **Commit-SHA:** `31627844cb3b57bfe7336185b795047540e9de24` (21-07-2026, "zet website om naar terugblikpagina na Autowasdag 2026")
 - **Live site zelf:** niet bekeken (domeinen buiten GitHub zijn geblokkeerd in de werkomgeving).
-- **Status:** op branch `creatief/ronde-2` met naam en link. **Vóór livegang:** bevestigen dat de kerk akkoord is met vermelding.
+- **Status:** *Goedgekeurd voor publicatie (naam en link)*, 2026-09-29, eigenaar: "Sionkerk mag erbij". Live sinds B-038.
 
 ## Wat is het
 
@@ -34,5 +34,5 @@ Bewust **niet** overgenomen: de opbrengst die in de terugblik staat. Dat is een 
 
 ## Rechten en toestemming
 
-- Naam en link: [TE BEVESTIGEN] akkoord van de organisatie (Sionkerk) vóór merge naar `main`.
+- Naam en link: akkoord via de eigenaar, 2026-09-29 ("Sionkerk mag erbij").
 - Geen logo's, foto's of screenshots gebruikt. Op de site staat een schematische vorm (agenda met tijdsloten).

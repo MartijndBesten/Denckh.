@@ -31,8 +31,7 @@ Loflijn is een fysiek christelijk muziekspel met een eigen online productpresent
   tijdlijn "van psalm tot praise", niet in een webshop. Daaronder een speelbare voorbeeldbeurt.
 - De voorbeeldbeurt gebruikt verzonnen jaartallen zonder liedtitels en zegt dat er ook bij: "Voorbeeld van het
   spelprincipe. De jaartallen zijn ter illustratie, niet van echte kaarten."
-- [TE BEVESTIGEN] Leg je in het echte spel de kaarten op jaartal (volgorde van uitkomen)? De voorbeeldbeurt gaat daarvan
-  uit. Klopt dat niet, dan past de beurt zich aan het echte principe aan.
+- Eigenaar na het zien van de voorbeeldbeurt, 2026-09-29: "Loflijn is top". De beurt blijft zoals gebouwd.
 
 ## Nog te bevestigen
 

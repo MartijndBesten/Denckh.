@@ -10,9 +10,9 @@ Hier staat welke projecten mogelijk als case op de Denckh-site komen, wat er al 
 | IntuSens-demokoffer | https://intusens-demokoffer.nl · publieke repo `MartijndBesten/intusens-demokoffer` | Geen toestemming voor naam, beelden of link (besluit eigenaar 2026-09-29); alleen anoniem en schematisch | 2026-09-29 | [intusens-demokoffer.md](intusens-demokoffer.md) |
 | Deegh | https://deegh.nl · broncode (privé) | Goedgekeurd voor publicatie (naam en link), 2026-09-29; beeldherkomst nog open | 2026-09-29 | [deegh.md](deegh.md) |
 | Loflijn | https://loflijn.nl (Shopify) | Goedgekeurd voor publicatie (naam en link), 2026-09-29; beelden nog niet aangeleverd | 2026-09-29 | [loflijn.md](loflijn.md) |
-| 3D-werkdag | Privé-repository van de eigenaar | Alleen anoniem en schematisch in "Ook gemaakt" (branch `creatief/ronde-2`); vermelding zelf nog te bevestigen | 2026-09-29 | [3d-werkdag.md](3d-werkdag.md) |
-| Interactieve presentatie | Privé-repository van de eigenaar | Alleen anoniem en schematisch in "Ook gemaakt" (branch `creatief/ronde-2`); vermelding zelf nog te bevestigen | 2026-09-29 | [presentatie.md](presentatie.md) |
-| Autowasdag Sionkerk | Publieke repo `MartijndBesten/autowasdag-sionkerk` (`3162784`) | Naam en link in "Ook gemaakt" (branch `creatief/ronde-2`); akkoord kerk te bevestigen vóór livegang | 2026-09-29 | [autowasdag-sionkerk.md](autowasdag-sionkerk.md) |
+| 3D-werkdag | Privé-repository van de eigenaar | Anoniem en schematisch in "Ook gemaakt"; akkoord eigenaar 2026-09-29 | 2026-09-29 | [3d-werkdag.md](3d-werkdag.md) |
+| Interactieve presentatie | Privé-repository van de eigenaar | Anoniem en schematisch in "Ook gemaakt"; akkoord eigenaar 2026-09-29 | 2026-09-29 | [presentatie.md](presentatie.md) |
+| Autowasdag Sionkerk | Publieke repo `MartijndBesten/autowasdag-sionkerk` (`3162784`) | Goedgekeurd voor publicatie (naam en link), 2026-09-29, via eigenaar | 2026-09-29 | [autowasdag-sionkerk.md](autowasdag-sionkerk.md) |
 
 Statussen: *Niet onderzocht* → *In onderzoek* → *Geverifieerd* → *Goedgekeurd voor publicatie*.
 

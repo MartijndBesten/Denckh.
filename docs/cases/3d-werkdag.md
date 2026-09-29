@@ -21,7 +21,7 @@ daglicht en tijd, en je grijpt zelf in: tijd versnellen, een ruimte aanklikken, 
 
 Merk- en productnamen, het systeem dat wordt gedemonstreerd, technische details en beelden uit het model.
 
-## Te bevestigen
+## Toestemming
 
-- [TE BEVESTIGEN] Mag dit (anoniem) genoemd worden? Het is werk binnen een werkgever.
+- Akkoord eigenaar voor anonieme vermelding, 2026-09-29 ("presentatie 3D-werkdag anoniem is prima").
 - Later eventueel: een eigen, merkloze opname of stilstaand beeld, als de eigenaar dat wil en mag.
