@@ -224,7 +224,7 @@ function Route({ form, concept }: { form: Extract<Form, { kind: "route" }>; conc
 function ConceptMap({ form, concept }: { form: Extract<Form, { kind: "kaart" }>; concept?: Concept }) {
   const [active, setActive] = useState<number | null>(null);
   const labels = concept ? [concept.subject ?? "idee", ...concept.map]
-    : form.nodes.length === 2 ? ["functie a", "functie b"] : ["wat", "voor wie", "hoe", "waarom", "wanneer"];
+    : form.names;
   return (
     <g className="fw fw--map">
       {form.edges.map(([a, b], i) => (

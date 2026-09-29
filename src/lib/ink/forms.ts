@@ -12,7 +12,7 @@ export type Form =
   | { kind: "schuif"; outline: Pt[]; closed: false; a: Pt; b: Pt }
   | { kind: "grafiek"; outline: Pt[]; closed: false; x0: number; x1: number; base: number; top: number; marks: Pt[] }
   | { kind: "route"; outline: Pt[]; closed: false; nodes: Pt[] }
-  | { kind: "kaart"; outline: Pt[]; closed: false; nodes: Pt[]; edges: [number, number][] };
+  | { kind: "kaart"; outline: Pt[]; closed: false; nodes: Pt[]; edges: [number, number][]; names: string[] };
 
 type Bounds = { x?: number; y?: number; w: number; h: number };
 
@@ -105,6 +105,23 @@ function mst(nodes: Pt[]): [number, number][] {
   return edges;
 }
 
+/** Denckh noemt de delen van een krabbel naar wat hij ziet: waar de pen begon, waar hij het vaakst kwam, waar hij ophield. */
+function nameParts(centers: Pt[], stroke: Pt[]): string[] {
+  const near = (p: Pt) => centers.reduce((bi, c, i) => (dist(p, c) < dist(p, centers[bi]) ? i : bi), 0);
+  const counts = centers.map(() => 0);
+  for (const p of stroke) counts[near(p)]++;
+  const names: (string | null)[] = centers.map(() => null);
+  const start = near(stroke[0]), end = near(stroke[stroke.length - 1]);
+  names[start] = "waar je begon";
+  if (end !== start) names[end] = "waar je eindigde";
+  const rest = centers.map((_, i) => i).filter((i) => names[i] === null).sort((a, b) => counts[b] - counts[a]);
+  const spare = ["een zijsprong", "nog een gedachte", "een uitloper"];
+  rest.forEach((i, j) => { names[i] = j === 0 ? "de kern" : spare[(j - 1) % spare.length]; });
+  // twee delen: begin en kern zegt meer dan begin en einde
+  if (centers.length === 2 && end !== start) names[counts[start] >= counts[end] ? start : end] = "de kern";
+  return names as string[];
+}
+
 export function buildForm(kind: FormKind, stroke: Pt[], f: Features, stage: Bounds): Form {
   const src = resample(stroke, N);
   const c = centroid(src);
@@ -173,7 +190,9 @@ export function buildForm(kind: FormKind, stroke: Pt[], f: Features, stage: Boun
     }
     case "kaart": {
       const k = clamp(Math.round(f.loops + f.crossings / 3), 2, 5);
-      let nodes = kmeans(src, k);
+      const centers = kmeans(src, k);
+      const names = nameParts(centers, src);
+      let nodes = centers;
       const ox = stage.x ?? 0, oy = stage.y ?? 0;
       nodes = spread(nodes, 96).map((p) => ({ x: clamp(p.x, ox + 56, ox + stage.w - 56), y: clamp(p.y, oy + 40, oy + stage.h - 40) }));
       const edges = mst(nodes);
@@ -187,7 +206,7 @@ export function buildForm(kind: FormKind, stroke: Pt[], f: Features, stage: Boun
         }
       };
       visit(0, -1);
-      return { kind, outline: polyline(walk, N), closed: false, nodes, edges };
+      return { kind, outline: polyline(walk, N), closed: false, nodes, edges, names };
     }
   }
 }

@@ -2,7 +2,8 @@
 
 // Een project dat uit lijnen wordt opgebouwd. Tijdens het scrollen loopt jouw lijn door een paar
 // tussenvormen naar de echte vorm van het project. Scroll bepaalt alleen hoe ver het is; de pagina scrolt normaal.
-// De stappen onder het beeld zijn knoppen: klik er een aan en de lijn loopt daarheen. Verder scrollen neemt het weer over.
+// De stappen onder het beeld zijn knoppen: wijs er een aan (of klik, of tab ernaartoe) en de lijn loopt daarheen.
+// Verder scrollen neemt het weer over.
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { clamp, linePath, resample, type Pt } from "@/lib/ink/geometry";
 import { mix, useScrollProgress, useWidth } from "@/lib/ink/hooks";
@@ -15,8 +16,8 @@ export type Stage = { outline: Pt[]; closed: boolean; details?: ReactNode; capti
 export type Build = (w: number, h: number) => { stages: Stage[]; final?: ReactNode };
 
 const ease = (t: number) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
-/** Binnen een overgang: 20% rust aan beide kanten, zodat elke vorm even blijft staan. */
-const settle = (local: number) => ease(clamp((local - 0.2) / 0.6, 0, 1));
+/** Binnen een overgang: 12% rust aan beide kanten, zodat elke vorm even blijft staan. */
+const settle = (local: number) => ease(clamp((local - 0.12) / 0.76, 0, 1));
 
 export function Construct({ project, label, end, ratio = 0.72, tone = "paper" }: {
   project: keyof typeof BUILDS; label: string; end?: string; ratio?: number; tone?: "paper" | "night";
@@ -24,8 +25,9 @@ export function Construct({ project, label, end, ratio = 0.72, tone = "paper" }:
   const build = BUILDS[project];
   const ref = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
-  // 0 zodra het midden van het beeld op 78% van de schermhoogte staat: het beeld is dan al helemaal in zicht.
-  const p = useScrollProgress(ref, !reduced, { from: 0.78, to: 0.22 });
+  // 0 zodra het midden van het beeld op 92% van de schermhoogte staat (het beeld komt dan half in zicht),
+  // 1 als het midden op 28% staat.
+  const p = useScrollProgress(ref, !reduced, { from: 0.92, to: 0.28 });
   const width = useWidth(ref, 520);
   const w = width, h = Math.round(width * ratio);
   const sketch = useSketch();
@@ -37,8 +39,8 @@ export function Construct({ project, label, end, ratio = 0.72, tone = "paper" }:
   const total = M + (final ? 1 : 0); // plus de overgang naar het echte eindbeeld
   const steps = [...all.map((s) => s.caption), ...(final ? [end ?? label] : [])];
 
-  // eerst even niets: de eerste 8% van de scrollweg blijft de lijn een lijn
-  const scrollPos = clamp((p - 0.08) / 0.86, 0, 1) * total;
+  // heel even niets: de eerste 4% van de scrollweg blijft de lijn een lijn
+  const scrollPos = clamp((p - 0.04) / 0.9, 0, 1) * total;
   const [manual, setManual] = useState<{ target: number; at: number } | null>(null);
   const goal = manual ? manual.target : scrollPos;
 
@@ -59,7 +61,9 @@ export function Construct({ project, label, end, ratio = 0.72, tone = "paper" }:
       const dt = Math.min(64, now - last);
       last = now;
       const cur = shownRef.current;
-      const next = glide.current && !reduced ? cur + (goal - cur) * (1 - Math.exp(-dt / 160)) : goal;
+      // altijd een fractie na-ijlen: schokkerige scroll (touch) wordt een vloeiende beweging; na een stapkeuze iets langer
+      const tau = glide.current ? 170 : 90;
+      const next = reduced ? goal : cur + (goal - cur) * (1 - Math.exp(-dt / tau));
       const done = Math.abs(goal - next) < 0.002;
       shownRef.current = done ? goal : next;
       setShown(shownRef.current);
@@ -101,7 +105,8 @@ export function Construct({ project, label, end, ratio = 0.72, tone = "paper" }:
         <ol>
           {steps.map((c, s) => (
             <li key={s}>
-              <button type="button" onClick={() => go(s)} aria-current={s === active ? "step" : undefined}
+              <button type="button" onClick={() => go(s)} onFocus={() => go(s)} onPointerEnter={(e) => { if (e.pointerType === "mouse") go(s); }}
+                aria-current={s === active ? "step" : undefined}
                 className={s === active ? "is-on" : s < active ? "is-past" : undefined}>{c}</button>
             </li>
           ))}

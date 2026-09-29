@@ -6,11 +6,17 @@ import { rr, type Build } from "./Construct";
 
 const D = (d: string, key: number) => <path key={key} d={d} pathLength={1} className="c-anim" />;
 
-/** Deegh: product → merk → webshop. Namen uit de broncode van de webshop (menu en producten). */
+/** Deegh: product → merk → webshop. Namen uit de broncode van de webshop (menu en producten).
+ *  Het logo is aangeleverd door de eigenaar (docs/cases/deegh.md); de deegbol rijst en wordt de cirkel van het logo. */
 export const deeghBuild: Build = (w, h) => {
   const bol = SHAPES.deegbol({ w, h });
-  const pizza = SHAPES.pizza({ w, h });
   const shop = SHAPES.webshop({ w, h });
+  const lr = Math.min(w, h) * 0.34, lcx = w / 2, lcy = h / 2;
+  const merk = resample(Array.from({ length: 129 }, (_, i) => {
+    const a = -Math.PI / 2 + (i / 128) * Math.PI * 2;
+    return { x: lcx + Math.cos(a) * lr, y: lcy + Math.sin(a) * lr };
+  }), 128);
+  const S = (lr * 356) / 130; // logocirkel in het bronbeeld (356 px): straal ca. 138 px; iets ruimer zodat de rafelrand buiten de lijn valt
   const W = Math.min(w * 0.86, h * 1.5), H = W / 1.5, x = (w - W) / 2, y = (h - H) / 2;
   const tw = (W - 56) / 3;
   const nav = ["Webshop", "Zo werkt Deegh", "Verkooppunten", "Zakelijk"];
@@ -19,7 +25,10 @@ export const deeghBuild: Build = (w, h) => {
   return {
     stages: [
       { ...bol, caption: "een deegbol", details: bol.details.map(D) },
-      { ...pizza, caption: "een pizza", details: pizza.details.map(D) },
+      { outline: merk, closed: true, caption: "een merk", details: [
+        <clipPath key="clip" id="deegh-logo-clip"><circle cx={lcx} cy={lcy} r={lr - 1} /></clipPath>,
+        <image key="logo" href="/images/deegh-logo.jpg" x={lcx - S / 2} y={lcy - S / 2} width={S} height={S} clipPath="url(#deegh-logo-clip)" className="c-logo" />,
+      ] },
       { ...shop, caption: "een plek om te bestellen", details: shop.details.map(D) },
     ],
     final: (

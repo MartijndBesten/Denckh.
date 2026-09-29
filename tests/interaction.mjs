@@ -66,6 +66,8 @@ const browser = await chromium.launch();
   await p.getByRole("button", { name: "Vertel", exact: true }).click();
   await p.waitForTimeout(300);
   check("idee: ander idee, andere vorm", ((await p.locator(".idea-title").textContent()) ?? "") === "Bakkerij" && /aantal/.test((await slider.getAttribute("aria-valuetext")) ?? ""));
+  const mail = decodeURIComponent((await p.locator(".contact-return__form").getAttribute("data-mailto")) ?? "");
+  check("mail: concreet voorstel gaat mee", /Wat het zou kunnen worden:/.test(mail) && /webshop voor mijn bakkerij/.test(mail), mail.slice(0, 80));
   const href = await p.locator(".contact-return__form").evaluate((f) => f.closest("section") !== null);
   check("contact: sectie aanwezig", href);
   const sketchNote = await p.locator(".contact-return__sketch").count();
@@ -133,10 +135,11 @@ const browser = await chromium.launch();
   check("construct: nog een lijn zolang het beeld binnenkomt", (await fig.locator(".construct__line.is-sketch").count()) === 1);
   await p.evaluate(({ top, h }) => scrollTo(0, top + h / 2 - innerHeight * 0.55), box);
   await p.waitForTimeout(900);
-  const pizza = fig.getByRole("button", { name: "een pizza" });
-  await pizza.click();
+  const merk = fig.getByRole("button", { name: "een merk" });
+  await merk.click();
   await p.waitForTimeout(1200);
-  check("construct: stap is klikbaar", (await pizza.getAttribute("aria-current")) === "step");
+  check("construct: stap is klikbaar", (await merk.getAttribute("aria-current")) === "step");
+  check("construct: Deegh-logo in de stap merk", (await fig.locator(".construct__details.is-on image").count()) === 1);
   await p.locator(".turn").scrollIntoViewIfNeeded();
   await p.getByRole("button", { name: "Leg de kaart tussen 1936 en 2004" }).click();
   check("loflijn: beurt geeft antwoord", /Goed/.test((await p.locator(".turn__say").textContent()) ?? ""));
@@ -145,6 +148,19 @@ const browser = await chromium.launch();
   await p.waitForTimeout(1200);
   check("ook gemaakt: drie vormen krijgen vorm", (await p.locator(".more__details").count()) === 3);
   check("projecten: geen console-errors", errors.length === 0, errors.join(" | "));
+  await ctx.close();
+}
+
+// 6b · desktop: stappen reageren al als je eroverheen gaat
+{
+  const { p, ctx } = await page(browser);
+  const fig = p.locator(".construct").first();
+  await fig.evaluate((el) => { const r = el.getBoundingClientRect(); scrollTo({ top: r.top + scrollY + r.height / 2 - innerHeight * 0.6, behavior: "instant" }); });
+  await p.waitForTimeout(500);
+  const shop = fig.getByRole("button", { name: "een plek om te bestellen" });
+  await shop.hover();
+  await p.waitForTimeout(1300);
+  check("construct: stap verandert al bij aanwijzen", (await shop.getAttribute("aria-current")) === "step");
   await ctx.close();
 }
 

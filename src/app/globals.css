@@ -317,6 +317,8 @@ nav .link-draw:hover, nav .link-draw:focus-visible { background-size: 100% 6px, 
 .loflijn-shot__new { fill: color-mix(in srgb, var(--ochre) 28%, var(--paper)); stroke: var(--idea); stroke-width: 2; }
 .construct__details .c-idea { stroke: var(--idea); stroke-width: 2; }
 .construct__details .c-fade { fill: var(--ink); stroke: none; opacity: 0; transition: opacity 0.5s 0.25s; }
+.construct__details .c-logo { opacity: 0; transition: opacity 0.6s 0.1s; }
+.construct__details.is-on .c-logo { opacity: 1; }
 .construct__details.is-on .c-fade { opacity: 1; }
 .construct__steps { margin-top: 1rem; font-size: 0.8rem; color: var(--graphite); }
 .construct__steps ol { display: flex; flex-wrap: wrap; gap: 0.2rem 0; margin: 0; padding: 0; list-style: none; }
@@ -390,6 +392,11 @@ nav .link-draw:hover, nav .link-draw:focus-visible { background-size: 100% 6px, 
 .contact-return__sketch { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 1rem; align-items: center; padding: 0.8rem; background: var(--paper-2); }
 .contact-return__sketch svg { width: 100%; height: auto; }
 .contact-return__sketch path { fill: none; stroke: var(--idea); stroke-width: 2.4; stroke-linecap: round; }
+.contact-return__plan { display: grid; gap: 0.35rem; padding: 0.9rem 1rem; border-left: 2px solid var(--menie); background: var(--paper-2); font-size: 0.95rem; }
+.contact-return__plan p { margin: 0; }
+.contact-return__plan-head { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--menie); }
+.contact-return__plan strong { font-weight: 650; }
+.contact-return__plan-q { color: var(--graphite); }
 .contact-return__sketch p { margin: 0; font-size: 0.92rem; }
 .contact-return__send { display: grid; gap: 0.8rem; margin-top: 1.4rem; justify-items: start; }
 .contact-return__send p { color: var(--graphite); font-size: 0.9rem; margin: 0; }

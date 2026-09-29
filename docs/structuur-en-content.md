@@ -12,7 +12,7 @@ De homepage volgt nu de interactieve grammatica uit `docs/creative-direction.md`
 | 1 | **Heb je een idee? Mooi.** | De punt uit "Mooi." trekken en tekenen → Denckh kijkt → lezing → eerste vorm → één vraag → het idee maakt de vorm concreet (onderwerp, drie delen, aantekeningen; opnieuw te proberen) |
 | 2 | overgang | jouw lijn, uitgerold |
 | 3 | **Van idee naar vorm.** | letters vinden hun plek tijdens het scrollen |
-| 4 | **Wat er al vorm kreeg.** | drie projecten, elk uit jouw lijn opgebouwd; scroll bepaalt de stand, de stappen eronder zijn klikbaar. Deegh (deegbol → pizza → webshop), een demokoffer (techniek → uitleg; zonder merknaam), Loflijn (kaart → lied → tijdlijn, plus een speelbare voorbeeldbeurt) |
+| 4 | **Wat er al vorm kreeg.** | drie projecten, elk uit jouw lijn opgebouwd; scroll bepaalt de stand, de stappen eronder zijn klikbaar. Deegh (deegbol → merk met het echte logo → webshop), een demokoffer (techniek → uitleg; zonder merknaam), Loflijn (kaart → lied → tijdlijn, plus een speelbare voorbeeldbeurt) |
 | 5 | **Ook gemaakt.** | drie kleinere projecten, elk één vorm waar jouw lijn in overloopt: Autowasdag Sionkerk (agenda), een presentatie (scherm; anoniem), een werkdag in 3D (gebouw; anoniem) |
 | 6 | **Wat kan eruit komen?** | één lijn, tien vormen, kiesbaar |
 | 7 | **Zo werkt het.** | Vertel → Denckh → Vorm met jouw eigen lijn |
