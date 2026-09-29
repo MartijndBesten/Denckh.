@@ -22,11 +22,10 @@ export const metadata: Metadata = {
     description: "Van idee naar vorm.",
   },
   icons: { icon: "/favicon.svg" },
-  manifest: "/site.webmanifest",
 };
 
 export const viewport: Viewport = {
-  themeColor: "#FAF8F3",
+  themeColor: "#F7F4EE",
   colorScheme: "light",
 };
 
@@ -36,11 +35,16 @@ const organization = {
   name: "Denckh",
   url: "https://denckh.nl",
   description: "Kleine creatieve conceptstudio. Van idee naar vorm.",
+  email: "info@denckh.nl",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="nl" data-scroll-behavior="smooth">
+      <head>
+        <link rel="preload" href="/fonts/fraunces-denckh.woff2" as="font" type="font/woff2" crossOrigin="" />
+        <link rel="preload" href="/fonts/manrope-denckh.woff2" as="font" type="font/woff2" crossOrigin="" />
+      </head>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organization) }} />
         <a className="skip-link" href="#inhoud">Ga naar de inhoud</a>

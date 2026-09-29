@@ -1,28 +1,21 @@
 import Link from "next/link";
+import { Wordmark } from "./Wordmark";
 
 type HeaderProps = {
   compact?: boolean;
 };
 
-export function Wordmark() {
-  return (
-    <span className="wordmark" aria-label="denckh, van idee naar vorm">
-      denckh<span className="wordmark__dot">.</span>
-      <span className="wordmark__tagline">van idee naar vorm</span>
-    </span>
-  );
-}
-
 export function Header({ compact = false }: HeaderProps) {
   return (
     <header className={`site-header${compact ? " site-header--compact" : ""}`}>
-      <Link className="brand-link" href="/" aria-label="Naar de homepage van denckh">
+      <Link className="brand-link" href="/" aria-label="denckh, naar de homepage">
         <Wordmark />
+        <span className="brand-link__tagline" aria-hidden="true">van idee naar vorm</span>
       </Link>
       <nav aria-label="Hoofdnavigatie">
-        <Link href="/#projecten">Projecten</Link>
-        <Link href="/#werkwijze">Werkwijze</Link>
-        <Link href="/#contact">Vertel het me</Link>
+        <Link className="link-draw" href="/#projecten">Projecten</Link>
+        <Link className="link-draw" href="/#werkwijze">Werkwijze</Link>
+        <Link className="link-draw link-draw--dot" href="/#contact">Vertel het me</Link>
       </nav>
     </header>
   );
@@ -31,16 +24,16 @@ export function Header({ compact = false }: HeaderProps) {
 export function Footer() {
   return (
     <footer className="site-footer">
-      <div>
-        <Wordmark />
-        <p>Een kleine conceptstudio voor ideeën die vorm mogen krijgen.</p>
+      <div className="site-footer__brand">
+        <Wordmark living={false} />
+        <p>Een kleine conceptstudio. Van idee naar vorm.</p>
       </div>
       <div className="footer-links">
-        <Link href="/#projecten">Projecten</Link>
-        <Link href="/#contact">Contact</Link>
-        <Link href="/privacy/">Privacy</Link>
+        <Link className="link-draw" href="/#projecten">Projecten</Link>
+        <a className="link-draw" href="mailto:info@denckh.nl">info@denckh.nl</a>
+        <Link className="link-draw" href="/privacy/">Privacy</Link>
       </div>
-      <p className="footer-note">Zonder tracking. Zonder cookie-banner.</p>
+      <p className="footer-note">Geen tracking, geen cookies. Je schets blijft in je eigen browser.</p>
     </footer>
   );
 }

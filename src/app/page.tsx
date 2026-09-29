@@ -1,142 +1,115 @@
 import Link from "next/link";
 import { Footer, Header } from "@/components/Header";
-import { IdeaCanvas } from "@/components/IdeaCanvas";
-import { ProjectVisual } from "@/components/ProjectVisual";
-
-const outcomes = ["website", "prototype", "interactieve demo", "webshop", "spel", "presentatie", "tool", "visualisatie"];
+import { PuntStage } from "@/components/punt/PuntStage";
+import { ContactReturn } from "@/components/grammar/ContactReturn";
+import { Construct } from "@/components/grammar/Construct";
+import { InkRule } from "@/components/grammar/InkRule";
+import { Outcomes } from "@/components/grammar/Outcomes";
+import { SettleTitle } from "@/components/grammar/SettleTitle";
+import { Werkwijze } from "@/components/grammar/Werkwijze";
 
 export default function Home() {
   return (
-    <main id="inhoud">\n      <div className="development-note"><span>Denckh krijgt vorm.</span> Dit is een eerste versie — binnenkort meer.</div>
-      <section className="hero section-shell">
-        <Header />
-        <div className="hero__grid">
-          <div className="hero__copy">
-            <p className="eyebrow">kleine conceptstudio</p>
-            <h1>Heb je een idee?<br /><em>Mooi.</em></h1>
-            <p className="hero__intro">Het hoeft nog geen plan te zijn. Denckh denkt mee en maakt het concreet: iets dat je kunt zien, testen, laten zien of gebruiken.</p>
-            <a className="text-link" href="#projecten">Bekijk wat al vorm kreeg <span aria-hidden="true">↓</span></a>
-          </div>
-          <IdeaCanvas />
+    <main id="inhoud">
+      <section className="hero" aria-label="Begin met een punt">
+        <div className="shell"><Header /></div>
+        <div className="shell hero__stage"><PuntStage /></div>
+      </section>
+
+      <div className="shell"><InkRule note="jouw lijn" /></div>
+
+      <section className="shell story" aria-labelledby="idee-titel">
+        <SettleTitle id="idee-titel" text="Van idee naar vorm." className="story__title" />
+        <div className="story__text">
+          <p className="story__lead">Soms weet je precies wat je wilt. Soms heb je alleen een gedachte waarvan je denkt: hier zit iets in.</p>
+          <p>Denckh denkt mee, maakt het zichtbaar en bouwt een eerste vorm. Van website tot prototype. Van interactieve uitleg tot iets waarvoor nog geen goede naam bestaat.</p>
         </div>
       </section>
 
-      <section className="idea-section section-shell" aria-labelledby="idee-title">
-        <div className="section-marker" aria-hidden="true"><span />01</div>
-        <div className="idea-section__copy">
-          <p className="eyebrow">van idee naar vorm</p>
-          <h2 id="idee-title">Soms begint het met<br />een los punt.</h2>
-          <p>Soms weet je precies wat je wilt. Soms heb je alleen een gedachte waarvan je denkt: hier zit iets in.</p>
-          <p>Denckh maakt zo&apos;n gedachte scherper en geeft hem een eerste vorm. Van website tot prototype. Van interactieve uitleg tot iets waarvoor nog geen goede naam bestaat.</p>
-        </div>
-        <div className="idea-line" aria-hidden="true">
-          <span className="idea-line__point" />
-          <svg viewBox="0 0 580 370" preserveAspectRatio="none"><path d="M24 19 C92 98 120 168 220 133 S365 82 393 208 S494 337 557 329" /></svg>
-          <span className="idea-line__shape" />
-        </div>
-      </section>
+      <section className="shell projects" id="projecten" aria-labelledby="projecten-titel">
+        <header className="projects__head">
+          <h2 id="projecten-titel">Wat er al vorm kreeg.</h2>
+          <p>Drie ideeën, drie soorten denken. Scroll, en kijk hoe een lijn elk project wordt.</p>
+        </header>
 
-      <section className="projects section-shell" id="projecten" aria-labelledby="projecten-title">
-        <div className="projects__heading">
-          <div className="section-marker" aria-hidden="true"><span />02</div>
-          <div>
-            <p className="eyebrow">niet alleen websites</p>
-            <h2 id="projecten-title">Dingen die al<br />vorm kregen.</h2>
-          </div>
-          <p>Geen verzonnen resultaten. Wel concrete vormen, elk begonnen met een ander soort idee.</p>
-        </div>
-
-        <article className="project project--deegh">
-          <ProjectVisual kind="deegh" />
-          <div className="project__copy">
-            <p className="project__index">01 · eigen product</p>
+        <article className="case">
+          <Construct project="deegh" label="deegh.nl, schematisch" />
+          <div className="case__text">
+            <p className="case__kind">product → merk → webshop</p>
             <h3>Deegh</h3>
-            <p className="project__lead">Een product kreeg een merk, uitleg en een plek om te bestellen.</p>
-            <dl>
-              <div><dt>Idee</dt><dd>Ambachtelijk pizzadeeg dat ook online een helder verhaal nodig heeft.</dd></div>
-              <div><dt>Vorm</dt><dd>Een webshop met producten, bereiding, recepten, verkooppunten en een route voor zakelijk bestellen.</dd></div>
+            <p className="case__lead">Van deegbol tot een plek waar je bestelt en leert hoe het werkt.</p>
+            <dl className="case__facts">
+              <div><dt>Aanleiding</dt><dd>Een eigen product, ambachtelijk pizzadeeg, had een plek nodig die net zo helder is als het product zelf.</dd></div>
+              <div><dt>Denckh</dt><dd>Een eigen webshop op WordPress en WooCommerce, met een eigen thema: producten, uitleg in stappen, recepten, verkooppunten en een zakelijke route.</dd></div>
+              <div><dt>Vorm</dt><dd>deegh.nl: bestellen, en leren hoe je van een bol deeg een pizza maakt.</dd></div>
             </dl>
-            <Link className="text-link" href="/projecten/deegh/">Bekijk de case <span aria-hidden="true">↗</span></Link>
+            <Link className="link-draw" href="/projecten/deegh/">Bekijk het project</Link>
           </div>
         </article>
 
-        <article className="project project--koffer">
-          <ProjectVisual kind="koffer" />
-          <div className="project__copy">
-            <p className="project__index">02 · interactieve uitleg</p>
-            <h3>Een demokoffer die meer vertelt.</h3>
-            <p className="project__lead">Complexe techniek wordt geen brochure, maar iets dat je kunt verkennen.</p>
-            <dl>
-              <div><dt>Idee</dt><dd>Een fysieke demokoffer ondersteunen met een digitale route, bediening en demonstratiemodus.</dd></div>
-              <div><dt>Vorm</dt><dd>Een meertalige, offline te gebruiken interactieve gids met koffer, stappen en presentatieflow.</dd></div>
+        <article className="case case--flip case--night">
+          <Construct project="koffer" label="interactieve gids bij een demokoffer" tone="night" />
+          <div className="case__text">
+            <p className="case__kind">complexe techniek → begrijpelijke uitleg</p>
+            <h3>Een koffer die zichzelf uitlegt</h3>
+            <p className="case__lead">Een demokoffer vol sensortechniek kreeg een digitale gids die je opent met een QR-code op de koffer.</p>
+            <dl className="case__facts">
+              <div><dt>Aanleiding</dt><dd>Wie de koffer openmaakt, moet snel snappen wat erin zit en hoe je het bedient.</dd></div>
+              <div><dt>Denckh</dt><dd>Een verkenner van de koffer, de bediening stap voor stap nagebootst en een demomodus om mee te presenteren. In drie talen, ook offline.</dd></div>
+              <div><dt>Vorm</dt><dd>Een interactieve uitleg die naast het echte product werkt.</dd></div>
             </dl>
-            <p className="project__note">Naam, beelden en volledige case worden pas gepubliceerd met toestemming.</p>
+            <p className="case__note">Naam, beelden en link volgen zodra daar toestemming voor is.</p>
           </div>
         </article>
 
-        <article className="project project--loflijn">
-          <ProjectVisual kind="loflijn" />
-          <div className="project__copy">
-            <p className="project__index">03 · spel en verkoop</p>
-            <h3>Een spel vindt<br />zijn plek online.</h3>
-            <p className="project__lead">Een fysiek muziekspel krijgt uitleg, ritme en een kooproute.</p>
-            <dl>
-              <div><dt>Idee</dt><dd>Een spel rond christelijke muziek begrijpelijk maken voor wie het voor het eerst ziet.</dd></div>
-              <div><dt>Vorm</dt><dd>Een online winkelervaring met speluitleg, oefenmoment en productinformatie.</dd></div>
+        <article className="case">
+          <Construct project="spel" label="speluitleg en webshop, schematisch" ratio={0.62} />
+          <div className="case__text">
+            <p className="case__kind">fysiek spel → uitleg en verkoop</p>
+            <h3>Een spel vindt zijn plek online</h3>
+            <p className="case__lead">Een muziekspel voor op tafel kreeg een online presentatie, uitleg in stappen en een kooproute.</p>
+            <dl className="case__facts">
+              <div><dt>Aanleiding</dt><dd>Een fysiek spel moet je snappen voordat je het koopt.</dd></div>
+              <div><dt>Denckh</dt><dd>Een webshop met de spelregels in drie stappen, productinformatie en een route naar bestellen.</dd></div>
+              <div><dt>Vorm</dt><dd>Een winkel waar je het spel leert kennen en bestelt.</dd></div>
             </dl>
-            <p className="project__note">Beeldmateriaal en de uitgebreide case volgen wanneer de rechten zijn bevestigd.</p>
+            <p className="case__note">Naam en beelden volgen zodra daar toestemming voor is.</p>
           </div>
         </article>
       </section>
 
-      <section className="outcomes section-shell" aria-labelledby="uitkomst-title">
-        <div className="section-marker" aria-hidden="true"><span />03</div>
-        <div className="outcomes__copy">
-          <p className="eyebrow">wat er kan ontstaan</p>
-          <h2 id="uitkomst-title">Het middel volgt<br />het idee.</h2>
-          <p>Niet andersom.</p>
-        </div>
-        <div className="outcomes__words" aria-label={`Mogelijke vormen: ${outcomes.join(", ")}. Of iets waar nog geen naam voor is.`}>
-          {outcomes.map((outcome, index) => <span key={outcome} style={{ "--word-index": index } as React.CSSProperties}>{outcome}</span>)}
-          <strong>Of iets waar nog geen naam voor is.</strong>
+      <section className="shell outcomes-section" aria-labelledby="uitkomst-titel">
+        <h2 id="uitkomst-titel">Wat kan eruit komen?</h2>
+        <Outcomes />
+      </section>
+
+      <section className="shell ww-section" id="werkwijze" aria-labelledby="werkwijze-titel">
+        <header className="ww-section__head">
+          <h2 id="werkwijze-titel">Zo werkt het.</h2>
+          <p>Wat er bovenaan met je lijn gebeurde, is precies hoe het werkt.</p>
+        </header>
+        <Werkwijze />
+      </section>
+
+      <section className="shell small" aria-labelledby="klein-titel">
+        <figure className="small__photo">
+          <span className="small__photo-note">hier komt een echte foto. geen gegenereerde.</span>
+        </figure>
+        <div className="small__text">
+          <h2 id="klein-titel">Denckh is klein. Bewust.</h2>
+          <p>Achter Denckh zit één persoon. Je werkt rechtstreeks met degene die meedenkt en maakt. Geen accountmanager, geen doorgeefluik.</p>
+          <p>Naast Denckh maak ik Deegh, ambachtelijk pizzadeeg. Ook dat begon als een idee.</p>
         </div>
       </section>
 
-      <section className="process section-shell" id="werkwijze" aria-labelledby="werkwijze-title">
-        <div className="process__heading">
-          <div className="section-marker section-marker--light" aria-hidden="true"><span />04</div>
-          <p className="eyebrow eyebrow--light">zo werkt het</p>
-          <h2 id="werkwijze-title">Niet groot doen.<br />Wel goed beginnen.</h2>
-        </div>
-        <ol className="process__steps">
-          <li><span>01</span><h3>Vertel</h3><p>Je hoeft nog geen briefing van twintig pagina&apos;s te hebben. Een gedachte is genoeg.</p></li>
-          <li><span>02</span><h3>Denckh</h3><p>We onderzoeken, denken en proberen tot het idee scherp genoeg is om te maken.</p></li>
-          <li><span>03</span><h3>Vorm</h3><p>Er ontstaat iets dat je kunt bekijken, testen, laten zien of gebruiken.</p></li>
-        </ol>
+      <div className="shell"><InkRule /></div>
+
+      <section className="shell contact" id="contact" aria-labelledby="contact-titel">
+        <h2 id="contact-titel">En wat zit er bij jou in je hoofd?</h2>
+        <ContactReturn />
       </section>
 
-      <section className="small section-shell" aria-labelledby="klein-title">
-        <div className="small__graphic" aria-hidden="true"><span /><i /><b /></div>
-        <div>
-          <p className="eyebrow">klein, bewust</p>
-          <h2 id="klein-title">Je werkt rechtstreeks met degene die meedenkt én maakt.</h2>
-          <p>Geen doorgeefluik. Geen groot verhaal. Gewoon aandacht voor wat er in je hoofd zit — en voor wat het kan worden.</p>
-        </div>
-      </section>
-
-      <section className="contact section-shell" id="contact" aria-labelledby="contact-title">
-        <div className="contact__heading">
-          <div className="section-marker" aria-hidden="true"><span />05</div>
-          <p className="eyebrow">jouw idee is het volgende punt</p>
-          <h2 id="contact-title">Heb je iets<br />in je hoofd?</h2>
-          <p>Het hoeft nog niet af te zijn.</p>
-        </div>
-        <div className="contact-placeholder">
-          <p>Denckh is nog in opbouw. De directe contactmogelijkheid volgt binnenkort.</p>
-          <span>van idee naar vorm</span>
-        </div>
-      </section>
-      <div className="section-shell"><Footer /></div>
+      <div className="shell"><Footer /></div>
     </main>
   );
 }

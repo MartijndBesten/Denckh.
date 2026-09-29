@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Footer, Header } from "@/components/Header";
-import { ProjectVisual } from "@/components/ProjectVisual";
+import { Construct } from "@/components/grammar/Construct";
 
 export const metadata: Metadata = {
   title: "Deegh",
@@ -20,7 +20,7 @@ export default function DeeghCase() {
           <h1>Van deegbol naar<br /><em>een plek die klopt.</em></h1>
           <p>Deegh is een eigen merk rond ambachtelijk pizzadeeg. De digitale vorm moest net zo duidelijk zijn als het product zelf.</p>
         </header>
-        <ProjectVisual kind="deegh" />
+        <Construct project="deegh" label="deegh.nl, schematisch" />
         <div className="case-page__facts">
           <section><h2>Idee</h2><p>Een product niet alleen aanbieden, maar ook laten zien hoe je ermee werkt, wat je kunt maken en waar je het vindt.</p></section>
           <section><h2>Denckh</h2><p>De nieuwe webshop is gebouwd als een eigen WordPress- en WooCommerce-omgeving met een lichtgewicht thema en een eigen functieplugin.</p></section>
