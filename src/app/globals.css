@@ -164,6 +164,7 @@ nav .link-draw:hover, nav .link-draw:focus-visible { background-size: 100% 6px, 
 .punt--drawing .punt__dot::after, .punt--still .punt__dot::after, .punt:not(.punt--idle) .punt__dot::after { animation: none; }
 .punt__dot:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
 .punt__dot:disabled { cursor: default; }
+.punt--vorm .punt__dot { visibility: hidden; } /* de punt is opgegaan in de vorm */
 @keyframes breathe { 0% { transform: scale(1); opacity: 0.55; } 70%, 100% { transform: scale(2.4); opacity: 0; } }
 
 .punt__hint { margin: 0; display: grid; gap: 0.2rem; }
@@ -191,6 +192,31 @@ nav .link-draw:hover, nav .link-draw:focus-visible { background-size: 100% 6px, 
 .look-text { fill: var(--menie); font-size: 12px; letter-spacing: 0.06em; font-family: var(--font-sans); opacity: 0; animation: appear 0.4s forwards; }
 @keyframes draw { to { stroke-dashoffset: 0; } }
 @keyframes appear { to { opacity: 1; } }
+
+/* het idee op de schets */
+.idea-text { font-family: var(--font-display); font-size: 15px; font-style: italic; fill: var(--ochre-deep); letter-spacing: -0.005em; opacity: 0; animation: appear 0.6s var(--ease) 0.1s forwards; }
+.idea-frame { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 0.9s var(--ease) 0.1s forwards; }
+.idea-frame--thin { stroke: var(--pencil); stroke-width: 1.2; animation-delay: 0.5s; }
+.idea-title { font-family: var(--font-display); font-size: 16px; font-weight: 600; fill: var(--ochre-deep); opacity: 0; animation: appear 0.5s var(--ease) 0.55s forwards; }
+.idea-tab { font-family: var(--font-sans); font-weight: 600; fill: var(--graphite); opacity: 0; animation: appear 0.5s var(--ease) 0.7s forwards; }
+.idea-active { fill: none; stroke: var(--ochre); stroke-width: 3; stroke-linecap: round; opacity: 0; animation: appear 0.5s var(--ease) 0.9s forwards; }
+.fw-draw.fw-accent { fill: color-mix(in srgb, var(--ochre) 45%, var(--paper)); stroke: var(--ochre-deep); }
+.fw-draw.fw-accent-line { stroke: var(--ochre-deep); stroke-width: 2; stroke-linejoin: round; }
+.idea-mark { opacity: 0; animation: mark-in 0.45s var(--ease) forwards; transform-box: fill-box; transform-origin: center; }
+.idea-mark circle { fill: var(--paper); stroke: var(--menie); stroke-width: 1.4; }
+.idea-mark text { font-family: var(--font-sans); font-size: 11px; font-weight: 700; fill: var(--menie); text-anchor: middle; }
+@keyframes mark-in { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: none; } }
+.punt__notes { display: grid; gap: 0.25rem; margin: 0; padding: 0; list-style: none; counter-reset: note; font-size: 0.92rem; color: var(--menie); }
+.punt__notes li { counter-increment: note; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 0.5rem; animation: rise 0.4s var(--ease) both; }
+.punt__notes strong { color: var(--ink); font-weight: 650; }
+.punt__notes li:nth-child(2) { animation-delay: 0.12s; }
+.punt__notes li:nth-child(3) { animation-delay: 0.24s; }
+.punt__notes li::before { content: counter(note); flex: 0 0 auto; display: inline-grid; place-items: center; width: 1.25rem; height: 1.25rem; border: 1.4px solid var(--menie); border-radius: 50%; font-size: 0.7rem; font-weight: 700; }
+.fw-say { animation: say-in 0.5s var(--ease) both; }
+@keyframes say-in { from { opacity: 0; } }
+.fw-title { font-family: var(--font-display); font-size: 15px; font-weight: 600; fill: var(--ochre-deep); }
+.fw-label--end { text-anchor: end; }
+.fw-label--idea { fill: var(--ochre-deep); font-weight: 700; }
 
 /* eerste vormen (interactief) */
 .fw { outline: none; }

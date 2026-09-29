@@ -5,7 +5,7 @@ beslissingen, open punten en de volgende stappen. **Bijwerken aan het eind van e
 
 - Laatst bijgewerkt: 2026-09-29
 - Live (`main`): de interactieve versie "begin met een punt" (gemerged uit `creatief/het-punt`, B-031)
-- In afwachting van akkoord: branch `creatief/ronde-2` (B-032 t/m B-036), **niet live**
+- In afwachting van akkoord: branch `creatief/ronde-2` (B-032 t/m B-037), **niet live**
 
 ---
 
@@ -42,7 +42,8 @@ Nieuw werk: op een aparte branch; merge naar `main` = livegang.
   voorbeeldbeurt (B-034).
 - Nieuwe sectie **Ook gemaakt**: Autowasdag Sionkerk (naam en link), een presentatie en een werkdag in 3D (beide
   anoniem) (B-035).
-- 29/29 e2e-controles, axe 0 overtredingen op `/`, `/projecten/deegh/` en `/privacy/`.
+- 33/33 e2e-controles, axe 0 overtredingen op `/`, `/projecten/deegh/`, `/privacy/` en de hero met vorm en idee.
+- Hero: je idee maakt de eerste vorm concreet (onderwerp, drie delen, labels en aantekeningen) (B-037).
 - Vóór merge: O-31 (akkoord Sionkerk) en O-32 (anonieme vermelding presentatie/3D) beantwoorden.
 
 ## Repositorygegevens
@@ -99,6 +100,7 @@ Pas de oude regel niet aan. *Voorstel* = wacht op akkoord van de eigenaar.
 | B-034 | 2026-09-29 | Loflijn volgt een beurt in het spel (kaart met QR → lied → tijdlijn) en eindigt in een tijdlijn "van psalm tot praise", niet in een webshop. Eronder een speelbare voorbeeldbeurt met verzonnen jaartallen zonder liedtitels, zo gelabeld. | Feedback eigenaar: Loflijn leek op Deegh. Het spel zelf is het onderscheidende idee. Label voorkomt dat het als echte spelinhoud leest. | Werkversie (O-33) |
 | B-035 | 2026-09-29 | Sectie "Ook gemaakt" met drie kleinere projecten, elk één vorm uit jouw lijn (nieuwe vormen `agenda` en `gebouw`). Autowasdag Sionkerk met naam en link; presentatie en 3D-werkdag zonder merknaam, beelden of link. | Eigenaar meldde deze projecten. TRILUX niet noemen (B-029). | Werkversie (O-31, O-32) |
 | B-036 | 2026-09-29 | Het publieke caseregister noemt geen werkgever- of productnamen meer voor de 3D-werkdag; dossiers van privé-repo's bevatten alleen wat ook op de site staat. | Publieke repo (`CLAUDE.md`, regel 6). | Vast |
+| B-037 | 2026-09-29 | Hero: na "Vertel" maakt het idee de eerste vorm concreet. Trefwoorden bepalen het soort ding (plannen, verkopen, spel, leren, inzicht, uitleg, samen, eten, techniek), het onderwerp komt uit de zin. De vorm krijgt concrete labels (knop "tijd 08:00–18:00", scherm met onderwerp, drie delen en mini-schetsen), een kader met titel en drie delen, en drie genummerde aantekeningen van Denckh. Opnieuw vertellen tekent de vorm opnieuw. Vaste regels, geen AI (`src/lib/ink/concept.ts`). | Feedback eigenaar: "nog mooier als die iets concreter zou zijn met het idee en de lijnen die hij daarna maakt". Kleurrollen blijven: oker = idee (zin, titel), rood = Denckh kijkt (aantekeningen), inkt = vorm. | Werkversie |
 
 ---
 

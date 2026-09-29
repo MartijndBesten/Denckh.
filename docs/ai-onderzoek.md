@@ -78,6 +78,9 @@ Advies: serverless functie op een apart subdomein (bijv. `denk.denckh.nl`). Dat 
 - De site blijft statisch op GitHub Pages. Er komt één extern endpoint bij.
 - De huidige vaste regels blijven de terugvaloptie en de standaard zonder opt-in.
 - De interface verandert niet: `READINGS` in `src/lib/ink/interpret.ts` wordt aangevuld met een asynchrone variant.
+- Sinds 2026-09-29 maakt `src/lib/ink/concept.ts` van de zin van de bezoeker een `Concept` (soort ding, onderwerp,
+  drie delen, labels, aantekeningen), met trefwoorden in plaats van een model. Een echte laag zou precies dat object
+  vullen (structured output tegen hetzelfde schema); de vorm tekent het dan zonder verdere wijzigingen.
 
 ## 8. Beslissingen vóór bouw (eigenaar)
 
