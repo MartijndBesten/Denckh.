@@ -1,6 +1,6 @@
 # Technische architectuur en deployment
 
-Status: **voorstel, 2026-09-29.** Hosting, DNS en deploy blijven buiten scope tot expliciet akkoord (B-003).
+Status: **bijgewerkt, 2026-09-29.** De site draait volgens de eigenaar op GitHub Pages onder `denckh.nl`; Cloud86/Plesk verzorgt mail voor `info@denckh.nl`. Deze ronde wijzigt geen productie-infrastructuur.
 
 ---
 
@@ -11,9 +11,10 @@ Status: **voorstel, 2026-09-29.** Hosting, DNS en deploy blijven buiten scope to
 | Framework | **Next.js (App Router) + TypeScript**, als **statische export** (`output: 'export'`) |
 | Styling | **Tailwind CSS v4** met design-tokens als CSS-variabelen |
 | Animatie | SVG + CSS. **Motion** (via `LazyMotion`) alleen voor de scroll-gekoppelde intro en de hero-punt |
-| Hosting | Het **bestaande Cloud86-webhostingpakket** (Plesk), met denckh.nl als extra domein *(te bevestigen)* |
-| Contactformulier | Klein **PHP-endpoint** op dezelfde hosting, mail naar de eigen mailbox. Geen externe formulierdienst |
-| Deploy | GitHub Actions: build en test bij elke push. Uploaden via SFTP **alleen handmatig** en pas na akkoord |
+| Hosting | **GitHub Pages** onder `denckh.nl` (door eigenaar bevestigd) |
+| Mail | **Cloud86 / Plesk**, mailbox `info@denckh.nl` (door eigenaar bevestigd) |
+| Contactformulier | Nog niet gekoppeld. Een Pages-compatibele, server-side verzendroute vereist eerst apart ontwerp en geheimbeheer. |
+| Deploy | GitHub Pages; deze ronde verandert geen workflow, custom domain of Pages-instelling. |
 | Analytics | **Geen** bij de start. Dus ook geen cookiebanner nodig |
 | Extra kosten | Naar verwachting alleen de domeinnaam *(te bevestigen)* |
 

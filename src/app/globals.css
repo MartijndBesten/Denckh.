@@ -116,6 +116,18 @@ p { max-width: 42rem; }
 .idea-orb:active, .is-dragging .idea-orb { cursor: grabbing; }
 .is-dragging .idea-orb::after, .is-formed .idea-orb::after { animation: none; opacity: 0; }
 .idea-canvas__hint { position: absolute; right: 1.25rem; bottom: 1.08rem; margin: 0; color: var(--graphite); font-size: 0.78rem; }
+.idea-canvas canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.idea-canvas__grid { position: absolute; inset: 1rem; opacity: 0.28; background-image: linear-gradient(to right, transparent 49.8%, var(--pencil) 50%, transparent 50.2%), linear-gradient(to bottom, transparent 49.8%, var(--pencil) 50%, transparent 50.2%); pointer-events: none; }
+.idea-canvas__copy { position: absolute; z-index: 3; right: 1.5rem; bottom: 1.4rem; left: 1.5rem; display: grid; gap: 0.2rem; max-width: 23rem; color: var(--ink); }
+.idea-canvas__copy strong { font-family: var(--display); font-size: clamp(1.25rem, 2vw, 1.8rem); font-weight: 400; letter-spacing: -0.04em; line-height: 1.05; }
+.idea-canvas__copy span { color: var(--graphite); font-size: 0.76rem; }
+.idea-canvas__copy button { justify-self: start; margin-top: 0.55rem; padding: 0.44rem 0.68rem; border: 1px solid var(--ink); color: var(--paper); background: var(--night); font-size: 0.76rem; font-weight: 750; cursor: pointer; }
+.idea-canvas__copy .quiet-button { color: var(--ink); background: transparent; }
+.idea-canvas--thinking .idea-orb { animation: think 760ms ease-in-out infinite alternate; }
+.idea-canvas--reading .idea-orb, .idea-canvas--formed .idea-orb { opacity: 0; pointer-events: none; }
+.first-form { position: relative; width: 8rem; height: 4.75rem; margin-top: 0.45rem; border: 1px solid var(--ochre-deep); background: color-mix(in srgb, var(--ochre) 17%, var(--paper)); }
+.first-form i { position: absolute; display: block; background: var(--ochre-deep); }.first-form--interface i:nth-child(1) { top: 0.65rem; left: 0.65rem; width: 3.5rem; height: 0.45rem; }.first-form--interface i:nth-child(2) { top: 1.7rem; left: 0.65rem; width: 6rem; height: 1.3rem; opacity: .28; }.first-form--interface i:nth-child(3) { right: .65rem; bottom: .55rem; width: 1.1rem; height: .45rem; }.first-form--flow i { top: 2.1rem; width: 1.25rem; height: 1.25rem; border-radius: 50%; }.first-form--flow i:nth-child(1) { left: .7rem; }.first-form--flow i:nth-child(2) { left: 3.3rem; }.first-form--flow i:nth-child(3) { right: .7rem; }.first-form--object { border-radius: 45% 55% 48% 52%; }.first-form--object i { top: 1.4rem; left: 2rem; width: 4rem; height: 1.7rem; border-radius: 1rem; opacity: .45; }
+@keyframes think { to { transform: translate(-50%, -50%) scale(0.9); filter: brightness(1.08); } }
 
 @keyframes quiet-pulse { 0% { transform: scale(0.72); opacity: 0.7; } 65%, 100% { transform: scale(1.36); opacity: 0; } }
 

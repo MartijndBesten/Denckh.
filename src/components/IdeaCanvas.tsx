@@ -1,91 +1,84 @@
 "use client";
 
-import { KeyboardEvent, PointerEvent, useMemo, useRef, useState } from "react";
+import { KeyboardEvent, PointerEvent, useEffect, useRef, useState } from "react";
 
-type Point = { x: number; y: number };
+type Point = { x: number; y: number; t: number };
+type Phase = "idle" | "drawing" | "thinking" | "reading" | "formed";
 
-const initialPoint: Point = { x: 50, y: 51 };
+const prompts = [
+  { name: "een bediening", text: "Ik zie hier misschien een bediening in.", shape: "interface" },
+  { name: "een route", text: "Dit zou een route met een paar duidelijke keuzes kunnen zijn.", shape: "flow" },
+  { name: "een object", text: "Hier zit mogelijk een product met twee functies in.", shape: "object" },
+];
 
-function toPath(points: Point[]) {
-  return points.map((point, index) => `${index === 0 ? "M" : "L"}${point.x} ${point.y}`).join(" ");
+function classify(points: Point[]) {
+  const xs = points.map((point) => point.x);
+  const ys = points.map((point) => point.y);
+  const width = Math.max(...xs) - Math.min(...xs);
+  const height = Math.max(...ys) - Math.min(...ys);
+  if (width > height * 1.7) return prompts[1];
+  if (height > width * 1.25) return prompts[0];
+  return prompts[2];
 }
 
 export function IdeaCanvas() {
-  const canvasRef = useRef<HTMLDivElement>(null);
-  const [points, setPoints] = useState<Point[]>([initialPoint]);
-  const [dragging, setDragging] = useState(false);
-  const [formed, setFormed] = useState(false);
+  const canvas = useRef<HTMLCanvasElement>(null);
+  const [points, setPoints] = useState<Point[]>([]);
+  const [phase, setPhase] = useState<Phase>("idle");
+  const [interpretation, setInterpretation] = useState(prompts[0]);
 
-  const path = useMemo(() => toPath(points), [points]);
+  useEffect(() => {
+    const element = canvas.current;
+    const context = element?.getContext("2d");
+    if (!element || !context) return;
+    const box = element.getBoundingClientRect();
+    const ratio = window.devicePixelRatio || 1;
+    element.width = box.width * ratio;
+    element.height = box.height * ratio;
+    context.scale(ratio, ratio);
+    context.clearRect(0, 0, box.width, box.height);
+    context.lineCap = "round";
+    context.lineJoin = "round";
+    points.slice(1).forEach((current, index) => {
+      const previous = points[index];
+      const distance = Math.hypot(current.x - previous.x, current.y - previous.y);
+      const speed = distance / Math.max(10, current.t - previous.t);
+      context.beginPath(); context.moveTo(previous.x, previous.y); context.lineTo(current.x, current.y);
+      context.lineWidth = Math.min(11, Math.max(2.5, 2.5 + speed * 13));
+      context.strokeStyle = "#C8A477"; context.globalAlpha = 0.88; context.stroke();
+    });
+  }, [points]);
 
-  function pointFromEvent(event: PointerEvent<HTMLButtonElement>): Point {
-    const box = canvasRef.current?.getBoundingClientRect();
-    if (!box) return initialPoint;
-    return {
-      x: Math.max(6, Math.min(94, ((event.clientX - box.left) / box.width) * 100)),
-      y: Math.max(10, Math.min(90, ((event.clientY - box.top) / box.height) * 100)),
-    };
+  function point(event: PointerEvent<HTMLButtonElement>): Point {
+    const box = canvas.current?.getBoundingClientRect();
+    return { x: event.clientX - (box?.left ?? 0), y: event.clientY - (box?.top ?? 0), t: performance.now() };
   }
-
-  function begin(event: PointerEvent<HTMLButtonElement>) {
-    event.currentTarget.setPointerCapture(event.pointerId);
-    setDragging(true);
-    setFormed(false);
-    setPoints([initialPoint, pointFromEvent(event)]);
-  }
-
-  function move(event: PointerEvent<HTMLButtonElement>) {
-    if (!dragging) return;
-    const next = pointFromEvent(event);
-    setPoints((current) => (current.length > 26 ? current : [...current, next]));
-  }
-
+  function begin(event: PointerEvent<HTMLButtonElement>) { event.currentTarget.setPointerCapture(event.pointerId); setPhase("drawing"); setPoints([point(event)]); }
+  function draw(event: PointerEvent<HTMLButtonElement>) { if (phase === "drawing") setPoints((current) => current.length > 100 ? current : [...current, point(event)]); }
   function finish() {
-    if (!dragging) return;
-    setDragging(false);
-    setFormed(true);
+    if (phase !== "drawing" || points.length < 4) return;
+    const result = classify(points); setInterpretation(result); setPhase("thinking");
+    window.setTimeout(() => setPhase("reading"), 760);
+    sessionStorage.setItem("denckh-sketch", result.shape);
+    window.dispatchEvent(new CustomEvent("denckh-sketch", { detail: result.shape }));
   }
-
-  function playWithKeyboard(event: KeyboardEvent<HTMLButtonElement>) {
+  function restart() { setPoints([]); setPhase("idle"); }
+  function keyboardStart(event: KeyboardEvent<HTMLButtonElement>) {
     if (event.key !== "Enter" && event.key !== " ") return;
-    event.preventDefault();
-    setPoints([
-      initialPoint,
-      { x: 60, y: 33 },
-      { x: 72, y: 63 },
-      { x: 42, y: 74 },
-      { x: 31, y: 42 },
-      initialPoint,
-    ]);
-    setFormed(true);
+    event.preventDefault(); const t = performance.now();
+    setPoints([{ x: 88, y: 174, t }, { x: 164, y: 98, t: t + 120 }, { x: 258, y: 132, t: t + 240 }, { x: 231, y: 249, t: t + 360 }, { x: 118, y: 245, t: t + 480 }, { x: 88, y: 174, t: t + 590 }]);
+    setInterpretation(prompts[0]); setPhase("reading");
   }
 
-  return (
-    <div
-      ref={canvasRef}
-      className={`idea-canvas${dragging ? " is-dragging" : ""}${formed ? " is-formed" : ""}`}
-      aria-label="Een klein experiment: sleep de punt om een vorm te maken"
-    >
-      <svg className="idea-canvas__line" viewBox="0 0 100 100" aria-hidden="true" preserveAspectRatio="none">
-        <path d={path} pathLength="1" />
-        <path className="idea-canvas__shape" d="M36 28 L69 35 L65 68 L31 63 Z" />
-      </svg>
-      <button
-        className="idea-orb"
-        type="button"
-        aria-label="Sleep de punt of druk Enter om een vorm te laten ontstaan"
-        aria-pressed={formed}
-        onKeyDown={playWithKeyboard}
-        onPointerDown={begin}
-        onPointerMove={move}
-        onPointerUp={finish}
-        onPointerCancel={finish}
-      >
-        <span aria-hidden="true" />
-      </button>
-      <p className="idea-canvas__hint" aria-live="polite">
-        {formed ? "vorm." : "begin met een punt"}
-      </p>
+  return <div className={`idea-canvas idea-canvas--${phase}`}>
+    <canvas ref={canvas} aria-hidden="true" /><div className="idea-canvas__grid" aria-hidden="true" />
+    <button className="idea-orb" type="button" aria-label="Begin met een punt. Teken met muis of vinger, of druk Enter voor een voorbeeld." aria-pressed={phase === "formed"} onPointerDown={begin} onPointerMove={draw} onPointerUp={finish} onPointerCancel={finish} onKeyDown={keyboardStart}><span /></button>
+    <div className="idea-canvas__copy" aria-live="polite">
+      {phase === "idle" && <><strong>begin met een punt</strong><span>sleep · teken · laat los</span></>}
+      {phase === "drawing" && <><strong>laat maar lopen</strong><span>er hoeft nog niets te kloppen</span></>}
+      {phase === "thinking" && <><strong>Denckh denkt even</strong><span>de lijn zoekt een eerste richting</span></>}
+      {phase === "reading" && <><strong>{interpretation.text}</strong><span>Dat hoeft het niet te zijn. Het is een begin.</span><button type="button" onClick={() => setPhase("formed")}>Geef er vorm aan</button><button className="quiet-button" type="button" onClick={restart}>Teken opnieuw</button></>}
+      {phase === "formed" && <><strong>eerste vorm: {interpretation.name}</strong><span>Een richting om samen verder te onderzoeken.</span><div className={`first-form first-form--${interpretation.shape}`} aria-hidden="true"><i /><i /><i /></div><button className="quiet-button" type="button" onClick={restart}>Nog een idee</button></>}
     </div>
-  );
+  </div>;
 }
