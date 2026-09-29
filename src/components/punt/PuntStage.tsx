@@ -100,6 +100,29 @@ export function PuntStage() {
     if (d) d.style.transform = `translate3d(${p.x}px, ${p.y}px, 0) translate(-50%, -50%) scale(${scale})`;
   }
 
+  // --- op een smal scherm staat de tekst onder het tekenvlak. Tekent iemand groter dan het vlak, dan schuift de tekst
+  // mee omlaag: lijn, aantekeningen en tekst vallen nooit over elkaar.
+  const svgRef = useRef<SVGSVGElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const [push, setPush] = useState(0);
+  const pushRef = useRef(0);
+  useEffect(() => {
+    let raf = 0;
+    const fit = () => {
+      raf = 0;
+      const svg = svgRef.current, panel = panelRef.current, stacked = zone.current.y > home.current.y + 40;
+      let next = 0;
+      if (svg && panel && stacked && phase !== "idle" && phase !== "drawing") {
+        const b = svg.getBBox(), top = panel.offsetTop - (parseFloat(getComputedStyle(panel).marginTop) || 0); // ook midden in de overgang
+        if (b.height > 0) next = Math.max(0, Math.ceil(b.y + b.height + 16 - top));
+      }
+      if (next !== pushRef.current) { pushRef.current = next; setPush(next); }
+    };
+    raf = requestAnimationFrame(fit);
+    const late = setTimeout(() => { if (!raf) raf = requestAnimationFrame(fit); }, 900); // na de animaties
+    return () => { cancelAnimationFrame(raf); clearTimeout(late); };
+  }, [phase, features, form, concept, size]);
+
   // --- nabijheid: in rust leunt de punt een fractie naar de cursor
   useEffect(() => {
     if (phase !== "idle" || reduced) return;
@@ -353,7 +376,7 @@ export function PuntStage() {
 
       <div className="punt__zone" data-zone aria-hidden="true" />
 
-      <svg className="punt__svg" width={size.w} height={size.h} viewBox={`0 0 ${size.w || 1} ${size.h || 1}`} aria-hidden={phase !== "vorm"}>
+      <svg ref={svgRef} className="punt__svg" width={size.w} height={size.h} viewBox={`0 0 ${size.w || 1} ${size.h || 1}`} aria-hidden={phase !== "vorm"}>
         {(showInk || phase === "vormen") && morphPts.length > 1 && (
           <path d={outlinePath(morphPts)} className="punt__ink" style={{ fill: phase === "vormen" ? `color-mix(in srgb, var(--idea) ${Math.round((1 - morph) * 100)}%, ${INK})` : undefined }} />
         )}
@@ -378,7 +401,7 @@ export function PuntStage() {
         disabled={phase === "kijken" || phase === "vormen"}
       />
 
-      <div className="punt__panel" aria-live="polite">
+      <div ref={panelRef} className="punt__panel" aria-live="polite" style={push ? { marginTop: push } : undefined}>
         {phase === "idle" && (
           <p className="punt__hint">
             <span className="punt__hint-main">begin met een punt</span>

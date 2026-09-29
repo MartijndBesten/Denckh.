@@ -205,6 +205,41 @@ for (const [w, h] of [[390, 844], [320, 640]]) {
   await ctx.close();
 }
 
+// 4b · mobiel: een tekening groter dan het vlak duwt de tekst omlaag; lijn, aantekeningen en tekst vallen niet over elkaar
+{
+  const { p, ctx, errors } = await page(browser, { width: 393, height: 852, mobile: true });
+  const dot = await p.locator(".punt__dot").boundingBox(), zone = await p.locator(".punt__zone").boundingBox();
+  const r = zone.width * 0.43, cx = zone.x + zone.width / 2, cy = zone.y + r + 20, sx = dot.x + dot.width / 2, sy = dot.y + dot.height / 2;
+  const cdp = await ctx.newCDPSession(p);
+  const t = (type, x, y) => cdp.send("Input.dispatchTouchEvent", { type, touchPoints: type === "touchEnd" ? [] : [{ x, y }] });
+  await t("touchStart", sx, sy);
+  for (let i = 1; i <= 20; i++) { await t("touchMove", sx, sy + (cy - r * 0.95 - sy) * (i / 20)); await p.waitForTimeout(8); }
+  for (let i = 0; i <= 70; i++) { const a = -Math.PI * 0.6 + (i / 70) * Math.PI * 2; await t("touchMove", cx + Math.cos(a) * r, cy + Math.sin(a) * r); await p.waitForTimeout(8); }
+  await t("touchEnd", 0, 0);
+  await p.waitForTimeout(3500);
+  const gap = await p.evaluate(() => { const look = document.querySelector(".punt__look").getBoundingClientRect(), say = document.querySelector(".punt__say").getBoundingClientRect(); return Math.round(say.top - look.bottom); });
+  check("mobiel: grote tekening, tekst staat onder de aantekeningen", gap >= 8, `${gap}px ruimte`);
+  const z = await p.evaluate(() => [".punt__copy", ".punt__svg"].map((q) => Number(getComputedStyle(document.querySelector(q)).zIndex)));
+  check("hero: intro ligt boven de lijn (leesbaar)", z[0] > z[1], z.join(" > "));
+  check("mobiel: grote tekening, geen console-errors", errors.length === 0, errors.join(" | "));
+  await ctx.close();
+}
+
+// 4c · 320 px: na vorm en idee valt niets in het paneel buiten beeld (invulveld, knop, aantekeningen)
+{
+  const { p, ctx } = await page(browser, { width: 320, height: 700, mobile: true });
+  await p.getByRole("button", { name: "of bekijk een voorbeeld" }).click();
+  await p.waitForTimeout(6000);
+  await p.getByRole("button", { name: "Zal ik er vorm aan geven?" }).click();
+  await p.waitForTimeout(2500);
+  await p.locator("#punt-idee").fill("een webshop voor mijn bakkerij");
+  await p.getByRole("button", { name: "Vertel", exact: true }).click();
+  await p.waitForTimeout(2000);
+  const out = await p.evaluate(() => [...document.querySelectorAll(".punt__panel *")].filter((e) => e.getBoundingClientRect().right > innerWidth + 0.5).map((e) => e.className || e.tagName).slice(0, 4));
+  check("320 px: paneel met idee past in beeld", out.length === 0, out.join(", "));
+  await ctx.close();
+}
+
 // 5 · reduced motion: geen ademende punt, titels recht
 {
   const { p, ctx } = await page(browser, { reduced: true });
@@ -249,6 +284,22 @@ for (const [w, h] of [[390, 844], [320, 640]]) {
   await shop.hover();
   await p.waitForTimeout(1300);
   check("construct: stap verandert al bij aanwijzen", (await shop.getAttribute("aria-current")) === "step");
+  await ctx.close();
+}
+
+// 6d · Deegh-eindbeeld: de menu-items schuiven nergens over elkaar, ook niet op een smal scherm
+for (const [w, h, mobile] of [[320, 700, true], [393, 852, true], [1440, 900, false]]) {
+  const { p, ctx } = await page(browser, { width: w, height: h, mobile });
+  const fig = p.locator(".construct").first();
+  await fig.evaluate((el) => { const r = el.getBoundingClientRect(); scrollTo({ top: r.top + scrollY + r.height / 2 - innerHeight * 0.5, behavior: "instant" }); });
+  await p.waitForTimeout(600);
+  await fig.getByRole("button", { name: /deegh\.nl/ }).click();
+  await p.waitForTimeout(1500);
+  const nav = await p.evaluate(() => {
+    const t = [...document.querySelectorAll(".deegh-shot text")].slice(0, 5).map((e) => e.getBBox()), frame = document.querySelector(".deegh-shot path").getBBox();
+    return { gaps: t.slice(1).map((b, i) => Math.round(b.x - (t[i].x + t[i].width))), over: Math.round(t[4].x + t[4].width - (frame.x + frame.width)) };
+  });
+  check(`deegh-eindbeeld op ${w}px: menu zonder overlap, binnen het kader`, nav.gaps.every((g) => g >= 4) && nav.over < 0, `ruimtes ${nav.gaps.join(",")} · rand ${nav.over}`);
   await ctx.close();
 }
 
