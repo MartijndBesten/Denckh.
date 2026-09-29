@@ -44,6 +44,18 @@ Nieuw werk: op een aparte branch; merge naar `main` = livegang.
 - 33/33 e2e-controles, axe 0 overtredingen op `/`, `/projecten/deegh/`, `/privacy/` en de hero met vorm en idee.
 - Hero: je idee maakt de eerste vorm concreet (onderwerp, drie delen, labels en aantekeningen) (B-037).
 
+**Prijzen (B-062 t/m B-066).** Richtprijzen op de site, alle bedragen uit één bestand (`src/lib/prices.ts`):
+
+- Homepage, na *Zo werkt het*: blok **Wat kost zoiets?** (`#prijzen`). Een lijn loopt tijdens het scrollen van een
+  punt (Eerst even Denckh, €45) via een schets (Eerste vorm, vanaf €125) naar een vorm (Echt maken, vanaf €295);
+  elke prijs krijgt een okeronderstreping zodra de lijn hem bereikt. Daaronder *Bekijk de richtprijzen* en *Vertel je
+  idee*.
+- Nieuwe pagina **`/prijzen/`** (*Wat kan een idee kosten?*): kennismaken / Even Denckh / project als dezelfde lijn,
+  elf vormen met vanafprijs (€95 t/m €795) waarbij één lijn de vorm aanneemt van de rij waar je leest of op wijst,
+  wat standaard wel en niet inbegrepen is, webadres en hosting, los vervolgwerk (€45 per uur), en *Vertel je idee*.
+- Bereikbaar via het homepageblok, de footer (*Prijzen*) en de sitemap. De kopnavigatie is ongewijzigd (B-065).
+- De prijslijst-PDF verschijnt pas als `public/downloads/denckh-prijslijst.pdf` bestaat (B-066).
+
 **Portret en merkbestanden (B-058, B-059):** achtergrondgasten uit het portret geretoucheerd; merkbestanden in
 `public/brand/` (`npm run brand`).
 
@@ -147,6 +159,11 @@ Pas de oude regel niet aan. *Voorstel* = wacht op akkoord van de eigenaar.
 | B-059 | 2026-09-29 | Merkbestanden in `public/brand/` (ook `denckh-brand-assets.zip`), gemaakt met `npm run brand` (`scripts/build-brand.mjs`) uit exact dezelfde bronnen als de site: woordmerk `src/components/wordmarkPaths.ts`, krul `src/lib/ink/krul.ts`, kleuren uit `globals.css`. Varianten: compact, signatuur (verhouding als in `/og.png`: woordmerk × 0,4472, krul op 830/120), lichte signatuur, krul los. Per variant SVG-master, vector-PDF, transparante PNG (3000 px breed; krul 2000 px hoog), web-PNG, en waar gevraagd een versie op licht of donker. Controle: exacte kleuren, echte transparantie, gelijke marges rondom, signatuur tegen `og.png` gemiddeld 0,3/255 verschil. | Eigenaar wil de logo's als gewone bestanden voor social, Office, Canva en drukwerk. Logo zelf niet gewijzigd. | Vast |
 | B-060 | 2026-09-29 | Deegh-stap "een merk": het echte logobestand (`public/images/deegh-logo.png`, 626 × 640, transparant, uit het eigen Deegh-thema) in plaats van de wazige screenshot-uitsnede (`deegh-logo.jpg`, verwijderd). Niet meer in een cirkel geknipt, zodat de spetterrand blijft; de inktlijn wordt de cirkel en verdwijnt dan (`hideLine`), zodat er geen zwarte rand om het logo staat. | Eigenaar: "mijn logo moet of er goed op of anders niet." | Vast |
 | B-061 | 2026-09-29 | Merkoverzicht als A4-PDF (`public/brand/denckh-merkoverzicht.pdf`, ook in de zip), gebouwd door `npm run brand` (`scripts/brand-guide.mjs`) uit de echte logobestanden, de lettertypes van de site en de kleurtokens. Gecorrigeerd ten opzichte van een eerder aangeleverd overzicht: logo's niet vervormd of afgesneden, signatuur in de vaste verhouding, alles in Fraunces en Manrope, tagline als `van idee naar vorm`, geen getypt woordmerk, echt deelbeeld, Nacht-inkt toegevoegd, krullijn = Idee en eindpunt = Oker, en waar de bestanden staan. | Eigenaar vroeg een gecorrigeerde versie. | Vast |
+| B-062 | 2026-09-29 | Prijzen van de eigenaar op de site, exclusief btw: Even Denckh €45 (60 minuten, verrekend bij een opdracht vanaf €295), Eerste vorm vanaf €125, Echt maken vanaf €295; per vorm: Iets zonder naam €95, Visual €125, Presentatie €195, Prototype, Spel en Website €295, Interactieve uitleg/tool €395, Interactieve demo en Website Plus €495, Webshop €595, Uitgebreidere webshop €795; los vervolgwerk €45 per uur, alleen na overleg. Eén bron: `src/lib/prices.ts` (homepage, `/prijzen/` en tests lezen daaruit). Teksten letterlijk uit de briefing. | Prijsbriefing eigenaar, 2026-09-29. Eén bron voorkomt dat homepage en prijspagina uit elkaar lopen. | Vast |
+| B-063 | 2026-09-29 | Homepageblok *Wat kost zoiets?* staat na *Zo werkt het* (de werkwijze eindigt bij "vorm", de prijs volgt daaruit) en vóór *klein, bewust*. Vorm: geen prijskaarten maar één lijn (`PriceLine`): punt → schets → vorm, getekend door te scrollen (alleen lezen), pen opgetild bij elke vorm, een kleine lus vóór de laatste halte zoals in de krul. Met reduced motion staat alles er meteen. | Briefing: geen standaard pricing cards; de lijn van klein denken naar gemaakt. Zelfde grammatica als de rest van de site. | Vast |
+| B-064 | 2026-09-29 | `/prijzen/`: de elf vormen als lijst met één morphende lijn (`FormPrices`) die de vorm aanneemt van de rij waar je leest (scroll) of met de muis op wijst; een punt op een okerrail loopt mee. Op mobiel staat de figuur als smalle vaste balk bovenaan. Nieuwe vormen in `shapes.ts`: `websitePlus` en `webshopPlus`. Iets zonder naam gebruikt de lijn van de bezoeker zelf. Tik op een telefoon zet geen rij vast (alleen muis). | Geen gewone prijstabel; de vorm maakt zichtbaar wat je voor de prijs krijgt. Figuur is `aria-hidden`, alle informatie staat in de lijst. | Vast |
+| B-065 | 2026-09-29 | *Prijzen* niet in de kopnavigatie, wel in de footer, de sitemap en via het homepageblok. | Een vierde item laat de kop op 390 px teruglopen naar twee regels; briefing: alleen toevoegen als het de navigatie niet slechter maakt. | Vast |
+| B-066 | 2026-09-29 | Prijslijst-PDF: blok *Liever alles even op een rij?* / *Download de prijslijst* staat klaar, maar verschijnt alleen als `public/downloads/denckh-prijslijst.pdf` bij de build bestaat. Domeinregel ("eerste jaar inbegrepen, tot maximaal €20 excl. btw") alleen bij Website, Website Plus en Webshop, zoals in de briefing. | Nooit een kapotte link; niets toezeggen wat niet gevraagd is. | Vast |
 
 ---
 
@@ -182,6 +199,9 @@ Pas de oude regel niet aan. *Voorstel* = wacht op akkoord van de eigenaar.
 | O-28 | **JS-gewicht:** 192 KB gzip, waarvan ca. 150 KB Next.js-runtime. Accepteren, of later naar Astro? | Accepteren; herzien als de site groeit. |
 | O-34 | **Logo-lab** (`denckh.nl/logo-lab/`): nu merkproefpagina (B-048). Woordmerk blijft; lettersnedes staan als archief onder "eerdere proeven". | Pagina weghalen of houden zodra de krul-toepassingen vaststaan. |
 | O-36 | **GitHub Pages meldt `http://denckh.nl/` als omgeving-URL.** Mogelijk staat "Enforce HTTPS" uit. | Eigenaar controleert in GitHub → Settings → Pages; niet door Claude aangepast (buiten scope). |
+| O-37 | **Prijzen exclusief btw en consumenten.** Voor prijzen die je aan consumenten laat zien, vraagt de wet (Besluit prijsaanduiding, ACM) een prijs inclusief btw. De site toont nu alles exclusief btw, zoals gevraagd. | Kiezen: (a) zo laten als Denckh zich op ondernemers richt, eventueel met "voor ondernemers"; of (b) incl. btw erbij tonen (bijv. €45 wordt €54,45). |
+| O-38 | **Domeinnaam bij Uitgebreidere webshop.** Staat nu alleen bij Website, Website Plus en Webshop (briefing). | Bevestigen, of ook bij Uitgebreidere webshop zetten (één regel in `prices.ts`). |
+| O-39 | **Prijslijst-PDF** aanleveren of laten maken. | Bestand als `public/downloads/denckh-prijslijst.pdf`; de link verschijnt dan vanzelf bij de volgende build. |
 | O-02 | Repo is publiek. | Op privé zetten kan alleen met betaald GitHub-plan voor Pages; anders bewust publiek laten en niets vertrouwelijks opnemen. |
 
 Afgehandeld: O-01 (repo hernoemd naar `denckh`), O-08 (live sites via geautoriseerde browsersessie bekeken, zie
@@ -191,6 +211,7 @@ cases), O-14 (domein actief op GitHub Pages), O-31/O-32/O-33 (B-038), O-35 (B-05
 
 ## Volgende stappen
 
+0. Live controle van `/prijzen/` en het prijsblok op `denckh.nl` en een echte iPhone; besluiten O-37 (btw) en O-38.
 0. Live controle van ronde 2 op `denckh.nl` en een echte iPhone.
 1. Live controle op `denckh.nl` en op een echte iPhone (vanuit de werkomgeving niet bereikbaar).
 2. Beslissen over O-23 (AI) en O-24 (contact).

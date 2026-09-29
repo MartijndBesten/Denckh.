@@ -8,13 +8,13 @@ const BASE = process.env.BASE_URL ?? "http://localhost:8711/";
 const results = [];
 const check = (name, ok, detail = "") => { results.push({ name, ok, detail }); console.log(`${ok ? "OK  " : "FAIL"} ${name}${detail ? ` · ${detail}` : ""}`); };
 
-async function page(browser, { width = 1440, height = 900, mobile = false, reduced = false } = {}) {
+async function page(browser, { width = 1440, height = 900, mobile = false, reduced = false, path = "" } = {}) {
   const ctx = await browser.newContext({ viewport: { width, height }, isMobile: mobile, hasTouch: mobile, reducedMotion: reduced ? "reduce" : "no-preference" });
   const p = await ctx.newPage();
   const errors = [];
   p.on("console", (m) => { if (m.type() === "error") errors.push(m.text()); });
   p.on("pageerror", (e) => errors.push(e.message));
-  await p.goto(BASE, { waitUntil: "networkidle" });
+  await p.goto(new URL(path, BASE).href, { waitUntil: "networkidle" });
   await p.waitForTimeout(500);
   return { p, ctx, errors };
 }
@@ -264,11 +264,106 @@ for (const [w, h] of [[390, 844], [320, 640]]) {
   await ctx.close();
 }
 
-// 7 · geen horizontale overflow
-for (const width of [320, 390, 768, 1024, 1440]) {
-  const { p, ctx } = await page(browser, { width, height: 800, mobile: width < 500 });
+// 7 · prijzen op de homepage: een lijn van €45 via €125 naar €295, geen prijskaarten
+{
+  const { p, ctx, errors } = await page(browser);
+  const block = p.locator("#prijzen");
+  check("prijsblok: kop en intro", ((await block.locator("h2").textContent()) ?? "") === "Wat kost zoiets?" && /hoeft niet eerst een offerte aan te vragen/.test((await block.locator(".prices__head p").textContent()) ?? ""));
+  const stops = await block.locator(".pl__stop").evaluateAll((els) => els.map((e) => ({ label: e.querySelector(".pl__label")?.textContent, price: e.querySelector(".pl__price")?.textContent?.replace(/\s+/g, " ").trim() })));
+  check("prijsblok: drie haltes in de goede volgorde", stops.map((s) => s.label).join(",") === "Eerst even Denckh,Eerste vorm,Echt maken", stops.map((s) => s.label).join(","));
+  check("prijsblok: €45, vanaf €125, vanaf €295, alle excl. btw", stops.map((s) => s.price).join(" | ") === "€45 excl. btw | vanaf €125 excl. btw | vanaf €295 excl. btw", stops.map((s) => s.price).join(" | "));
+  check("prijsblok: €45 wordt verrekend bij een opdracht vanaf €295", /Wordt het daarna een opdracht vanaf €295\? Dan verreken ik die €45\./.test((await block.locator(".pl__note").textContent()) ?? ""));
+  check("prijsblok: links naar /prijzen/ en contact", (await block.getByRole("link", { name: "Bekijk de richtprijzen" }).getAttribute("href")) === "/prijzen/" && (await block.getByRole("link", { name: "Vertel je idee" }).getAttribute("href")) === "#contact");
+  const line = block.locator(".pl__line path");
+  await block.evaluate((el) => scrollTo({ top: el.getBoundingClientRect().top + scrollY - innerHeight * 1.2, behavior: "instant" }));
+  await p.waitForTimeout(400);
+  const before = Number(await line.evaluate((e) => getComputedStyle(e).strokeDashoffset.replace("px", "")));
+  await p.locator(".pl").evaluate((el) => { const r = el.getBoundingClientRect(); scrollTo({ top: r.top + scrollY + r.height / 2 - innerHeight * 0.35, behavior: "instant" }); });
+  await p.waitForTimeout(600);
+  const after = Number(await line.evaluate((e) => getComputedStyle(e).strokeDashoffset.replace("px", "")));
+  check("prijsblok: de lijn tekent zich bij het scrollen", before > 0.9 && after < 0.05, `${before.toFixed(2)} → ${after.toFixed(2)}`);
+  check("prijsblok: alle drie haltes bereikt", (await block.locator(".pl__stop.is-reached").count()) === 3);
+  await p.locator("#prijzen-titel").evaluate((el) => { el.tabIndex = -1; el.focus(); });
+  await p.keyboard.press("Tab");
+  check("prijsblok: toetsenbord gaat direct naar de richtprijzen", ((await p.evaluate(() => document.activeElement?.textContent)) ?? "") === "Bekijk de richtprijzen");
+  check("footer: link naar prijzen", (await p.locator(".site-footer a[href='/prijzen/']").count()) === 1);
+  check("prijsblok: geen console-errors", errors.length === 0, errors.join(" | "));
+  await ctx.close();
+}
+
+// 7b · reduced motion: de prijslijn staat er meteen helemaal
+{
+  const { p, ctx } = await page(browser, { reduced: true });
+  await p.locator("#prijzen").scrollIntoViewIfNeeded();
+  await p.waitForTimeout(300);
+  const off = Number(await p.locator("#prijzen .pl__line path").evaluate((e) => getComputedStyle(e).strokeDashoffset.replace("px", "")));
+  check("reduced motion: prijslijn meteen getekend", off === 0 && (await p.locator("#prijzen .pl__stop.is-reached").count()) === 3, String(off));
+  await ctx.close();
+}
+
+const dotOffset = (p) => p.evaluate(() => { const n = document.querySelector(".fp__row.is-on .fp__name").getBoundingClientRect(), d = document.querySelector(".fp__dot").getBoundingClientRect(); return Math.round(Math.abs(n.top + n.height / 2 - (d.top + d.height / 2))); });
+
+// 8 · /prijzen/: richtprijzen per vorm
+{
+  const prices = { "Visual / eerste vorm": 125, "Presentatie": 195, "Prototype": 295, "Spel / spelconcept": 295, "Website": 295, "Interactieve uitleg / tool": 395, "Interactieve demo": 495, "Website Plus": 495, "Webshop": 595, "Uitgebreidere webshop": 795, "Iets zonder naam": 95 };
+  const { p, ctx, errors } = await page(browser, { path: "prijzen/" });
+  check("prijzen: titel en beschrijving", (await p.title()) === "Prijzen · Denckh" && /€45/.test((await p.locator('meta[name="description"]').getAttribute("content")) ?? ""), await p.title());
+  check("prijzen: canonical", (await p.locator('link[rel="canonical"]').getAttribute("href")) === "https://denckh.nl/prijzen/");
+  check("prijzen: kop", ((await p.locator("h1").textContent()) ?? "") === "Wat kan een idee kosten?");
+  const rows = await p.locator(".fp__row").evaluateAll((els) => els.map((e) => ({ name: e.querySelector(".fp__name")?.textContent, price: e.querySelector(".fp__price")?.textContent?.replace(/\s+/g, " ").trim(), domain: !!e.querySelector(".fp__domain"), aside: e.querySelector(".fp__aside")?.textContent ?? "" })));
+  const wrong = rows.filter((r) => r.price !== `vanaf €${prices[r.name]}`);
+  check("prijzen: elf vormen met de juiste vanafprijs", rows.length === 11 && wrong.length === 0, wrong.map((r) => `${r.name}: ${r.price}`).join(", ") || `${rows.length} rijen`);
+  check("prijzen: vermelding exclusief btw bij de vormen", /Alle bedragen zijn vanafprijzen, exclusief btw\./.test(await p.locator("#vormen-titel + p").textContent() ?? ""));
+  check("prijzen: domeinnaam alleen bij Website, Website Plus en Webshop", rows.filter((r) => r.domain).map((r) => r.name).join(",") === "Website,Website Plus,Webshop");
+  check("prijzen: domeinnaam tot maximaal €20 excl. btw", /eerste jaar inbegrepen, tot maximaal €20 excl\. btw\./.test((await p.locator(".fp__domain").first().textContent()) ?? ""));
+  check("prijzen: €95 is anders dan Even Denckh", /Anders dan Even Denckh/.test(rows.find((r) => r.name === "Iets zonder naam")?.aside ?? ""));
+  const start = await p.locator(".pl__stop").evaluateAll((els) => els.map((e) => `${e.querySelector(".pl__label")?.textContent}: ${e.querySelector(".pl__price")?.textContent?.replace(/\s+/g, " ").trim()}`));
+  check("prijzen: kennismaken, Even Denckh, project", start.join(" | ") === "Kennismaken: vrijblijvend circa 20 minuten | Even Denckh: €45 excl. btw · 60 minuten | Project: vaste prijs vooraf afgesproken", start.join(" | "));
+  const body = (await p.locator("main").textContent()) ?? "";
+  check("prijzen: los vervolgwerk €45 per uur excl. btw, na overleg", /Extra of los vervolgwerk: €45 per uur excl\. btw\./.test(body) && /Alleen na overleg\./.test(body));
+  check("prijzen: webadres op eigen naam, hosting niet standaard", /komt op jouw naam/.test(body) && /Hosting zit er niet standaard bij\./.test(body));
+  check("prijzen: standaard en niet standaard", (await p.locator(".scope-list--in li").count()) === 6 && (await p.locator("#niet-titel + ul li").count()) === 12);
+  const pdf = fs.existsSync(new URL("../public/downloads/denckh-prijslijst.pdf", import.meta.url));
+  check("prijzen: pdf-link alleen als het bestand er is", (await p.getByRole("link", { name: "Download de prijslijst" }).count()) === (pdf ? 1 : 0), pdf ? "pdf aanwezig" : "nog geen pdf");
+  check("prijzen: vertel je idee naar contact", (await p.getByRole("link", { name: "Vertel je idee" }).getAttribute("href")) === "/#contact");
+  check("prijzen: geen gedachtestreepjes en geen 'wij'", !/[—–]/.test(body) && !/\b(wij|ons|onze)\b/i.test(body));
+  await p.locator(".fp__row", { hasText: "Webshop" }).first().hover();
+  await p.waitForTimeout(900);
+  await p.waitForTimeout(700); // laatste detail: 420 ms + 40 ms per detail + 500 ms tekenen
+  const partial = await p.locator(".fp__details path").evaluateAll((els) => els.filter((e) => { const c = getComputedStyle(e), da = parseFloat(c.strokeDasharray) || Infinity; return da < e.getTotalLength() - 0.5 || parseFloat(c.strokeDashoffset) !== 0; }).length);
+  check("prijzen: de vorm wordt helemaal getekend", partial === 0, `${partial} onvolledig`);
+  check("prijzen: punt op de rail staat bij de aangewezen rij", (await dotOffset(p)) <= 2, `${await dotOffset(p)}px`);
+  check("prijzen: aanwijzen geeft de lijn de vorm van die rij", /Webshop/.test((await p.locator(".fp__row.is-on .fp__name").textContent()) ?? "") && /vanaf €595/.test((await p.locator(".fp__now").textContent()) ?? "") && (await p.locator(".fp__details path").count()) > 0);
+  const sitemap = await (await p.request.get(new URL("sitemap.xml", BASE).href)).text();
+  check("prijzen: in de sitemap", sitemap.includes("https://denckh.nl/prijzen/"));
+  check("prijzen: geen console-errors", errors.length === 0, errors.join(" | "));
+  await ctx.close();
+}
+
+// 8b · /prijzen/ op mobiel: de vaste figuur volgt de rij waar je leest
+{
+  const { p, ctx, errors } = await page(browser, { width: 390, height: 844, mobile: true, path: "prijzen/" });
+  const row = p.locator(".fp__row").nth(8);
+  await row.evaluate((el) => scrollTo({ top: el.getBoundingClientRect().top + scrollY - innerHeight * 0.4, behavior: "instant" }));
+  await p.waitForTimeout(900);
+  const on = (await p.locator(".fp__row.is-on .fp__name").textContent()) ?? "";
+  const now = (await p.locator(".fp__now span").first().textContent()) ?? "";
+  const fig = await p.locator(".fp__figure").boundingBox();
+  check("prijzen mobiel: punt op de rail staat bij die rij", (await dotOffset(p)) <= 2, `${await dotOffset(p)}px`);
+  check("prijzen mobiel: figuur blijft staan en toont de rij waar je leest", on === now && fig.y >= 0 && fig.y < 120, `${on} / ${now} · y ${Math.round(fig.y)}`);
+  await p.locator(".fp__row").nth(8).locator(".fp__text").tap();
+  await p.locator(".fp__row").nth(2).evaluate((el) => scrollTo({ top: el.getBoundingClientRect().top + scrollY - innerHeight * 0.4, behavior: "instant" }));
+  await p.waitForTimeout(900);
+  check("prijzen mobiel: een tik zet geen rij vast, scrollen blijft leidend", ((await p.locator(".fp__row.is-on .fp__name").textContent()) ?? "") !== on, (await p.locator(".fp__row.is-on .fp__name").textContent()) ?? "");
+  check("prijzen mobiel: geen console-errors", errors.length === 0, errors.join(" | "));
+  await ctx.close();
+}
+
+// 9 · geen horizontale overflow
+for (const path of ["", "prijzen/"]) for (const width of [320, 390, 768, 1024, 1440]) {
+  const { p, ctx } = await page(browser, { width, height: 800, mobile: width < 500, path });
   const ov = await p.evaluate(() => document.documentElement.scrollWidth - innerWidth);
-  check(`geen horizontale overflow op ${width}px`, ov <= 0, `${ov}px`);
+  check(`geen horizontale overflow op ${width}px${path ? ` (/${path})` : ""}`, ov <= 0, `${ov}px`);
   await ctx.close();
 }
 

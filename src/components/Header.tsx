@@ -30,6 +30,7 @@ export function Footer() {
       </div>
       <div className="footer-links">
         <Link className="link-draw" href="/#projecten">Projecten</Link>
+        <Link className="link-draw" href="/prijzen/">Prijzen</Link>
         <a className="link-draw" href="mailto:info@denckh.nl">info@denckh.nl</a>
         <Link className="link-draw" href="/privacy/">Privacy</Link>
       </div>
