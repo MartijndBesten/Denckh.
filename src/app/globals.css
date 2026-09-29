@@ -404,6 +404,101 @@ nav .link-draw:hover, nav .link-draw:focus-visible { background-size: 100% 6px, 
 .contact-return__send p { color: var(--graphite); font-size: 0.9rem; margin: 0; }
 @media (max-width: 760px) { .contact-return { grid-template-columns: 1fr; } .contact-return__start { min-height: 4rem; place-items: center start; } }
 
+/* ---------------- prijzen: de lijn van een gedachte naar iets gemaakts ---------------- */
+.prices { padding-block: clamp(3rem, 8vw, 6rem); }
+.prices__head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1rem 3rem; margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+.prices__head p { margin: 0; color: var(--graphite); max-width: 30rem; }
+.prices__more { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.2rem 2rem; margin-top: clamp(2.5rem, 5vw, 4rem); padding-top: 1.6rem; border-top: 1px solid color-mix(in srgb, var(--ink) 14%, transparent); }
+.prices__more p { margin: 0; font-family: var(--font-display); font-size: clamp(1.25rem, 2vw, 1.55rem); letter-spacing: -0.015em; }
+.prices__cta { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.8rem; }
+
+.pl { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.4rem clamp(1.5rem, 4vw, 3.5rem); margin: 0; padding: 0; list-style: none; }
+.pl__line { position: absolute; inset: 0; overflow: visible; pointer-events: none; }
+.pl__line path { fill: none; stroke: var(--idea); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; }
+.pl__stop { position: relative; }
+.pl__glyph { display: block; width: 64px; height: 48px; margin-bottom: 1.3rem; overflow: visible; }
+.pl__dot { fill: var(--ochre); }
+.pl__ring { fill: none; stroke: var(--ochre); stroke-width: 1.4; opacity: 0; transform-box: fill-box; transform-origin: center; transform: scale(0.6); transition: opacity 0.5s var(--ease), transform 0.5s var(--ease); }
+.pl__sketch { fill: none; stroke: var(--idea); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; }
+.pl__sketch--thin { stroke-width: 1.5; }
+.pl__form { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linejoin: round; stroke-dasharray: 1; }
+.pl__form--thin { stroke-width: 1.4; }
+.pl__stop:hover .pl__ring, .pl__stop:focus-within .pl__ring { opacity: 0.55; transform: none; }
+.pl__stop:hover .pl__glyph--schets, .pl__stop:hover .pl__glyph--vorm { transform: translateY(-2px); }
+.pl__glyph { transition: transform 0.4s var(--ease); }
+.pl__label { margin: 0 0 0.5rem; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ochre-deep); }
+.pl__price { margin: 0 0 0.9rem; font-family: var(--font-display); font-size: clamp(2.2rem, 4vw, 3.1rem); line-height: 1; letter-spacing: -0.035em; }
+.pl__amount { background: linear-gradient(var(--ochre), var(--ochre)) no-repeat 0 96% / 0% 0.09em; transition: background-size 0.9s var(--ease); padding-bottom: 0.06em; }
+.pl__stop.is-reached .pl__amount { background-size: 100% 0.09em; }
+.pl__from, .pl__meta { font-family: var(--font-sans); font-size: 0.82rem; font-weight: 600; letter-spacing: 0; color: var(--graphite); }
+.pl__from { margin-right: 0.15em; }
+.pl__text { margin: 0; color: var(--graphite); max-width: 22rem; }
+.pl__note { margin: 1rem 0 0; padding-left: 0.8rem; border-left: 2px solid var(--ochre); font-size: 0.92rem; max-width: 22rem; }
+@media (max-width: 760px) {
+  .pl { grid-template-columns: 1fr; gap: 2.6rem; }
+  .pl__stop { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 0 1rem; align-items: start; }
+  .pl__glyph { width: 52px; height: 39px; margin: 0; }
+  .prices__more { flex-direction: column; align-items: flex-start; }
+}
+
+/* /prijzen/ */
+.price-page__header { padding-block: 1.5rem clamp(2.5rem, 6vw, 4.5rem); max-width: 52rem; }
+.price-page__header h1 { font-size: clamp(2.8rem, 7vw, 6rem); line-height: 0.95; letter-spacing: -0.04em; margin-bottom: 1.4rem; }
+.price-page__header p:last-child { font-size: clamp(1.1rem, 1.6vw, 1.25rem); color: var(--graphite); max-width: 40rem; }
+.price-page__section { padding-block: clamp(2.5rem, 6vw, 4.5rem); border-top: 1px solid color-mix(in srgb, var(--ink) 14%, transparent); }
+.price-page__section > h2 { margin-bottom: clamp(2rem, 4vw, 3rem); font-size: clamp(2rem, 4vw, 3rem); }
+.price-page__head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 0.6rem 3rem; margin-bottom: clamp(2rem, 4vw, 3rem); }
+.price-page__head h2 { font-size: clamp(2rem, 4vw, 3rem); }
+.price-page__head p { margin: 0; color: var(--graphite); }
+.price-page__small { font-size: 0.92rem; color: var(--graphite); margin: 1rem 0 0; }
+.price-page__scope { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem clamp(2rem, 6vw, 6rem); }
+.price-page__scope h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: 1.4rem; }
+.price-page__notes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem clamp(2rem, 6vw, 6rem); }
+.price-page__notes h3 { font-size: 1.35rem; letter-spacing: -0.015em; margin-bottom: 0.9rem; }
+.price-page__notes p { margin: 0; }
+.price-page__pdf { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.6rem 1.6rem; padding-block: 2rem; border-top: 1px solid color-mix(in srgb, var(--ink) 14%, transparent); }
+.price-page__pdf p { margin: 0; font-family: var(--font-display); font-size: 1.4rem; }
+.scope-list { display: grid; gap: 0.55rem; margin: 0; padding: 0; list-style: none; }
+.scope-list li { display: grid; grid-template-columns: 1.1rem minmax(0, 1fr); gap: 0.6rem; align-items: baseline; color: var(--graphite); }
+.scope-list li::before { content: ""; width: 0.5rem; height: 0.5rem; border-radius: 50%; border: 1.4px solid var(--pencil); transform: translateY(-0.05em); }
+.scope-list--in li { color: var(--ink); }
+.scope-list--in li::before { background: var(--ochre); border-color: var(--ochre); }
+.scope-list--small li { font-size: 0.95rem; }
+@media (max-width: 760px) { .price-page__scope, .price-page__notes { grid-template-columns: 1fr; } }
+
+.fp { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 2rem clamp(2rem, 5vw, 5rem); align-items: start; }
+.fp__figure { position: sticky; top: 12vh; }
+.fp__figure svg { display: block; width: 100%; max-width: 480px; height: auto; overflow: visible; }
+.fp__line { fill: none; stroke: var(--ink); stroke-width: calc(2.2px / var(--k, 1)); stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.5s; }
+.fp__line.is-sketch { stroke: var(--idea); }
+.fp__details path { fill: none; stroke: var(--ink); stroke-width: calc(1.4px / var(--k, 1)); stroke-linecap: round; stroke-linejoin: round; }
+.fp__now { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 0.8rem; margin: 1.2rem 0 0; font-family: var(--font-display); font-size: 1.5rem; letter-spacing: -0.02em; }
+.fp__now-price { font-family: var(--font-sans); font-size: 0.95rem; font-weight: 650; letter-spacing: 0; color: var(--ochre-deep); }
+.fp__list { margin: 0; padding: 0; list-style: none; }
+.fp__row { padding-block: 1.3rem; border-bottom: 1px solid color-mix(in srgb, var(--ink) 12%, transparent); }
+.fp__row:first-child { padding-top: 0; }
+.fp__top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.2rem 1.5rem; margin-bottom: 0.4rem; }
+.fp__rail { position: relative; padding-left: 2rem; }
+.fp__rail::before { content: ""; position: absolute; left: 0.45rem; top: 0.4rem; bottom: 1.4rem; width: 1.5px; background: color-mix(in srgb, var(--idea) 55%, transparent); border-radius: 1px; }
+.fp__dot { position: absolute; left: calc(0.45rem - 6px + 0.75px); top: -6px; width: 12px; height: 12px; border-radius: 50%; background: var(--ochre); box-shadow: 0 0 0 4px var(--paper); transition: transform 0.45s var(--ease); }
+.fp__name { font-size: 1.45rem; letter-spacing: -0.02em; transition: color 0.3s; }
+.fp__row:not(.is-on) .fp__name { color: color-mix(in srgb, var(--ink) 82%, var(--paper)); }
+.fp__price { margin: 0; font-family: var(--font-display); font-size: 1.45rem; letter-spacing: -0.02em; white-space: nowrap; }
+.fp__from { font-family: var(--font-sans); font-size: 0.8rem; font-weight: 600; color: var(--graphite); letter-spacing: 0; }
+.fp__text { margin: 0; color: var(--graphite); max-width: 36rem; }
+.fp__aside { margin: 0.6rem 0 0; padding-left: 0.8rem; border-left: 2px solid var(--ochre); font-size: 0.92rem; max-width: 36rem; }
+.fp__domain { margin: 0.5rem 0 0; font-size: 0.85rem; color: var(--ochre-deep); max-width: none; }
+@media (max-width: 860px) {
+  .fp { grid-template-columns: 1fr; gap: 0; }
+  .fp__figure { top: 0; z-index: 2; display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 1rem; align-items: center; padding-block: 0.7rem; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); background: var(--paper); border-bottom: 1px solid color-mix(in srgb, var(--ink) 12%, transparent); }
+  .fp__figure svg { max-width: 132px; }
+  .fp__now { margin: 0; font-size: 1.2rem; display: grid; gap: 0.1rem; }
+  .fp__rail { margin-top: 1.2rem; padding-left: 1.6rem; }
+  .fp__rail::before { left: 0.3rem; }
+  .fp__dot { left: calc(0.3rem - 6px + 0.75px); }
+  .fp__row:first-child { padding-top: 1.3rem; }
+}
+
 /* Ook gemaakt */
 .more-section { padding-block: clamp(2.5rem, 6vw, 5rem); border-top: 1px solid color-mix(in srgb, var(--ink) 14%, transparent); }
 .more-section .projects__head { margin-bottom: clamp(1.5rem, 4vw, 3rem); }

@@ -16,13 +16,19 @@ De homepage volgt nu de interactieve grammatica uit `docs/creative-direction.md`
 | 5 | **Ook gemaakt.** | drie kleinere projecten, elk één vorm waar jouw lijn in overloopt: Autowasdag Sionkerk (agenda), een presentatie (scherm; anoniem), een werkdag in 3D (gebouw; anoniem) |
 | 6 | **Wat kan een idee worden?** | "De vorm volgt uit wat het idee nodig heeft." Eén lijn, tien voorbeeldvormen, kiesbaar |
 | 7 | **Zo werkt het.** | Vertel (idee, probleem of losse gedachte) → Denckh (uitzoeken wat nodig is en welke vorm past) → Vorm (zichtbaar, testbaar of bruikbaar; waar nodig verder uitgebouwd), met jouw eigen lijn |
-| 8 | **Denckh is klein. Bewust.** | echt portret van de eigenaar (B-043) |
-| 9 | overgang | jouw lijn |
-| 10 | **En wat zit er bij jou in je hoofd?** | de punt komt terug; je schets en zin reizen mee; mailto naar info@denckh.nl |
+| 8 | **Wat kost zoiets?** (`#prijzen`) | een lijn van punt (Eerst even Denckh, €45) via schets (Eerste vorm, vanaf €125) naar vorm (Echt maken, vanaf €295), getekend door te scrollen; links naar `/prijzen/` en contact (B-063) |
+| 9 | **Denckh is klein. Bewust.** | echt portret van de eigenaar (B-043) |
+| 10 | overgang | jouw lijn |
+| 11 | **En wat zit er bij jou in je hoofd?** | de punt komt terug; je schets en zin reizen mee; mailto naar info@denckh.nl |
 
 Contact werkt via het eigen mailprogramma (GitHub Pages kan niets verzenden). Deegh en Loflijn staan er met naam en
 link (B-029). De demokoffer, de presentatie en de 3D-werkdag blijven zonder merknaam, beelden of link. Autowasdag
 Sionkerk staat er met naam en link (akkoord eigenaar, B-038).
+
+**Prijzen (B-062 t/m B-066).** Eigen pagina `/prijzen/` (*Wat kan een idee kosten?*): hoe het begint (kennismaken,
+Even Denckh, project) als dezelfde lijn; elf vormen met vanafprijs, waarbij één lijn de vorm aanneemt van de rij waar je
+leest; wat standaard wel en niet inbegrepen is; webadres en hosting; los vervolgwerk; en *Vertel je idee*. Alle bedragen
+en teksten staan in `src/lib/prices.ts`. Bereikbaar via het homepageblok en de footer, niet via de kopnavigatie (B-065).
 
 ---
 
@@ -34,6 +40,7 @@ Sionkerk staat er met naam en link (akkoord eigenaar, B-038).
 /projecten/intusens-demokoffer/ Case (alleen na toestemming, zie cases/intusens-demokoffer.md)
 /projecten/loflijn/             Case (alleen na verificatie)
 /contact/                       Contact (zelfde formulier als op de homepage, voor directe links)
+/prijzen/                       Richtprijzen (B-062 t/m B-066)
 /privacy/                       Privacyverklaring
 /colofon/                       Colofon: bedrijfsgegevens, en hoe deze site is gemaakt (optioneel, later)
 /404                            "Dit punt bestaat (nog) niet."
@@ -206,4 +213,5 @@ Heb je iets in je hoofd? [Vertel het me]
 |---|---|---|
 | Home | Denckh · van idee naar vorm | Kleine conceptstudio. Ik denk mee en maak ideeën concreet: van website tot prototype, van interactieve uitleg tot iets waar nog geen naam voor is. |
 | Case | [Case] · Denckh | Eén zin uit *Aanleiding* + *Vorm*. |
+| Prijzen | Prijzen · Denckh | Richtprijzen van Denckh: even samen denken voor €45, een eerste vorm vanaf €125 en een werkend resultaat vanaf €295. Na de intake weet je vooraf wat jouw idee kost. |
 | Contact | Vertel het me · Denckh | Heb je iets in je hoofd? Het hoeft nog niet af te zijn. |

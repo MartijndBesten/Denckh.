@@ -24,7 +24,7 @@ is een bewuste livegang en gebeurt alleen na akkoord van de eigenaar.
 | Styling | Eén globale stylesheet met tokens (`src/app/globals.css`); Tailwind 4 is aanwezig, maar wordt nauwelijks gebruikt |
 | Interactie | Eigen code, geen animatiebibliotheek: canvas (live tekenen), SVG (analyse, vormen), CSS (overgangen) |
 | Fonts | Fraunces (display, eigen instantie: SOFT 100, WONK 0, opsz 72–144, wght 400–700) en Manrope, **zelf gehost en gesubset** (samen 50 KB) |
-| Tests | `npm run test:e2e` (Playwright, 58 controles), `lint`, `typecheck` |
+| Tests | `npm run test:e2e` (Playwright, 98 controles), `lint`, `typecheck` |
 
 ## 3. Interactie-architectuur
 
@@ -38,7 +38,9 @@ src/lib/ink/
   store.ts      de schets van de bezoeker, genormaliseerd, in sessionStorage; standaardschets als niemand tekent
   hooks.ts      in beeld, scrollvoortgang (alleen lezen, geen kaping), morph, breedte
 src/components/punt/      hero: PuntStage (tekenen → kijken → lezen → vorm) + FormWidget (bruikbare mini-vormen)
-src/components/grammar/   InkRule, SettleTitle, Construct (+ caseBuilds), Outcomes, Werkwijze, ContactReturn
+src/components/grammar/   InkRule, SettleTitle, Construct (+ caseBuilds), Outcomes, Werkwijze, ContactReturn,
+                          PriceLine (prijzen als lijn), FormPrices (richtprijzen per vorm)
+src/lib/prices.ts         alle prijzen en prijsteksten op één plek
 src/components/Wordmark.tsx  woordmerk met ck-ligatuur; de punt neemt de vorm van jouw schets aan
 ```
 
@@ -71,8 +73,8 @@ in `sessionStorage` van de eigen browser en verdwijnen met het tabblad. Privacyv
 | LCP / TBT / CLS | 2,5 s / 240 ms / 0 |
 | JavaScript homepage | 192 KB gzip, waarvan ca. 150 KB Next.js/React-runtime en ca. 40 KB eigen code |
 | Fonts | 50 KB (2 bestanden, preload) |
-| axe (WCAG 2.2 AA + best practices) | 0 overtredingen op home (1440 en 390 px), Deegh-case en privacy |
-| e2e | 58/58: tekenen (muis, touch, toetsenbord), voorbeeld, idee maakt de vorm concreet, krul als hulplijn, kaartvraag, voorbeeldreeks (desktop, 390, 320 px, touch), voorstel in de mail, reduced motion, projecten (start bij binnenkomst, stappen bij klikken en aanwijzen, Deegh-logo, "Ook gemaakt"), logo-lab niet vindbaar, geen overflow van 320 tot 1440 px, geen console-errors |
+| axe (WCAG 2.2 AA + best practices) | 0 overtredingen op home (1440 en 390 px), `/prijzen/` (1440 en 390 px, ook midden in de scroll en met reduced motion), Deegh-case en privacy |
+| e2e | 98/98: prijzen (bedragen en btw-vermeldingen per plek, lijn tekent bij scrollen en staat er meteen met reduced motion, elf vormen met de juiste prijs, domeinregel alleen bij de drie webvormen, pdf-link alleen als het bestand er is, figuur volgt scroll en muis maar niet een tik, geen overflow op `/prijzen/` van 320 tot 1440 px); tekenen (muis, touch, toetsenbord), voorbeeld, idee maakt de vorm concreet, krul als hulplijn, kaartvraag, voorbeeldreeks (desktop, 390, 320 px, touch), voorstel in de mail, reduced motion, projecten (start bij binnenkomst, stappen bij klikken en aanwijzen, Deegh-logo, "Ook gemaakt"), logo-lab niet vindbaar, geen overflow van 320 tot 1440 px, geen console-errors |
 
 **Kanttekening:** de JS-bundel ligt boven het eerdere budget van 130 KB. Het verschil zit bijna helemaal in de
 Next.js-runtime. Astro zou hier ca. 100 KB lichter zijn; zie open punt in `HANDOFF.md`.
@@ -82,5 +84,7 @@ Next.js-runtime. Astro zou hier ca. 100 KB lichter zijn; zie open punt in `HANDO
 - Lighthouse draaide lokaal (gesimuleerd 4G, CPU-vertraging), niet tegen de live site: die is vanuit de werkomgeving
   niet bereikbaar.
 - Niet getest op een fysieke iPhone; wel op iPhone-maat met touch-emulatie.
+- `pathLength` in een svg die door CSS geschaald wordt (of met `vector-effect: non-scaling-stroke`) tekent in Chrome
+  maar een deel van het pad. `FormPrices` meet daarom de echte padlengte en compenseert de lijndikte met `--k`.
 - `[pathLength]`-attribuutselectors bleken in Chrome niet betrouwbaar te matchen na minificatie; animaties gebruiken
   daarom klassen.

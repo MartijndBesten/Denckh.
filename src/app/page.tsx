@@ -7,8 +7,10 @@ import { Construct } from "@/components/grammar/Construct";
 import { InkRule } from "@/components/grammar/InkRule";
 import { MoreWork } from "@/components/grammar/MoreWork";
 import { Outcomes } from "@/components/grammar/Outcomes";
+import { PriceLine } from "@/components/grammar/PriceLine";
 import { SettleTitle } from "@/components/grammar/SettleTitle";
 import { Werkwijze } from "@/components/grammar/Werkwijze";
+import { HOME_STOPS } from "@/lib/prices";
 
 export default function Home() {
   return (
@@ -105,6 +107,21 @@ export default function Home() {
           <p>Wat er bovenaan met je lijn gebeurde, is precies hoe het werkt.</p>
         </header>
         <Werkwijze />
+      </section>
+
+      <section className="shell prices" id="prijzen" aria-labelledby="prijzen-titel">
+        <header className="prices__head">
+          <h2 id="prijzen-titel">Wat kost zoiets?</h2>
+          <p>Dat hangt af van wat het idee nodig heeft. Maar je hoeft niet eerst een offerte aan te vragen om enig idee van de prijs te krijgen.</p>
+        </header>
+        <PriceLine stops={HOME_STOPS} label="Van even samen denken tot echt maken" />
+        <div className="prices__more">
+          <p>Benieuwd naar de richtprijzen per vorm?</p>
+          <div className="prices__cta">
+            <Link className="ink-button" href="/prijzen/">Bekijk de richtprijzen</Link>
+            <a className="link-draw link-draw--dot" href="#contact">Vertel je idee</a>
+          </div>
+        </div>
       </section>
 
       <section className="shell small" aria-labelledby="klein-titel">

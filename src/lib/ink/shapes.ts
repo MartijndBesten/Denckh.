@@ -54,6 +54,29 @@ export const SHAPES: Record<string, (b: Box) => Shape> = {
       R(x + W - 96, y + H - 34, 80, 20, 10),
     ] };
   },
+  websitePlus: ({ w, h }) => {
+    // meer pagina's: een tweede pagina erachter, en meer inhoud op de voorste
+    const W = Math.min(w * 0.8, h * 1.4), H = W / 1.5, ox = W * 0.07, oy = H * 0.1;
+    const x = (w - W) / 2 + ox / 2, y = (h - H) / 2 + oy / 2, bx = x - ox, by = y - oy;
+    return { outline: rrect(x, y, W, H, 10), closed: true, details: [
+      `M${x} ${by + H} H${bx} V${by} H${bx + W} V${y}`,
+      L(x, y + 24, x + W, y + 24), L(x + W - 70, y + 12, x + W - 54, y + 12), L(x + W - 46, y + 12, x + W - 30, y + 12), L(x + W - 22, y + 12, x + W - 12, y + 12),
+      R(x + 16, y + 38, W * 0.5, H * 0.3, 5), L(x + W * 0.6, y + 42, x + W - 18, y + 42), L(x + W * 0.6, y + 54, x + W - 30, y + 54), C(x + W - 36, y + 38 + H * 0.2, 8),
+      L(x + 16, y + H * 0.66, x + W * 0.44, y + H * 0.66), L(x + 16, y + H * 0.76, x + W * 0.38, y + H * 0.76),
+      L(x + W * 0.52, y + H * 0.66, x + W - 18, y + H * 0.66), L(x + W * 0.52, y + H * 0.76, x + W * 0.82, y + H * 0.76),
+    ] };
+  },
+  webshopPlus: ({ w, h }) => {
+    // meer eigen uitstraling: een beeldbanner, meer producten en een eigen knop
+    const W = Math.min(w * 0.86, h * 1.5), H = W / 1.5, x = (w - W) / 2, y = (h - H) / 2;
+    const tw = (W - 32 - 3 * 10) / 4, ty = y + 34 + H * 0.26;
+    return { outline: rrect(x, y, W, H, 10), closed: true, details: [
+      L(x, y + 24, x + W, y + 24), C(x + W - 18, y + 12, 5), C(x + W - 34, y + 12, 3),
+      R(x + 16, y + 32, W - 32, H * 0.22, 5), L(x + 28, y + 32 + H * 0.15, x + W * 0.4, y + 32 + H * 0.15),
+      ...[0, 1, 2, 3].flatMap((i) => [R(x + 16 + i * (tw + 10), ty, tw, H * 0.3, 4), L(x + 16 + i * (tw + 10), ty + H * 0.3 + 9, x + 16 + i * (tw + 10) + tw * 0.7, ty + H * 0.3 + 9)]),
+      R(x + W - 104, y + H - 30, 88, 18, 9), R(x + 16, y + H - 30, 60, 18, 9),
+    ] };
+  },
   prototype: ({ w, h }) => {
     const H = h * 0.88, W = H * 0.5, x = (w - W) / 2, y = (h - H) / 2;
     return { outline: rrect(x, y, W, H, 22), closed: true, details: [
