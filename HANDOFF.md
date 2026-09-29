@@ -140,3 +140,11 @@ git remote set-url origin https://github.com/MartijndBesten/denckh.git
 - GitHub Pages deployment is voorbereid via `.github/workflows/deploy-pages.yml` en bouwt de bestaande Next.js static export uit `out/`.
 - Productie is nog niet volledig geactiveerd: GitHub Pages moet in repository Settings > Pages op GitHub Actions worden gezet en `denckh.nl` moet daarna als custom domain worden ingesteld. DNS bij Cloud86 moet vervolgens naar GitHub Pages wijzen.
 - Geen DNS-, Cloud86- of e-mailinstellingen zijn door deze wijziging aangepast.
+
+
+### Update 29 september 2026 — uitgebreidere preview
+- Op verzoek is de tijdelijke one-screen coming-soonpagina weer vervangen door de reeds gebouwde, uitgebreidere Denckh-homepage.
+- De homepage toont nu de positionering, idee→vorm-uitleg, bestaande projectvoorbeelden, mogelijke uitkomsten, werkwijze en het kleinschalige karakter van Denckh.
+- Bovenaan staat bewust een smalle melding dat dit een eerste versie is en dat de site nog vorm krijgt.
+- Het bestaande contactformulier is nog niet gekoppeld aan een verzendroute en daarom bewust niet publiek als werkend formulier getoond; de contactsectie meldt dat de directe contactmogelijkheid volgt.
+- De eerdere coming-soonstylesheet blijft voorlopig in de repo als ontwerpvariant, maar wordt niet meer door de homepage gebruikt.
