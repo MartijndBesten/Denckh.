@@ -43,7 +43,10 @@ export default function Home() {
               <div><dt>Denckh</dt><dd>Een eigen webshop op WordPress en WooCommerce, met een eigen thema: producten, uitleg in stappen, recepten, verkooppunten en een zakelijke route.</dd></div>
               <div><dt>Vorm</dt><dd>deegh.nl: bestellen, en leren hoe je van een bol deeg een pizza maakt.</dd></div>
             </dl>
-            <Link className="link-draw" href="/projecten/deegh/">Bekijk het project</Link>
+            <p className="case__links">
+              <Link className="link-draw" href="/projecten/deegh/">Bekijk het project</Link>
+              <a className="link-draw" href="https://deegh.nl" rel="noopener">deegh.nl</a>
+            </p>
           </div>
         </article>
 
@@ -58,22 +61,22 @@ export default function Home() {
               <div><dt>Denckh</dt><dd>Een verkenner van de koffer, de bediening stap voor stap nagebootst en een demomodus om mee te presenteren. In drie talen, ook offline.</dd></div>
               <div><dt>Vorm</dt><dd>Een interactieve uitleg die naast het echte product werkt.</dd></div>
             </dl>
-            <p className="case__note">Naam, beelden en link volgen zodra daar toestemming voor is.</p>
+            <p className="case__note">Zonder merknaam of productbeelden: het gaat hier om de manier van uitleggen.</p>
           </div>
         </article>
 
         <article className="case">
-          <Construct project="spel" label="speluitleg en webshop, schematisch" ratio={0.62} />
+          <Construct project="spel" label="loflijn.nl, schematisch" ratio={0.62} />
           <div className="case__text">
             <p className="case__kind">fysiek spel → uitleg en verkoop</p>
-            <h3>Een spel vindt zijn plek online</h3>
-            <p className="case__lead">Een muziekspel voor op tafel kreeg een online presentatie, uitleg in stappen en een kooproute.</p>
+            <h3>Loflijn</h3>
+            <p className="case__lead">Een muziekspel voor op tafel kreeg een plek online: uitleg in drie stappen en een route naar bestellen.</p>
             <dl className="case__facts">
-              <div><dt>Aanleiding</dt><dd>Een fysiek spel moet je snappen voordat je het koopt.</dd></div>
-              <div><dt>Denckh</dt><dd>Een webshop met de spelregels in drie stappen, productinformatie en een route naar bestellen.</dd></div>
-              <div><dt>Vorm</dt><dd>Een winkel waar je het spel leert kennen en bestelt.</dd></div>
+              <div><dt>Aanleiding</dt><dd>Van Psalm tot Praise is een fysiek muziekspel. Wie het nog niet kent, moet in een paar tellen snappen hoe het werkt.</dd></div>
+              <div><dt>Denckh</dt><dd>De website en webshop: het spel uitgelegd in drie stappen (scan de QR-code, luister naar het lied, leg de kaart op de tijdlijn), productinformatie en een kooproute.</dd></div>
+              <div><dt>Vorm</dt><dd>loflijn.nl, waar je het spel leert kennen en bestelt.</dd></div>
             </dl>
-            <p className="case__note">Naam en beelden volgen zodra daar toestemming voor is.</p>
+            <p className="case__links"><a className="link-draw" href="https://loflijn.nl" rel="noopener">loflijn.nl</a></p>
           </div>
         </article>
       </section>

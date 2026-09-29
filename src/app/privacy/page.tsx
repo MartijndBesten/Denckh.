@@ -25,7 +25,7 @@ export default function PrivacyPage() {
           <h2>Externe diensten</h2>
           <p>Lettertypen worden vanaf deze site zelf geladen. Er zijn geen video&apos;s, embeds of analysetools van derden. De site wordt gehost via GitHub Pages; zoals bij elke webserver kan de host technische verbindingsgegevens verwerken.</p>
           <h2>Vragen</h2>
-          <p>Mail naar info@denckh.nl. Bedrijfsgegevens volgen hier zodra ze definitief zijn.</p>
+          <p>Mail naar info@denckh.nl. Denckh · Vlierweg 54, Houten · KvK 83176896 · btw NL003791952B15.</p>
         </article>
         <Footer />
       </div>

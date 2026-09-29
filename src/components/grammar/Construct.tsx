@@ -35,7 +35,7 @@ export function Construct({ project, label, ratio = 0.72, tone = "paper" }: { pr
   const closed = eased > 0.5 ? all[i + 1].closed : all[i].closed;
   const settled = pos >= all.length - 1 - 0.05;
   const current = eased > 0.6 ? i + 1 : i;
-  const finalT = clamp((p - 0.82) / 0.14, 0, 1);
+  const finalT = final ? clamp((p - 0.82) / 0.14, 0, 1) : 0;
 
   return (
     <figure className={`construct construct--${tone}`} ref={ref} style={{ ["--final" as string]: finalT }}>

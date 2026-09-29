@@ -16,8 +16,7 @@ een prototype, een tool of een ander concept dat een idee concreet en toetsbaar 
 
 | Onderdeel | Stand |
 |---|---|
-| Live (`main`) | Eerste versie op `denckh.nl` via GitHub Pages |
-| Branch `creatief/het-punt` | Nieuwe interactieve ervaring "begin met een punt", typografieproef, grammatica voor de hele site. Nog niet live. |
+| Live (`main`) | Interactieve versie "begin met een punt" op `denckh.nl` via GitHub Pages |
 | Mail | Cloud86/Plesk, `info@denckh.nl` |
 
 De actuele stand, genomen beslissingen en open punten staan in [`HANDOFF.md`](HANDOFF.md).
@@ -70,5 +69,5 @@ De websitecode staat in `src/` en gebruikt Next.js met statische export. Zie `do
 ## Repository
 
 - GitHub: `MartijndBesten/denckh` (live via GitHub Pages op `denckh.nl`; elke push naar `main` gaat live)
-- Werkbranch voor de nieuwe interactieve ervaring: `creatief/het-punt`
+- Nieuw werk: op een aparte branch, merge naar `main` = livegang
 - Hoofdbranch: `main`

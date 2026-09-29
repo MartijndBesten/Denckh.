@@ -86,8 +86,8 @@ grafiet 5,2 : 1, menie 5,1 : 1, oker alleen voor lijnen en vlakken.
 
 **Materiaal:** papier, potlood, inkt, maatlijnen. Geen gradients, geen glas, geen schaduwen, geen rounded cards.
 
-**Typografie:** zie `docs/typografie-proef.md`. Werkhypothese: Fraunces (soft) met ck-ligatuur voor het woordmerk en
-grote zinnen, Manrope voor tekst.
+**Typografie:** zie `docs/typografie-proef.md`. Gekozen (B-028): `denckh.` in kleine letters, Fraunces (soft) met
+ck-ligatuur, levend woordmerk; Manrope voor tekst.
 
 **Beeld:** alleen echte beelden. Waar rechten ontbreken, zijn projecten schematisch opgebouwd uit lijnen en als
 "schematisch" gemarkeerd. Portretplek staat klaar: "hier komt een echte foto. geen gegenereerde."

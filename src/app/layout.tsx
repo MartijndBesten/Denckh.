@@ -15,9 +15,11 @@ export const metadata: Metadata = {
     siteName: "Denckh",
     title: "Denckh · van idee naar vorm",
     description: "Een kleine conceptstudio voor ideeën die concreet mogen worden.",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "denckh. van idee naar vorm" }],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
+    images: ["/og.png"],
     title: "Denckh · van idee naar vorm",
     description: "Van idee naar vorm.",
   },
@@ -36,6 +38,8 @@ const organization = {
   url: "https://denckh.nl",
   description: "Kleine creatieve conceptstudio. Van idee naar vorm.",
   email: "info@denckh.nl",
+  address: { "@type": "PostalAddress", streetAddress: "Vlierweg 54", addressLocality: "Houten", addressCountry: "NL" },
+  vatID: "NL003791952B15",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

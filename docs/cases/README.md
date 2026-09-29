@@ -7,9 +7,9 @@ Hier staat welke projecten mogelijk als case op de Denckh-site komen, wat er al 
 
 | Case | Bron(nen) | Status | Laatst gecontroleerd | Dossier |
 |---|---|---|---|---|
-| IntuSens-demokoffer | https://intusens-demokoffer.nl · publieke repo `MartijndBesten/intusens-demokoffer` | In onderzoek: inhoud live en via de repo gecontroleerd; naam, rol en toestemming open | 2026-09-29 | [intusens-demokoffer.md](intusens-demokoffer.md) |
-| Deegh | https://deegh.nl · broncode (privé) | In onderzoek: live shop en bouw gecontroleerd; beeldherkomst en merkrol open | 2026-09-29 | [deegh.md](deegh.md) |
-| Loflijn | https://loflijn.nl (Shopify) | In onderzoek: live shop gecontroleerd; rol, beelden en toestemming open | 2026-09-29 | [loflijn.md](loflijn.md) |
+| IntuSens-demokoffer | https://intusens-demokoffer.nl · publieke repo `MartijndBesten/intusens-demokoffer` | Geen toestemming voor naam, beelden of link (besluit eigenaar 2026-09-29); alleen anoniem en schematisch | 2026-09-29 | [intusens-demokoffer.md](intusens-demokoffer.md) |
+| Deegh | https://deegh.nl · broncode (privé) | Goedgekeurd voor publicatie (naam en link), 2026-09-29; beeldherkomst nog open | 2026-09-29 | [deegh.md](deegh.md) |
+| Loflijn | https://loflijn.nl (Shopify) | Goedgekeurd voor publicatie (naam en link), 2026-09-29; beelden nog niet aangeleverd | 2026-09-29 | [loflijn.md](loflijn.md) |
 | TRILUX LiveLink 3D-demo | GitHub-repository (privé) | Niet publiceren: project en rechten zijn onderzocht, maar naam, assets en volledige inhoud blijven buiten de publieke portfolio tot toestemming | 2026-09-29 | – |
 
 Statussen: *Niet onderzocht* → *In onderzoek* → *Geverifieerd* → *Goedgekeurd voor publicatie*.

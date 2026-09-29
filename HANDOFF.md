@@ -4,8 +4,7 @@ Overdrachtsdocument voor de Denckh-website. Hier staan de actuele stand, alle be
 beslissingen, open punten en de volgende stappen. **Bijwerken aan het eind van elke werksessie.**
 
 - Laatst bijgewerkt: 2026-09-29
-- Live (`main`): eerste versie van de site via GitHub Pages
-- In ontwikkeling: branch **`creatief/het-punt`** (niet live) met de nieuwe interactieve ervaring
+- Live (`main`): de interactieve versie "begin met een punt" (gemerged uit `creatief/het-punt`, B-031)
 
 ---
 
@@ -75,6 +74,11 @@ Pas de oude regel niet aan. *Voorstel* = wacht op akkoord van de eigenaar.
 | B-024 | 2026-09-29 | Geen animatiebibliotheek: canvas + SVG + CSS. Motion (B-010) vervalt. | Klein, beheersbaar; alles wat nodig is kan met native API's. | Vast |
 | B-025 | 2026-09-29 | Contact via `mailto:info@denckh.nl` met ingevulde tekst en schets-samenvatting. | GitHub Pages kan niets verzenden; eerlijk en werkend zonder backend. | Voorstel |
 | B-026 | 2026-09-29 | Projecten zonder toestemming: geen namen, logo's of beelden van derden; schematisch opgebouwd uit lijnen, als zodanig gemarkeerd. TRILUX 3D-demo niet getoond. | Volgt B-014/B-016. | Vast |
+| B-027 | 2026-09-29 | Akkoord eigenaar: menie als tweede accent (B-022 wordt Vast). | Antwoord eigenaar. | Vast |
+| B-028 | 2026-09-29 | Woordmerk: richting D (Fraunces + ck-ligatuur), **kleine letters `denckh.`**, **levend woordmerk** (punt neemt de vorm van de schets aan). B-023 wordt Vast; definitieve vectortekening volgt. | Eigenaar vroeg "wat is het beste?"; advies: kleine letters sluiten aan op `deegh` en de briefing, de ligatuur maakt het woordbeeld eigen, de levende punt vertelt het concept zonder uitleg. | Vast (op advies) |
+| B-029 | 2026-09-29 | Rechten: **TRILUX niet** (IntuSens en 3D-demo zonder naam, beelden of link; demokoffer blijft alleen als anonieme, schematische case). **Loflijn wel** en **Deegh wel** (naam en link). | Antwoord eigenaar. Loflijn- en Deegh-beelden alleen na aanlevering; de live sites zijn vanuit de werkomgeving niet te screenshotten. | Vast |
+| B-030 | 2026-09-29 | Bedrijfsgegevens gelijk aan deegh.nl, naam Denckh: Vlierweg 54, Houten · KvK 83176896 · btw NL003791952B15. In footer, privacy en structured data. | Antwoord eigenaar; gegevens staan ook publiek op deegh.nl. | Vast |
+| B-031 | 2026-09-29 | Branch `creatief/het-punt` naar `main` gemerged: livegang. | Akkoord eigenaar ("ja zet live"). | Vast |
 
 ---
 
@@ -100,16 +104,14 @@ Pas de oude regel niet aan. *Voorstel* = wacht op akkoord van de eigenaar.
 
 | # | Onderwerp | Voorstel |
 |---|---|---|
-| O-20 | **Branch live zetten?** Mergen van `creatief/het-punt` naar `main` zet alles live. | Eerst bekijken (lokaal of via de gepubliceerde proef), dan mergen. |
-| O-21 | **Typografie/logo:** ck-ligatuur (D) akkoord? Kleine letter `denckh.` of `Denckh.`? Levend woordmerk ja/nee? | D, kleine letter, levend woordmerk ja. Daarna definitieve vectortekening. |
-| O-22 | **Palet met menie** als tweede accent. | Akkoord; menie alleen voor "Denckh kijkt". |
+| O-21 | **Definitieve woordmerktekening** (B-028): de ligatuur is nu opgebouwd uit fontcontouren plus een balk. | Laten tekenen/verfijnen voor print en groot formaat. |
 | O-23 | **Echte AI:** publiek, alleen demo, of niet? Model, endpoint, budget. | Eerst niet publiek; besluit na `docs/ai-onderzoek.md`. |
 | O-24 | **Contact:** mailto volstaat, of een echte verzendroute (serverless)? | Mailto voor nu. |
-| O-25 | **Rechten projecten:** TRILUX (IntuSens, 3D-demo) en Loflijn: naam, beelden, link. | Schriftelijke toestemming vragen; tot die tijd anoniem en schematisch. |
+| O-25 | **Beelden Loflijn en Deegh** (naam en link mogen, B-029). | Screenshots of foto's aanleveren; de schematische constructie eindigt dan in het echte beeld. |
+| O-30 | **Handelsnaam Denckh bij KvK.** De site noemt KvK 83176896 (de inschrijving van Deegh). | Controleren dat Denckh als handelsnaam bij deze inschrijving staat; zo niet, laten toevoegen bij KvK. |
 | O-26 | **Deegh-beelden:** welke foto's zijn echt en van jou? | Pas daarna echte beelden in de Deegh-case. |
 | O-27 | **Portret en naam** in "klein, bewust". | Echte foto aanleveren; naam tonen. |
 | O-28 | **JS-gewicht:** 192 KB gzip, waarvan ca. 150 KB Next.js-runtime. Accepteren, of later naar Astro? | Accepteren; herzien als de site groeit. |
-| O-29 | **Bedrijfsgegevens** (KvK, adres, btw) voor footer en privacy. | Aanleveren vóór definitieve livegang. |
 | O-02 | Repo is publiek. | Op privé zetten kan alleen met betaald GitHub-plan voor Pages; anders bewust publiek laten en niets vertrouwelijks opnemen. |
 
 Afgehandeld: O-01 (repo hernoemd naar `denckh`), O-08 (live sites via geautoriseerde browsersessie bekeken, zie
@@ -119,8 +121,8 @@ cases), O-14 (domein actief op GitHub Pages).
 
 ## Volgende stappen
 
-1. Eigenaar bekijkt de branch en beslist over O-20 t/m O-23.
-2. Na akkoord: merge naar `main` (= livegang), daarna live controle op `denckh.nl` en op een echte iPhone.
+1. Live controle op `denckh.nl` en op een echte iPhone (vanuit de werkomgeving niet bereikbaar).
+2. Beslissen over O-23 (AI) en O-24 (contact).
 3. Definitieve woordmerktekening en favicon/OG-beelden in de nieuwe stijl.
 4. Echte beelden per project zodra rechten er zijn; de schematische constructie eindigt dan in het echte beeld.
 5. AI-laag alleen na besluit O-23.
