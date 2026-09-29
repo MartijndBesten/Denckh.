@@ -252,7 +252,7 @@ nav .link-draw:hover, nav .link-draw:focus-visible { background-size: 100% 6px, 
 .case--flip { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
 .case--flip .construct { order: 2; }
 .case--night { color: var(--night-ink); background: var(--night); border-top: 0; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); }
-.case--night .case__kind, .case--night .case__note, .case--night dt { color: color-mix(in srgb, var(--night-ink) 62%, transparent); }
+.case--night .case__kind, .case--night .case__note, .case--night .case__facts dt { color: color-mix(in srgb, var(--night-ink) 62%, transparent); }
 .case__kind { margin: 0 0 0.9rem; font-size: 0.8rem; font-weight: 650; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ochre-deep); }
 .case--night .case__kind { color: var(--ochre); }
 .case__lead { font-family: var(--font-display); font-size: clamp(1.3rem, 2vw, 1.6rem); line-height: 1.2; letter-spacing: -0.015em; margin: 0.9rem 0 1.6rem; }
@@ -284,11 +284,12 @@ nav .link-draw:hover, nav .link-draw:focus-visible { background-size: 100% 6px, 
 .construct--night .callout text { fill: var(--night-ink); }
 .construct--night .callout__label { fill: color-mix(in srgb, var(--night-ink) 65%, transparent); }
 .deegh-shot text { font-family: var(--font-sans); }
-.construct__steps { display: flex; flex-wrap: wrap; gap: 0.3rem 1.1rem; margin-top: 1rem; font-size: 0.8rem; color: var(--pencil); }
+.construct__steps { display: flex; flex-wrap: wrap; gap: 0.3rem 1.1rem; margin-top: 1rem; font-size: 0.8rem; color: var(--graphite); }
 .construct__steps span { transition: color 0.3s; }
 .construct__steps .is-past { color: var(--graphite); }
 .construct__steps .is-on { color: var(--ink); font-weight: 650; }
 .construct__steps .is-on::before { content: ""; display: inline-block; width: 0.45em; height: 0.45em; margin-right: 0.4em; border-radius: 50%; background: var(--ochre); }
+.construct--night .construct__steps, .construct--night .construct__steps .is-past { color: color-mix(in srgb, var(--night-ink) 68%, var(--night)); }
 .construct--night .construct__steps .is-on { color: var(--night-ink); }
 
 /* ---------------- wat kan eruit komen ---------------- */

@@ -14,19 +14,23 @@ een prototype, een tool of een ander concept dat een idee concreet en toetsbaar 
 
 ## Status
 
-| Fase | Stand |
+| Onderdeel | Stand |
 |---|---|
-| 0 · Projectbasis (repo, documentatie, werkafspraken) | **Gereed** |
-| 1 · Onderzoek bestaande projecten | Uitgevoerd (live sites nog niet bekeken, zie `HANDOFF.md`) |
-| 2 · Creative direction | Voorstel: [`docs/creative-direction.md`](docs/creative-direction.md) |
-| 3 · Structuur en content | Voorstel: [`docs/structuur-en-content.md`](docs/structuur-en-content.md) |
-| Architectuur en deployment | Voorstel: [`docs/architectuur.md`](docs/architectuur.md) |
-| 4 · Design system | Eerste tokens en uitwerking in de websitecode gereed |
-| 5–7 · Homepage en eerste case | Eerste werkende versie in opbouw; zie `HANDOFF.md` |
-| 8–10 · Cases, contact, QA | Vervolg na de eerste technische controle |
-| Hosting, DNS en livegang (denckh.nl) | **Bewust buiten scope** tot expliciet akkoord |
+| Live (`main`) | Eerste versie op `denckh.nl` via GitHub Pages |
+| Branch `creatief/het-punt` | Nieuwe interactieve ervaring "begin met een punt", typografieproef, grammatica voor de hele site. Nog niet live. |
+| Mail | Cloud86/Plesk, `info@denckh.nl` |
 
 De actuele stand, genomen beslissingen en open punten staan in [`HANDOFF.md`](HANDOFF.md).
+
+## Lokaal draaien
+
+```bash
+npm ci
+npm run dev            # ontwikkelen op http://localhost:3000
+npm run build          # statische export naar out/
+npx serve out -l 8711  # build bekijken
+npm run test:e2e       # 23 interactiecontroles (vereist de server op poort 8711)
+```
 
 ## Uitgangspunten
 
@@ -48,15 +52,23 @@ De actuele stand, genomen beslissingen en open punten staan in [`HANDOFF.md`](HA
 │   ├── cases/                  ← caseregister, verificatieprotocol en dossier per case
 │   ├── creative-direction.md   ← concept, bewegingstaal, kleur, typografie, toon
 │   ├── structuur-en-content.md ← sitemap, homepage-opbouw, concepttekst, formulier
-│   └── architectuur.md         ← stack, hosting, deploy, privacy, SEO, performance, a11y
+│   ├── architectuur.md         ← stack, hosting, interactie-architectuur, performance, a11y
+│   ├── ai-onderzoek.md         ← wat nodig is voor echte AI (nog niets gebouwd)
+│   ├── typografie-proef.md     ← typografische richtingen en werkhypothese
+│   └── typografie/             ← proefpagina, woordmerk-SVG's
+├── src/lib/ink/                ← inkt-engine: geometrie, analyse, interpretatie, vormen
+├── src/components/punt/        ← hero: begin met een punt
+├── src/components/grammar/     ← de lijn die door de site reist
+├── tests/interaction.mjs       ← e2e-controles
 ├── .editorconfig
 ├── .gitattributes
 └── .gitignore
 ```
 
-De websitecode staat in `src/` en gebruikt Next.js met statische export. Zie `docs/architectuur.md` en `HANDOFF.md`.
+De websitecode staat in `src/` en gebruikt Next.js met statische export. Zie `docs/architectuur.md`.
 
 ## Repository
 
-- GitHub: `MartijndBesten/Denckh.`
+- GitHub: `MartijndBesten/denckh` (live via GitHub Pages op `denckh.nl`; elke push naar `main` gaat live)
+- Werkbranch voor de nieuwe interactieve ervaring: `creatief/het-punt`
 - Hoofdbranch: `main`
