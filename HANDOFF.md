@@ -130,3 +130,13 @@ git remote set-url origin https://github.com/MartijndBesten/denckh.git
 4. **Fase 8–10:** casepagina's pas uitbreiden met goedgekeurde beelden en namen; werkende contactroute, juridische
    gegevens en privacytekst alleen na bevestiging.
 5. Hosting, DNS en livegang blijven buiten scope tot expliciet akkoord (B-003).
+
+
+## Tijdelijke publieke landingpage — 29 september 2026
+
+- De volledige Denckh-site blijft in de Git-geschiedenis bewaard; de homepage is tijdelijk vervangen door een compacte coming-soonpagina.
+- Richting: `denckh.` / `van idee naar vorm`, warm crème/antraciet/oker, met een subtiele animatie van idee naar vorm.
+- Tijdelijke homepagebestanden: `src/app/page.tsx` en `src/app/coming-soon.module.css`.
+- GitHub Pages deployment is voorbereid via `.github/workflows/deploy-pages.yml` en bouwt de bestaande Next.js static export uit `out/`.
+- Productie is nog niet volledig geactiveerd: GitHub Pages moet in repository Settings > Pages op GitHub Actions worden gezet en `denckh.nl` moet daarna als custom domain worden ingesteld. DNS bij Cloud86 moet vervolgens naar GitHub Pages wijzen.
+- Geen DNS-, Cloud86- of e-mailinstellingen zijn door deze wijziging aangepast.
