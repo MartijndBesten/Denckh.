@@ -357,7 +357,7 @@ const dotOffset = (p) => p.evaluate(() => { const n = document.querySelector(".f
 
 // 8 · /prijzen/: richtprijzen per vorm
 {
-  const prices = { "Visual / eerste vorm": 125, "Presentatie": 195, "Prototype": 295, "Spel / spelconcept": 295, "Website": 295, "Interactieve uitleg / tool": 395, "Interactieve demo": 495, "Website Plus": 495, "Webshop": 595, "Uitgebreidere webshop": 795, "Iets zonder naam": 95 };
+  const prices = { "Visual / eerste vorm": 125, "Presentatie": 195, "Prototype": 295, "Spel / spelconcept": 295, "Website": 295, "Interactieve uitleg / tool": 395, "Interactieve demo": 495, "Uitgebreidere website": 495, "Webshop": 595, "Uitgebreidere webshop": 795, "Iets zonder naam": 95 };
   const { p, ctx, errors } = await page(browser, { path: "prijzen/" });
   check("prijzen: titel en beschrijving", (await p.title()) === "Prijzen · Denckh" && /€45/.test((await p.locator('meta[name="description"]').getAttribute("content")) ?? ""), await p.title());
   check("prijzen: canonical", (await p.locator('link[rel="canonical"]').getAttribute("href")) === "https://denckh.nl/prijzen/");
@@ -366,7 +366,7 @@ const dotOffset = (p) => p.evaluate(() => { const n = document.querySelector(".f
   const wrong = rows.filter((r) => r.price !== `vanaf €${prices[r.name]}`);
   check("prijzen: elf vormen met de juiste vanafprijs", rows.length === 11 && wrong.length === 0, wrong.map((r) => `${r.name}: ${r.price}`).join(", ") || `${rows.length} rijen`);
   check("prijzen: vermelding exclusief btw bij de vormen", /Alle bedragen zijn vanafprijzen, exclusief btw\./.test(await p.locator("#vormen-titel + p").textContent() ?? ""));
-  check("prijzen: domeinnaam alleen bij Website, Website Plus en Webshop", rows.filter((r) => r.domain).map((r) => r.name).join(",") === "Website,Website Plus,Webshop");
+  check("prijzen: domeinnaam alleen bij Website, Uitgebreidere website en Webshop", rows.filter((r) => r.domain).map((r) => r.name).join(",") === "Website,Uitgebreidere website,Webshop");
   check("prijzen: domeinnaam tot maximaal €20 excl. btw", /eerste jaar inbegrepen, tot maximaal €20 excl\. btw\./.test((await p.locator(".fp__domain").first().textContent()) ?? ""));
   check("prijzen: €95 is anders dan Even Denckh", /Anders dan Even Denckh/.test(rows.find((r) => r.name === "Iets zonder naam")?.aside ?? ""));
   const start = await p.locator(".pl__stop").evaluateAll((els) => els.map((e) => `${e.querySelector(".pl__label")?.textContent}: ${e.querySelector(".pl__price")?.textContent?.replace(/\s+/g, " ").trim()}`));

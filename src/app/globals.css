@@ -57,7 +57,7 @@ body {
 
 ::selection { background: color-mix(in srgb, var(--ochre) 45%, transparent); color: var(--ink); }
 
-h1, h2, h3 { margin: 0; font-family: var(--font-display); font-weight: 560; letter-spacing: -0.03em; text-wrap: balance; }
+h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); font-weight: 560; letter-spacing: -0.03em; text-wrap: balance; }
 h2 { font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1; }
 h3 { font-size: clamp(1.8rem, 3.4vw, 2.6rem); line-height: 1.02; }
 p { margin: 0 0 1em; max-width: 62ch; }
@@ -482,6 +482,8 @@ nav .link-draw:hover, nav .link-draw:focus-visible { background-size: 100% 6px, 
 .fp__rail { position: relative; padding-left: 2rem; }
 .fp__rail::before { content: ""; position: absolute; left: 0.45rem; top: 0.4rem; bottom: 1.4rem; width: 1.5px; background: color-mix(in srgb, var(--idea) 55%, transparent); border-radius: 1px; }
 .fp__dot { position: absolute; left: calc(0.45rem - 6px + 0.75px); top: -6px; width: 12px; height: 12px; border-radius: 50%; background: var(--ochre); box-shadow: 0 0 0 4px var(--paper); transition: transform 0.45s var(--ease); }
+.fp__group { margin: 0 0 0.9rem; font-family: var(--font-sans); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ochre-deep); }
+.fp__row:not(:first-child) .fp__group { margin-top: 1.6rem; }
 .fp__name { font-size: 1.45rem; letter-spacing: -0.02em; transition: color 0.3s; }
 .fp__row:not(.is-on) .fp__name { color: color-mix(in srgb, var(--ink) 82%, var(--paper)); }
 .fp__price { margin: 0; font-family: var(--font-display); font-size: 1.45rem; letter-spacing: -0.02em; white-space: nowrap; }
@@ -498,6 +500,12 @@ nav .link-draw:hover, nav .link-draw:focus-visible { background-size: 100% 6px, 
   .fp__rail::before { left: 0.3rem; }
   .fp__dot { left: calc(0.3rem - 6px + 0.75px); }
   .fp__row:first-child { padding-top: 1.3rem; }
+  .fp__figure { grid-template-columns: 96px minmax(0, 1fr); }
+  .fp__figure svg { max-width: 96px; }
+  .fp__row { padding-block: 0.85rem; }
+  .fp__name, .fp__price { font-size: 1.2rem; }
+  .fp__text { font-size: 0.95rem; line-height: 1.45; }
+  .fp__row:not(:first-child) .fp__group { margin-top: 1.2rem; }
 }
 
 /* Ook gemaakt */
