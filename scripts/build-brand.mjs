@@ -1,4 +1,4 @@
-// Exporteert de Denckh-merkbestanden naar public/brand/ (SVG-masters, PNG's, vector-PDF's en een zip).
+// Exporteert de Denckh-merkbestanden naar public/brand/ (SVG-masters, PNG's, vector-PDF's, het merkoverzicht en een zip).
 // Bron: exact het woordmerk van de site (src/components/wordmarkPaths.ts) en de krul uit het Open Graph-beeld
 // (src/lib/ink/krul.ts). Hier wordt niets aan het logo veranderd; alleen samengesteld en weggeschreven.
 // Gebruik: npm run brand
@@ -8,6 +8,7 @@ import path from "node:path";
 import { chromium } from "playwright";
 import { DOT, LETTERS, LIGATURE } from "../src/components/wordmarkPaths.ts";
 import { KRUL_END, KRUL_PATH } from "../src/lib/ink/krul.ts";
+import { buildGuide } from "./brand-guide.mjs";
 
 const OUT = path.resolve("public/brand");
 // kleuren = de tokens in src/app/globals.css
@@ -86,9 +87,11 @@ for (const m of MARKS) {
   await pdfPage.close();
   report.push(`${base}: viewBox ${vb.join(" ")}, png ${big.join("×")}`);
 }
+// 5 · merkoverzicht (A4-PDF) uit dezelfde bestanden
+await buildGuide({ browser, out: OUT, C });
 await browser.close();
 
-// 5 · zip met alles
+// 6 · zip met alles
 const zip = path.join(OUT, "denckh-brand-assets.zip");
 fs.rmSync(zip, { force: true });
 const files = fs.readdirSync(OUT).filter((f) => /\.(svg|png|pdf|txt)$/.test(f)).sort();
