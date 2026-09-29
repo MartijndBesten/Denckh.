@@ -418,6 +418,15 @@ const dotOffset = (p) => p.evaluate(() => { const n = document.querySelector(".f
   await ctx.close();
 }
 
+// 8c · /prijzen/: alle prijzen rechts uitgelijnd, ook bij een lange naam op een smal scherm
+for (const [w, h, mobile] of [[320, 700, true], [390, 844, true], [1440, 900, false]]) {
+  const { p, ctx } = await page(browser, { width: w, height: h, mobile, path: "prijzen/" });
+  const rights = await p.locator(".fp__price").evaluateAll((els) => els.map((e) => Math.round(e.getBoundingClientRect().right)));
+  const firstLine = await p.locator(".fp__row").evaluateAll((rows) => rows.every((r) => Math.abs(r.querySelector(".fp__price").getBoundingClientRect().top - r.querySelector(".fp__name").getBoundingClientRect().top) < 14));
+  check(`prijzen op ${w}px: alle prijzen rechts, op de eerste regel`, new Set(rights).size === 1 && firstLine, `${[...new Set(rights)].join(",")}${firstLine ? "" : " · prijs onder de naam"}`);
+  await ctx.close();
+}
+
 // 9 · geen horizontale overflow
 for (const path of ["", "prijzen/"]) for (const width of [320, 390, 768, 1024, 1440]) {
   const { p, ctx } = await page(browser, { width, height: 800, mobile: width < 500, path });

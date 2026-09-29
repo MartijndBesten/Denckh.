@@ -478,7 +478,7 @@ nav .link-draw:hover, nav .link-draw:focus-visible { background-size: 100% 6px, 
 .fp__list { margin: 0; padding: 0; list-style: none; }
 .fp__row { padding-block: 1.3rem; border-bottom: 1px solid color-mix(in srgb, var(--ink) 12%, transparent); }
 .fp__row:first-child { padding-top: 0; }
-.fp__top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.2rem 1.5rem; margin-bottom: 0.4rem; }
+.fp__top { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: 0.2rem 1.2rem; margin-bottom: 0.4rem; } /* prijs altijd rechts, ook als de naam twee regels krijgt */
 .fp__rail { position: relative; padding-left: 2rem; }
 .fp__rail::before { content: ""; position: absolute; left: 0.45rem; top: 0.4rem; bottom: 1.4rem; width: 1.5px; background: color-mix(in srgb, var(--idea) 55%, transparent); border-radius: 1px; }
 .fp__dot { position: absolute; left: calc(0.45rem - 6px + 0.75px); top: -6px; width: 12px; height: 12px; border-radius: 50%; background: var(--ochre); box-shadow: 0 0 0 4px var(--paper); transition: transform 0.45s var(--ease); }
@@ -538,6 +538,7 @@ nav .link-draw:hover, nav .link-draw:focus-visible { background-size: 100% 6px, 
 .legal-page article { max-width: 44rem; padding-bottom: 2rem; }
 .legal-page h2 { font-size: 1.6rem; margin: 2rem 0 0.6rem; }
 .legal-page__intro { font-size: 1.2rem; }
+.legal-page__date { margin-top: 2rem; color: var(--graphite); font-size: 0.9rem; }
 .not-found { min-height: 70svh; padding-bottom: 4rem; }
 @media (max-width: 760px) { .case-page__facts { grid-template-columns: 1fr; } }
 
