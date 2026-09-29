@@ -1,150 +1,103 @@
 # Creative direction
 
-Status: **voorstel, 2026-09-29.** Wacht op akkoord van de eigenaar. Onderdelen met *(proef)* worden in fase 4
-gevalideerd met een visuele proef.
+Status: **ronde "Het punt", 2026-09-29.** Gebouwd op branch `creatief/het-punt`, nog niet live. Vervangt de
+eerdere versie van dit document (die staat in de Git-geschiedenis).
 
 ---
 
-## 1. Kern in één zin
+## 1. Kern
 
-**Denckh maakt van een idee iets dat je kunt zien, testen of gebruiken, en de site laat dat zelf gebeuren.**
+**De website is zelf een Denckh-project.** Je ervaart op de site wat Denckh voor een idee doet: iets vaags wordt
+begrepen en krijgt een vorm die je kunt gebruiken.
 
-De bezoeker moet na het bezoek denken: *"Hier kan ik met een vaag idee naartoe, en dan ontstaat er iets."*
+De toets bij elke beslissing: *had dit op een andere bureausite kunnen staan?* Zo ja, dan opnieuw.
 
 ## 2. Het concept: *Het punt*
 
-De punt achter **denckh.** is het idee. Op de site volg je die ene punt terwijl hij vorm krijgt.
-
 ```
-punt  →  lijn  →  schets  →  vlak  →  vorm
-idee     denken   verkennen   structuur  iets echts
+PUNT  →  LIJN  →  SCHETS  →  IDEE  →  VORM
+jij      jij      Denckh kijkt   Denckh leest   samen
 ```
 
-Het concept heeft twee lagen. Ze gebruiken dezelfde bewegingstaal.
+De punt achter **"Mooi."** in de openingszin is het idee. Je trekt hem uit de zin en tekent. In de zin blijft een lege
+ring achter: het idee is eruit. Je lijn laat je niet meer los: hij komt verderop in de site terug.
 
-### 2a. Bovenaan: *Krabbel → vorm* (interactie)
+## 3. De interactieve kern: *begin met een punt*
 
-In de hero staat een grote okerkleurige punt. Die kun je vastpakken en slepen (muis of vinger). Terwijl je sleept,
-laat de punt een ruwe potloodlijn achter: jouw vage idee. Laat je los, dan trekt de krabbel zich rustig samen tot een
-schone vorm, bijvoorbeeld een cirkel, een afgerond vlak of een lijn. Welke vorm het wordt, hangt af van wat je tekende.
-Klein label: *vorm.* Daarna keert de punt terug.
+| Moment | Wat je ziet | Waarom |
+|---|---|---|
+| **Punt** | De punt staat als leesteken in de kop, ademt heel licht, leunt een fractie naar je cursor. Een vaag potloodspoor wijst naar het tekenvlak. | Uitnodigen zonder uitleg. |
+| **Tekenen** | Inkt in oker. Snel bewegen = dunne lijn, langzaam = de inkt loopt uit. De pen volgt met lichte traagheid, zodat het niet voelt als Paint. | Een ontworpen materiaal, geen tekenprogramma. |
+| **Loslaten** | De lijn organiseert zich: trillingen verdwijnen, de vorm blijft van jou. | Eerste stap van vaag naar helder. |
+| **Denckh kijkt** | Rode potloodaantekeningen: hoekmarkeringen, cirkels op hoeken, een maatlijn, labels als "gesloten · rond · 1,1 : 1". | Zo kijkt een ontwerper naar een schets. Het is meten, geen raden. |
+| **Lezing** | Eén zin: "Iets ronds en gesloten. Ik zie hier misschien een bediening in." Plus: "Dat hoeft het niet te zijn. Het is een begin." | Geen Pictionary. Een voorzichtige interpretatie. |
+| **Vorm** | Op "Zal ik er vorm aan geven?" loopt je lijn punt voor punt over in een eerste vorm, gemaakt van dezelfde punten. | Letterlijk van idee naar vorm. |
+| **Gebruik** | De vorm werkt: een draaiknop die draait, een regelaar die schuift, een scherm met keuzes, een verloop met meetpunten, een route in stappen, een ideeënkaart. | "Iets dat je kunt zien, testen of gebruiken." |
+| **Vraag** | "Wat zat er ongeveer in je hoofd?" Eén zin. Voorbeeldreactie koppelt je zin aan de vorm en stelt een vervolgvraag. | De opstap naar een gesprek. |
 
-- Doet de bezoeker niets? Dan speelt het één keer vanzelf af, kort en rustig.
-- Het is een aanbod, geen opdracht: alle inhoud is leesbaar zonder interactie.
-- Op mobiel reageert alleen een veeg die **op de punt** begint. De rest van het scherm scrolt gewoon (geen
-  scroll-kaping).
-- Waarom dit sterker is dan alleen een scroll-animatie: de bezoeker ervaart "van idee naar vorm" binnen 5 seconden met
-  de eigen hand. Het is de belofte van Denckh in het klein.
+Zes vormen, gekozen uit meetbare eigenschappen van de lijn (niet willekeurig):
 
-### 2b. Tijdens het scrollen: *de rode draad* (verhaal)
-
-Als je verder scrolt, verlaat de punt de hero en wordt hij een dunne okerlijn:
-
-1. **Punt:** de hero.
-2. **Lijn:** naast de tekst "Van idee naar vorm." trekt de punt een lijn.
-3. **Schets:** de lijn loopt uit in een losse, handgetekende contour (net niet recht).
-4. **Vlak:** de contour sluit en vult zich rustig met een vlak.
-5. **Vorm:** het vlak wordt het kader van het eerste echte project. Er verschijnt een screenshot of foto in.
-
-Daarna volgen de projecten: de vorm die ideeën eerder kregen. Aan het eind keert de punt terug bij het
-contactformulier: *jouw idee is het volgende punt.* Het verhaal is rond.
-
-## 3. Bewegingstaal: *tekenen → invullen*
-
-Eén motion language, overal consequent:
-
-| Regel | Invulling |
+| Lijn | Vorm |
 |---|---|
-| **Wat beweegt** | Alleen de punt en de lijn in oker. De rest staat stil. |
-| **Hoe** | Een lijn tekent zichzelf (SVG `pathLength`/`stroke-dashoffset`) en daarna vult of verschijnt de vorm (opacity, clip-path). |
-| **Karakter** | Licht handmatig: vooraf berekende, iets "wiebelige" paden. Geen random ruis per frame. |
-| **Tempo** | Rustig. 500–1200 ms, ease-out (`cubic-bezier(.2,.7,.2,1)`). Geen bounce. Alleen de hero-punt veert licht (spring). |
-| **Scroll-gekoppeld** | Alleen de intro (punt → vorm), en alleen op brede schermen, maximaal ca. 1,5 schermhoogte vastgezet. Op mobiel spelen dezelfde beelden af zodra ze in beeld komen, zonder vastzetten. |
-| **Hover op cases** | Over de echte screenshot ligt eerst een lijntekening (wireframe/contour). Bij hover of focus tekent die zich af en verschijnt het echte beeld. Op touch gebeurt dit één keer bij in beeld komen. |
-| **Reduced motion** | Alles staat meteen in de eindstand, geen scroll-koppeling. De hero-punt is statisch; de krabbel-interactie blijft beschikbaar zonder animatie van de overgang. |
+| gesloten en rond | draaiknop |
+| gesloten met hoeken | scherm |
+| open en recht | regelaar |
+| open, gaat één kant op, golft | verloop (visualisatie) |
+| open met keerpunten | route |
+| kruist zichzelf, meerdere lussen | ideeënkaart |
 
-**Bewust niet:** parallax-lagen, zwevende blobs, cursor-trails over de hele pagina, tekst die letter voor letter
-invliegt, 3D/WebGL, confetti.
+Toetsenbord: Enter pakt de punt, pijltjes tekenen, Enter laat los, Escape stopt. Voor wie niet wil tekenen: "of bekijk
+een voorbeeld". Reduced motion: geen ademen, geen letterbeweging, overgangen direct.
 
-## 4. Visuele identiteit
+## 4. De interactieve grammatica voor de hele site
 
-### Kleur
+Eén regel: **iets vaags krijgt steeds meer vorm, gemaakt van jouw lijn.**
 
-Afgeleid van het bestaande logo (gemeten: achtergrond `#FAF8F3`, tekst `#363434`, punt `#C8A477`).
+| Moment | Grammatica |
+|---|---|
+| **Overgangen** | Jouw lijn, uitgerold tot een horizontale lijn met hetzelfde ritme, tekent zich tussen secties. Klein label: "jouw lijn". |
+| **Van idee naar vorm.** | De letters liggen los en vinden hun plek terwijl je scrolt. Van losse tekens naar een woord. |
+| **Projecten** | Geen kaartjes. Elk project wordt opgebouwd uit jouw lijn: via tussenvormen naar het project zelf. Scroll bepaalt hoe ver het is, de pagina scrolt normaal. |
+| **Wat kan eruit komen?** | Hetzelfde materiaal (jouw lijn) neemt steeds een andere vorm aan: website, prototype, tool, presentatie, demo, spel, visualisatie, webshop, uitleg. De laatste, "iets waar nog geen naam voor is", blijft bewust een krabbel. |
+| **Zo werkt het** | Vertel → Denckh → Vorm, getekend met jouw eigen lijn: de ruwe lijn, dezelfde lijn met rode aantekeningen, de vorm die jij bovenaan kreeg. "Wat er bovenaan met je lijn gebeurde, is precies hoe het werkt." |
+| **Contact** | De punt komt terug: "En wat zit er bij jou in je hoofd?" Je schets en je zin staan klaar om mee te nemen. |
+| **Woordmerk** | De punt in het logo neemt de vorm aan die jouw idee kreeg. |
+| **Micro-interacties** | Links: een met de hand getekende onderstreping tekent zich. Knoppen: vullen zich met inkt van links naar rechts. Focus: inktlijn. Selectie: oker. Geen `translateY(-2px)` met schaduw. |
 
-| Token | Hex | Gebruik | Contrast |
-|---|---|---|---|
-| `papier` | `#FAF8F3` | Paginagrond | – |
-| `papier-2` | `#F1ECE2` | Rustige banden en vlakken | – |
-| `inkt` | `#363434` | Tekst, lijnen UI | 11,7 : 1 op papier |
-| `grafiet` | `#6E6862` | Secundaire tekst, labels | 5,2 : 1 op papier (AA) |
-| `potlood` | `#A8A29A` | Schetslijnen (decoratief, geen tekst) | – |
-| `oker` | `#C8A477` | De punt, de lijn, vlakken. **Nooit als kleine tekst op licht** (2,2 : 1) | 5,3 : 1 op inkt |
-| `oker-diep` | `#7A5C33` | Tekstaccent als oker leesbaar moet zijn | 5,8 : 1 op papier |
-| `nacht` | `#1F1E1D` | Donkere secties (bijv. een case) | 15,7 : 1 met papier |
+**Twee "hoe hebben ze dát gedaan"-momenten:**
 
-**Geen extra frisse accentkleur.** De punt moet het enige zijn dat "leeft". Een tweede accent verdunt dat. Als het
-ontwerp in fase 4 te braaf blijkt, is een koel *blauwdrukblauw* voor alleen de schetsfase het eerste alternatief om te
-testen.
+1. **De punt is een leesteken.** Het interactieve element is de punt achter "Mooi." en laat een lege plek in de zin achter.
+2. **Je lijn wordt de site.** Dezelfde krabbel wordt scheidslijn, projectconstructie, uitkomstmateriaal, werkwijze en
+   logo. Wie opnieuw tekent, ziet de hele site meeveranderen.
 
-### Case-werelden
+## 5. Visuele wereld
 
-Het Denckh-kader (typografie, punt, lijn) blijft constant. Binnen elke case domineert de **eigen identiteit van het
-project**, zodat bezoekers de reikwijdte zien:
+**Kleur heeft een rol, geen decoratie:**
 
-- **Deegh:** licht, crème en warm grijs, beeldgedreven.
-- **IntuSens-demokoffer:** zwart en wit, technisch, strak (zoals de site zelf).
-- **Loflijn:** volgt uit het bekijken van de site.
+| Rol | Kleur | Token |
+|---|---|---|
+| jouw idee | oker `#C29258` (lijn `#B07F45`) | `--ochre`, `--idea` |
+| Denckh kijkt | menie `#B63F26`, de kleur van rood potlood | `--menie` |
+| de vorm | inkt `#211F1D` | `--ink` |
+| drager | papier `#F7F4EE`, met een heel lichte vezel | `--paper` |
 
-### Typografie *(proef)*
+Menie is het beperkte tweede accent. Het doet één ding: laten zien dat Denckh kijkt. Contrast op papier: inkt 15,5 : 1,
+grafiet 5,2 : 1, menie 5,1 : 1, oker alleen voor lijnen en vlakken.
 
-| Rol | Voorstel | Waarom | Alternatief voor de proef |
-|---|---|---|---|
-| Logo en grote statements | **Young Serif** (OFL) | Zwaar, zacht, iets eigenwijs, oude-letter-gevoel zonder historisch te worden. Sluit aan bij het bestaande logo. | Fraunces (variabel, "soft"-as) |
-| Tekst en interface | **Manrope** (OFL) | Helder en modern. Deegh gebruikt hem ook: dezelfde stem, ander karakter. Familie zonder kopie. | Hanken Grotesk |
+**Materiaal:** papier, potlood, inkt, maatlijnen. Geen gradients, geen glas, geen schaduwen, geen rounded cards.
 
-- Displayletter **alleen** voor het logo, de hero en een handvol zinnen. Nooit voor lopende tekst of UI.
-- Maatvoering ingetogen: hero ≈ `clamp(2.5rem, 7vw, 5rem)`, sectiekoppen ≈ 2–2,5rem, body 18px, regelafstand 1,6,
-  regelbreedte ≤ 66 tekens.
-- Fonts zelf hosten (geen Google Fonts-verzoeken: sneller en privacyvriendelijk).
+**Typografie:** zie `docs/typografie-proef.md`. Gekozen (B-028): `denckh.` in kleine letters, Fraunces (soft) met
+ck-ligatuur, levend woordmerk; Manrope voor tekst.
 
-### Logo
+**Beeld:** alleen echte beelden. Waar rechten ontbreken, zijn projecten schematisch opgebouwd uit lijnen en als
+"schematisch" gemarkeerd. Portretplek staat klaar: "hier komt een echte foto. geen gegenereerde."
 
-- Werkvoorstel: **denckh.** in kleine letters (zoals de briefing en als zusje van "deegh"), gezet in de displayletter,
-  met de punt als los SVG-element in oker. Zo kan dezelfde punt in logo, hero en contact terugkomen.
-- Het bestaande PNG-logo heeft een hoofdletter D ("Denckh.") en de tagline eronder. Keuze hoofdletter of kleine
-  letter: **open punt**.
-- Nodig: definitieve logovorm als SVG.
+## 6. Toon
 
-### Beeld
+Ik-vorm waar het persoonlijk is, Denckh als naam, nooit "wij". Kort, direct, met een droge knipoog. De verboden lijst uit
+de briefing geldt onverkort.
 
-- Alleen echte screenshots en echte foto's. Geen stockbeelden, geen gegenereerde mensen.
-- Screenshots in een rustig, consistent kader: geen schuine 3D-mockups, geen apparaatfoto's met glans.
-- Portret van de maker: plek gereserveerd, pas vullen met een echte foto.
+## 7. Wat bewust níet
 
-### Vorm en details
-
-- Hoeken: recht of licht afgerond (≤ 4px). Geen "rounded cards" overal.
-- Scheiding door witruimte en dunne lijnen, niet door kaarten met schaduw.
-- Iconen: geen iconensets. Waar nodig een kleine, met de hand getekende lijn in de stijl van de schetsen.
-
-## 5. Toon
-
-- **Ik** waar het persoonlijk is, **Denckh** als naam. Nooit "wij".
-- Kort, direct, concreet, met een droge knipoog. Aanspreken met *je*.
-- Eerst het beeld of voorbeeld, dan de uitleg.
-
-**Verboden woorden en frasen** (briefing, aangevuld): *impact creëren, innovatieve digitale oplossingen, jouw digitale
-partner, oplossingen op maat, grenzen verleggen, ideeën tot leven brengen, passie, full service, next level,
-cutting-edge, ontzorgen, naadloos, state of the art, gamechanger, boost, one-stop-shop, vrijblijvende offerte.*
-
-**Voorbeeld van de toon:**
-
-> Soms weet je precies wat je wilt. Soms heb je alleen een gedachte waarvan je denkt: hier zit iets in.
-> Denckh denkt mee, maakt het zichtbaar en bouwt een eerste vorm.
-
-## 6. Wat de site bewust níet is
-
-Geen hero → diensten → drie kaarten → over mij → formulier. Geen gradients, blobs, glassmorphism, badges,
-nep-statistieken, logo-muren of testimonials. Geen eindeloze secties: de homepage heeft **zeven** blokken en is binnen
-ongeveer acht schermhoogtes op mobiel klaar.
+Geen scrolljacking, geen WebGL, geen animatiebibliotheek, geen AI-imitatie die doet alsof ze echt is (de site zegt
+eerlijk: "reageert met vaste regels in je browser").

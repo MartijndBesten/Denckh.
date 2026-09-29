@@ -3,7 +3,7 @@
 - **Bron(nen):** https://loflijn.nl
 - **Live site zelf:** bekeken via een geautoriseerde browsersessie op 2026-09-29.
 - **Gecontroleerd op / door:** 2026-09-29 · Codex
-- **Status:** *In onderzoek*. Inhoud gecontroleerd; rol, beeldrechten en publicatietoestemming ontbreken.
+- **Status:** *Goedgekeurd voor publicatie (naam en link)*, 2026-09-29, akkoord eigenaar. Beelden nog niet aangeleverd.
 
 ## Wat wel is vastgesteld
 
@@ -19,7 +19,12 @@
 
 Loflijn is een fysiek christelijk muziekspel met een eigen online productpresentatie, speluitleg en kooproute.
 
-## Te bevestigen (alles)
+## Publicatie (2026-09-29)
+
+- Eigenaar: Loflijn mag als case met naam en link. De site toont een schematische constructie, geen kaartontwerpen of productfoto's.
+- Rol op de site: "de website en webshop", onderbouwd door de vermelding "Website gemaakt door Denckh." in de footer van loflijn.nl.
+
+## Nog te bevestigen
 
 - [TE BEVESTIGEN] Van wie is het spel? Is het spel ook door Martijn/Denckh bedacht of ontworpen, of alleen de webshop?
 - [TE BEVESTIGEN] Wat is er concreet gemaakt: Shopify-inrichting, thema/maatwerk, teksten, spelregeluitleg, fotografie,

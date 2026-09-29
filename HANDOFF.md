@@ -4,40 +4,40 @@ Overdrachtsdocument voor de Denckh-website. Hier staan de actuele stand, alle be
 beslissingen, open punten en de volgende stappen. **Bijwerken aan het eind van elke werksessie.**
 
 - Laatst bijgewerkt: 2026-09-29
-- Fase: **4–7 (eerste design system, homepage en eerste case): basis gebouwd, technische eindcontrole open**
-- Volgende fase: lokale preview en volledige QA, daarna de resterende case- en contactstappen
+- Live (`main`): de interactieve versie "begin met een punt" (gemerged uit `creatief/het-punt`, B-031)
 
 ---
 
 ## Huidige stand
 
-- Fase 0 (projectbasis) is gereed.
-- Fase 1 (onderzoek) is uitgevoerd, **met een belangrijke beperking:** de live sites (`deegh.nl`,
-  `intusens-demokoffer.nl`, `loflijn.nl`), `denckh.nl` en `cloud86.io` waren vanuit de werkomgeving **niet
-  bereikbaar** (netwerkbeleid). Het onderzoek steunt op de broncode-repositories, DNS en zoekresultaten. Zie
-  `docs/cases/`.
-- Fase 2 en 3 staan als voorstel in:
-  - [`docs/creative-direction.md`](docs/creative-direction.md): concept *Het punt*, bewegingstaal, kleur,
-    typografie, toon;
-  - [`docs/structuur-en-content.md`](docs/structuur-en-content.md): sitemap, homepage-opbouw met concepttekst,
-    case-template, formulier;
-  - [`docs/architectuur.md`](docs/architectuur.md): stack, hosting- en deployanalyse, formulier, privacy, SEO,
-    performance, toegankelijkheid, tests.
-- De eerste websitecode staat in `src/`: homepage, Deegh-case, privacy- en 404-pagina, semantische navigatie,
-  interactieve punt, reduced-motion-weergave, metadata, sitemap, robots en favicon. Er is bewust geen productie-deploy
-  en niets aan hosting of DNS gewijzigd.
-- De contact-UI valideert lokaal, maar verstuurt nog niets. Dit is expliciet zichtbaar voor de bezoeker; een PHP/mailroute
-  wordt pas toegevoegd als mailbox, privacygegevens en spammaatregelen zijn bevestigd.
-- De projectschetsen zijn eigen, abstracte diagrammen. Er zijn geen Deegh-, Loflijn-, TRILUX- of LiveLink-beelden of
-  logo's gekopieerd.
+**Productie.** `denckh.nl` draait op GitHub Pages vanaf `main` (laatste commit `2f9a7a2`). Mail via Cloud86/Plesk
+(`info@denckh.nl`). Deze ronde is niets aan productie, DNS, Plesk of mail gewijzigd.
+
+**Branch `creatief/het-punt`** (samengevoegd uit `main` en `codex/interactieve-kern`):
+
+- **Fase A · typografie:** echte proef met 13 letters en 5 uitgewerkte richtingen, als contouren gezet.
+  Werkhypothese: Fraunces met eigen ck-ligatuur. `docs/typografie-proef.md`, `docs/typografie/`.
+- **Fase B · interactieve kern "begin met een punt":** punt uit "Mooi." trekken, tekenen met inkt die op snelheid
+  reageert, Denckh kijkt (rode meetlijnen), lezing, eerste vorm uit de eigen lijn, zes bruikbare mini-vormen, één
+  vraag, voorbeeldreactie. Muis, touch, toetsenbord, voorbeeld, reduced motion.
+- **Fase C · grammatica:** jouw lijn als overgang, letters die hun plek vinden, projecten opgebouwd uit jouw lijn,
+  "wat kan eruit komen" als één morphende lijn, werkwijze met jouw lijn, contact als nieuw begin, levend woordmerk,
+  micro-interacties (getekende onderstreping, inktknoppen).
+- **Fase D · homepage:** volledig omgezet. Deegh-casepagina en privacyverklaring bijgewerkt.
+- **Kwaliteit:** 23/23 e2e-controles, axe 0 overtredingen, Lighthouse mobiel 93/100/100/100 (met gzip). Zie
+  `docs/architectuur.md` §6.
+- **AI:** alleen onderzoek, niets gebouwd: `docs/ai-onderzoek.md`.
+
+Bekijken zonder live te zetten: `git checkout creatief/het-punt && npm ci && npm run build && npx serve out`.
 
 ## Repositorygegevens
 
 | Onderwerp | Waarde |
 |---|---|
-| Remote | `https://github.com/MartijndBesten/Denckh.` |
-| Zichtbaarheid | Publiek (stand 2026-09-29) |
-| Hoofdbranch | `main` |
+| Remote | `https://github.com/MartijndBesten/denckh` |
+| Zichtbaarheid | Publiek |
+| Hoofdbranch | `main` (live) |
+| Werkbranch | `creatief/het-punt` |
 
 ---
 
@@ -64,73 +64,72 @@ Pas de oude regel niet aan. *Voorstel* = wacht op akkoord van de eigenaar.
 | B-014 | 2026-09-29 | Een case gaat pas online na verificatie **én** toestemming. Liever twee echte cases dan drie halve. Voorgestelde volgorde: IntuSens-demokoffer → Deegh → Loflijn. Zonder toestemming van TRILUX komt Deegh eerst. | Volgt uit B-004/B-005. De demokoffer doorbreekt het beeld "webdesigner" het sterkst. | Voorstel |
 | B-015 | 2026-09-29 | De eerste bouwstap gebruikt Next.js 16 met TypeScript, Tailwind CSS 4 en statische export. De interactie is bewust met native browser-API's gebouwd; Motion is niet nodig voor deze eerste, lichte versie. | Voldoet aan B-010/B-011 zonder extra runtimegewicht. | Vast op basis van de opdracht van de eigenaar |
 | B-016 | 2026-09-29 | Zolang portfolio-rechten per merk/beeld niet zijn bevestigd, gebruikt de site alleen eigen abstracte diagrams en gecontroleerde tekst. | Een publieke GitHub-repo en later publieke site mogen geen herpublicatierecht suggereren. | Vast |
+| B-017 | 2026-09-29 | Metadata-routes `robots.txt` en `sitemap.xml` worden expliciet statisch gegenereerd. | Vereist voor een betrouwbare Next.js static export. | Vast |
+| B-018 | 2026-09-29 | De nieuwe hero is een lokaal UX-prototype voor `punt → krabbel → interpretatie → eerste vorm`; de reacties zijn deterministisch en geen AI. | De propositie is ervaarbaar zonder privacy-, kosten- of backendaanname. | Vast |
+| B-019 | 2026-09-29 | Ontwerp- en bouwwerk gebeurt op een aparte branch; `main` alleen na akkoord eigenaar. | Elke push naar `main` gaat direct live via GitHub Pages. | Vast |
+| B-020 | 2026-09-29 | Creatief concept verdiept tot **één interactieve grammatica**: de lijn van de bezoeker reist door de hele site (overgangen, projecten, uitkomsten, werkwijze, contact, woordmerk). De punt is het leesteken achter "Mooi.". Vervangt B-008/B-009. | De site moet zelf laten zien wat Denckh kan; geen losse trucjes. Zie `docs/creative-direction.md`. | Voorstel (gebouwd op branch) |
+| B-021 | 2026-09-29 | Interpretatie met **vaste regels in de browser** (meetbare lijneigenschappen → zes vormen). Echte AI pas na onderzoek en besluit eigenaar (`docs/ai-onderzoek.md`). De site zegt eerlijk dat er geen AI is. | Geen sleutel client-side, geen kosten, geen privacyrisico; interface blijft gelijk voor een latere AI-laag. | Vast tot besluit |
+| B-022 | 2026-09-29 | Kleur met rollen: oker = jouw idee, **menie `#B63F26`** = Denckh kijkt (beperkt tweede accent), inkt `#211F1D` = vorm, papier `#F7F4EE`. Vervangt B-012. | Tweede accent met een functie; meer contrast en drukwerkgevoel. | Voorstel |
+| B-023 | 2026-09-29 | Typografie-werkhypothese: Fraunces (soft) met eigen **ck-ligatuur** voor woordmerk en grote zinnen, Manrope voor tekst; beide zelf gehost en gesubset. Levend woordmerk: de punt neemt de vorm van de schets aan. | Uit de proef met 13 letters en 5 uitgewerkte richtingen (`docs/typografie-proef.md`). | Voorstel |
+| B-024 | 2026-09-29 | Geen animatiebibliotheek: canvas + SVG + CSS. Motion (B-010) vervalt. | Klein, beheersbaar; alles wat nodig is kan met native API's. | Vast |
+| B-025 | 2026-09-29 | Contact via `mailto:info@denckh.nl` met ingevulde tekst en schets-samenvatting. | GitHub Pages kan niets verzenden; eerlijk en werkend zonder backend. | Voorstel |
+| B-026 | 2026-09-29 | Projecten zonder toestemming: geen namen, logo's of beelden van derden; schematisch opgebouwd uit lijnen, als zodanig gemarkeerd. TRILUX 3D-demo niet getoond. | Volgt B-014/B-016. | Vast |
+| B-027 | 2026-09-29 | Akkoord eigenaar: menie als tweede accent (B-022 wordt Vast). | Antwoord eigenaar. | Vast |
+| B-028 | 2026-09-29 | Woordmerk: richting D (Fraunces + ck-ligatuur), **kleine letters `denckh.`**, **levend woordmerk** (punt neemt de vorm van de schets aan). B-023 wordt Vast; definitieve vectortekening volgt. | Eigenaar vroeg "wat is het beste?"; advies: kleine letters sluiten aan op `deegh` en de briefing, de ligatuur maakt het woordbeeld eigen, de levende punt vertelt het concept zonder uitleg. | Vast (op advies) |
+| B-029 | 2026-09-29 | Rechten: **TRILUX niet** (IntuSens en 3D-demo zonder naam, beelden of link; demokoffer blijft alleen als anonieme, schematische case). **Loflijn wel** en **Deegh wel** (naam en link). | Antwoord eigenaar. Loflijn- en Deegh-beelden alleen na aanlevering; de live sites zijn vanuit de werkomgeving niet te screenshotten. | Vast |
+| B-030 | 2026-09-29 | Bedrijfsgegevens gelijk aan deegh.nl, naam Denckh: Vlierweg 54, Houten · KvK 83176896 · btw NL003791952B15. In footer, privacy en structured data. | Antwoord eigenaar; gegevens staan ook publiek op deegh.nl. | Vast |
+| B-031 | 2026-09-29 | Branch `creatief/het-punt` naar `main` gemerged: livegang. | Akkoord eigenaar ("ja zet live"). | Vast |
 
 ---
 
 ## Geverifieerde feiten
 
-Alleen wat daadwerkelijk is gecontroleerd, met datum.
-
 | Feit | Bron | Gecontroleerd |
 |---|---|---|
-| Repo `MartijndBesten/Denckh.` bestaat en is publiek. | GitHub | 2026-09-28 |
 | Er bestaat een Denckh-logo (PNG 270×117): donker woordmerk "Denckh" met een okerpunt en de tagline eronder. Gemeten kleuren: achtergrond `#FAF8F3`, tekst `#363434`, punt `#C8A477`. | Ander project van de eigenaar | 2026-09-29 |
 | `intusens-demokoffer.nl` wijst naar GitHub Pages. De site is de publieke repo `MartijndBesten/intusens-demokoffer` (commit `d8817c7`): statische site, NL/EN/FR, offline-geschikt, `noindex`. | DNS + repo | 2026-09-29 |
 | `deegh.nl` wijst naar een Cloud86-server. De broncode van de nieuwe Deegh-webshop (WordPress/WooCommerce, eigen thema en plugin) staat in een privé-repo. | DNS + repo | 2026-09-29 |
 | `loflijn.nl` wijst naar een Shopify-IP. Er is geen repo voor. | DNS | 2026-09-29 |
-| `denckh.nl` heeft geen A-record (geen website actief). Of het domein geregistreerd is, kon niet worden vastgesteld. | DNS | 2026-09-29 |
 | De werkomgeving blokkeert `deegh.nl`, `intusens-demokoffer.nl`, `loflijn.nl`, `denckh.nl`, `cloud86.io` en `support.cloud86.io`. | curl/WebFetch | 2026-09-29 |
 | `deegh.nl`, `intusens-demokoffer.nl` en `loflijn.nl` zijn daarna live bekeken via een geautoriseerde browsersessie. De inhoudelijke bevindingen zijn verwerkt in de drie casedossiers; geen externe beelden zijn gekopieerd. | Live sites + publieke bron waar beschikbaar | 2026-09-29 |
+| Repo hernoemd naar `MartijndBesten/denckh`; oude naam stuurt door. | GitHub | 2026-09-29 |
+| `denckh.nl` wijst naar GitHub Pages (185.199.108–111.153). Live inhoud niet bekeken: domein geblokkeerd in de werkomgeving. | DNS | 2026-09-29 |
+| Workflow `deploy-pages.yml` deployt elke push naar `main`; laatste run (2f9a7a2) geslaagd. | GitHub Actions | 2026-09-29 |
+| Mail via Cloud86/Plesk, mailbox `info@denckh.nl`. | Eigenaar | 2026-09-29 |
+| Op live `main` staat letterlijk `\n` linksboven op de homepage (typefout in `src/app/page.tsx`); op de branch opgelost. | Code | 2026-09-29 |
 
 ---
 
-## Open punten
+## Open beslissingen (eigenaar)
 
-| # | Onderwerp | Toelichting | Voorstel | Wie |
-|---|---|---|---|---|
-| O-01 | **Reponaam eindigt op een punt** (`Denckh.`) | Geeft technisch gedoe: URL's, `Denckh..git`, Windows verwijdert een punt aan het eind van mapnamen, CI/hosting. | Hernoemen naar `denckh`. GitHub stuurt de oude URL door. | Eigenaar |
-| O-02 | **Repo is publiek** | Onderzoeksdossiers en concepten zijn openbaar. Vertrouwelijke details zijn daarom bewust weggelaten. | Op privé zetten tot de livegang. | Eigenaar |
-| O-03 | **Akkoord op het voorstel** | B-008 t/m B-014. | Akkoord geven of bijsturen, dan start fase 4. | Eigenaar |
-| O-04 | **Logo** | Hoofdletter "Denckh." (bestaand PNG) of kleine letters "denckh." (briefing)? Een vectorbestand ontbreekt. | Kleine letters, opnieuw gezet in de displayletter met een losse SVG-punt. Bevestigen in de typografieproef (fase 4). | Eigenaar |
-| O-05 | **Schrijfwijze in lopende tekst** | "Denckh" of "Denckh."? | In lopende tekst zonder punt: "Denckh". De punt alleen in het logo. | Eigenaar |
-| O-06 | **TRILUX 3D-demo** | Staat niet in de eerste portfolio. | Niet tonen. Later heroverwegen, met dezelfde rechtenvraag als bij O-09. | – |
-| O-07 | **Lokale werkmap** | Zie hieronder. | `C:\Denckh` | Eigenaar |
-| O-08 | **Netwerktoegang werkomgeving** | Live sites konden niet worden bekeken of gescreenshot. | Voeg de domeinen toe aan de toegestane domeinen van de omgeving (of kies een ruimer toegangsniveau), of lever screenshots aan. | Eigenaar |
-| O-09 | **IntuSens: rol en toestemming** | Merk en product van TRILUX; de site staat bewust op `noindex`. | Schriftelijke toestemming voor case, beelden, naam en link. Rol en opdrachtgever bevestigen. Zie `docs/cases/intusens-demokoffer.md`. | Eigenaar |
-| O-10 | **Deegh: live stand, merkrol, beelden** | Is 2.0 live? Wie ontwierp logo en verpakking? Enkele beelden lijken gegenereerd of een mockup. | Bevestigen per punt. Alleen echte beelden gebruiken. Zie `docs/cases/deegh.md`. | Eigenaar |
-| O-11 | **Loflijn: alles** | Nog niets geverifieerd. | Toegang tot de site of screenshots plus toelichting. Zie `docs/cases/loflijn.md`. | Eigenaar |
-| O-12 | **De maker op de site** | Naam tonen? Echte foto beschikbaar? Deegh noemen in "klein, bewust"? | Naam: ja. Foto: pas als er een echte is. Deegh: ja, één zin. | Eigenaar |
-| O-13 | **Bedrijfsgegevens** | KvK-nummer, adres, btw-id, e-mailadres en reactietermijn zijn nodig voor footer, privacy en formulier. | Aanleveren vóór fase 9. | Eigenaar |
-| O-14 | **Domein en hosting** | Is `denckh.nl` geregistreerd en waar? Past een extra website in het huidige Cloud86-pakket? | Controleren in de registrar en in Plesk. Niets wijzigen (B-003). | Eigenaar |
+| # | Onderwerp | Voorstel |
+|---|---|---|
+| O-21 | **Definitieve woordmerktekening** (B-028): de ligatuur is nu opgebouwd uit fontcontouren plus een balk. | Laten tekenen/verfijnen voor print en groot formaat. |
+| O-23 | **Echte AI:** publiek, alleen demo, of niet? Model, endpoint, budget. | Eerst niet publiek; besluit na `docs/ai-onderzoek.md`. |
+| O-24 | **Contact:** mailto volstaat, of een echte verzendroute (serverless)? | Mailto voor nu. |
+| O-25 | **Beelden Loflijn en Deegh** (naam en link mogen, B-029). | Screenshots of foto's aanleveren; de schematische constructie eindigt dan in het echte beeld. |
+| O-30 | **Handelsnaam Denckh bij KvK.** De site noemt KvK 83176896 (de inschrijving van Deegh). | Controleren dat Denckh als handelsnaam bij deze inschrijving staat; zo niet, laten toevoegen bij KvK. |
+| O-26 | **Deegh-beelden:** welke foto's zijn echt en van jou? | Pas daarna echte beelden in de Deegh-case. |
+| O-27 | **Portret en naam** in "klein, bewust". | Echte foto aanleveren; naam tonen. |
+| O-28 | **JS-gewicht:** 192 KB gzip, waarvan ca. 150 KB Next.js-runtime. Accepteren, of later naar Astro? | Accepteren; herzien als de site groeit. |
+| O-02 | Repo is publiek. | Op privé zetten kan alleen met betaald GitHub-plan voor Pages; anders bewust publiek laten en niets vertrouwelijks opnemen. |
 
-### Lokaal clonen (O-07)
-
-In PowerShell of de opdrachtprompt:
-
-```powershell
-git clone https://github.com/MartijndBesten/Denckh. C:\Denckh
-cd C:\Denckh
-git status          # verwacht: On branch main, up to date with 'origin/main'
-```
-
-Wordt de repo hernoemd (O-01)? Pas dan de remote aan:
-
-```powershell
-git remote set-url origin https://github.com/MartijndBesten/denckh.git
-```
+Afgehandeld: O-01 (repo hernoemd naar `denckh`), O-08 (live sites via geautoriseerde browsersessie bekeken, zie
+cases), O-14 (domein actief op GitHub Pages).
 
 ---
 
 ## Volgende stappen
 
-1. **Eigenaar:** akkoord of bijsturing op B-008 t/m B-014 (O-03), plus O-01 en O-02.
-2. **Eigenaar:** netwerktoegang of screenshots (O-08), zodat de live sites alsnog bekeken kunnen worden.
-3. **Lokale technische controle:** afgeronde production build, visuele controles op 390 px, tablet en desktop,
-   toetsenbord, reduced motion en console.
-4. **Fase 8–10:** casepagina's pas uitbreiden met goedgekeurde beelden en namen; werkende contactroute, juridische
-   gegevens en privacytekst alleen na bevestiging.
-5. Hosting, DNS en livegang blijven buiten scope tot expliciet akkoord (B-003).
+1. Live controle op `denckh.nl` en op een echte iPhone (vanuit de werkomgeving niet bereikbaar).
+2. Beslissen over O-23 (AI) en O-24 (contact).
+3. Definitieve woordmerktekening en favicon/OG-beelden in de nieuwe stijl.
+4. Echte beelden per project zodra rechten er zijn; de schematische constructie eindigt dan in het echte beeld.
+5. AI-laag alleen na besluit O-23.
 
+---
+
+## Geschiedenis
 
 ## Tijdelijke publieke landingpage — 29 september 2026
 

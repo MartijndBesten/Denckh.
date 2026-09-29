@@ -29,7 +29,7 @@ voordat je iets wijzigt: daar staat de actuele stand.
    - hosting inrichten of wijzigen (waaronder Cloud86);
    - DNS aanpassen;
    - `denckh.nl` live zetten of een productie-deploy doen;
-   - GitHub Pages of een andere publieke publicatie activeren;
+   - GitHub Pages-instellingen of een andere publieke publicatie wijzigen;
    - secrets, API-keys of betaalde diensten toevoegen.
 6. **Publieke repo.** Zolang deze repository publiek is, komt er geen vertrouwelijke informatie in (interne
    werkgeversinformatie, details uit privé-repositories, klantgegevens, contactgegevens van derden).
@@ -41,14 +41,20 @@ voordat je iets wijzigt: daar staat de actuele stand.
   marketingtaal.
 - **Git:** `main` is de hoofdbranch. Kleine, beschrijvende commits. Grotere wijzigingen via een aparte branch en
   een pull request. Nooit force-pushen naar `main`.
-- **Techniek:** het stackvoorstel staat in `HANDOFF.md` (B-010, B-011) en `docs/architectuur.md`. Voeg geen
-  framework, dependencies of buildtooling toe zolang die besluiten de status *Voorstel* hebben.
-- **Ontwerp:** volg `docs/creative-direction.md`. Er is één bewegingstaal (tekenen → invullen). Voeg geen losse
-  effecten toe die daarbuiten vallen.
+- **Productie:** elke push naar `main` gaat live via GitHub Pages. Werk op een branch; merge naar `main` alleen na
+  akkoord van de eigenaar.
+- **Techniek:** Next.js 16 + TypeScript, statische export, geen animatiebibliotheek (canvas/SVG/CSS). Zie
+  `docs/architectuur.md`. Voeg geen dependencies toe zonder reden in `HANDOFF.md`.
+- **Ontwerp:** volg `docs/creative-direction.md`. Eén grammatica: iets vaags krijgt steeds meer vorm, gemaakt van de
+  lijn van de bezoeker. Geen losse effecten daarbuiten. Kleuren hebben een rol (oker = idee, menie = Denckh kijkt,
+  inkt = vorm).
+- **AI:** geen echte AI, API-sleutels of betaalde diensten zonder besluit van de eigenaar (`docs/ai-onderzoek.md`).
+  Nooit een sleutel client-side.
+- **Testen:** `npm run lint`, `npm run typecheck`, `npm run build`, `npm run test:e2e`.
 - **Twijfel:** stel een korte, gerichte vraag aan de eigenaar in plaats van een harde aanname te maken.
 
 ## Naam en schrijfwijze
 
 - De naam is **Denckh**. In het bestaande beeldmerk staat een punt achter de naam ("Denckh.") in een accentkleur.
-- De GitHub-repository heet `Denckh.` (met punt). Zie open punt over de reponaam in `HANDOFF.md`.
-- Of de punt ook in lopende tekst wordt geschreven, is nog niet besloten (open punt).
+- De GitHub-repository heet `MartijndBesten/denckh`.
+- In lopende tekst: Denckh (zonder punt). Woordmerk: zie `docs/typografie-proef.md` (werkhypothese `denckh.` met ck-ligatuur).
