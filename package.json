@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test:e2e": "node tests/interaction.mjs"
+    "test:e2e": "node tests/interaction.mjs",
+    "brand": "node --experimental-strip-types --no-warnings scripts/build-brand.mjs"
   },
   "dependencies": {
     "next": "^16.0.0",
