@@ -2,6 +2,7 @@
 // Gebruik: npm run build && npx http-server out -p 8711 -s  (tweede terminal)  →  node tests/interaction.mjs
 // Vereist Playwright (globaal of via npx). Geen testdata verlaat de browser.
 import { chromium } from "playwright";
+import crypto from "node:crypto";
 import fs from "node:fs";
 
 const BASE = process.env.BASE_URL ?? "http://localhost:8711/";
@@ -376,6 +377,13 @@ const dotOffset = (p) => p.evaluate(() => { const n = document.querySelector(".f
   check("prijzen: standaard en niet standaard", (await p.locator(".scope-list--in li").count()) === 6 && (await p.locator("#niet-titel + ul li").count()) === 12);
   const pdf = fs.existsSync(new URL("../public/downloads/denckh-prijslijst.pdf", import.meta.url));
   check("prijzen: pdf-link alleen als het bestand er is", (await p.getByRole("link", { name: "Download de prijslijst" }).count()) === (pdf ? 1 : 0), pdf ? "pdf aanwezig" : "nog geen pdf");
+  if (pdf) {
+    const res = await p.request.get(new URL("downloads/denckh-prijslijst.pdf", BASE).href);
+    const body = await res.body();
+    check("prijslijst: pdf wordt echt geleverd", res.ok() && body.subarray(0, 5).toString() === "%PDF-" && body.length < 1024 * 1024, `${res.status()} · ${Math.round(body.length / 1024)} KB`);
+    const hash = crypto.createHash("sha256").update(fs.readFileSync(new URL("../src/lib/prices.ts", import.meta.url))).digest("hex");
+    check("prijslijst: gemaakt uit de huidige prijzen (anders: npm run prijslijst)", fs.readFileSync(new URL("../scripts/prijslijst.bron.txt", import.meta.url), "utf8").startsWith(hash));
+  }
   check("prijzen: vertel je idee naar contact", (await p.getByRole("link", { name: "Vertel je idee" }).getAttribute("href")) === "/#contact");
   check("prijzen: geen gedachtestreepjes en geen 'wij'", !/[—–]/.test(body) && !/\b(wij|ons|onze)\b/i.test(body));
   await p.locator(".fp__row", { hasText: "Webshop" }).first().hover();
