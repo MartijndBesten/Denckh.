@@ -3,35 +3,43 @@
 Overdrachtsdocument voor de Denckh-website. Hier staan de actuele stand, alle belangrijke technische en creatieve
 beslissingen, open punten en de volgende stappen. **Bijwerken aan het eind van elke werksessie.**
 
-- Laatst bijgewerkt: 2026-09-28
-- Fase: **0 · Projectbasis: gereed**
+- Laatst bijgewerkt: 2026-09-29
+- Fase: **1–3 (onderzoek, creative direction, structuur/content): voorstel gereed, wacht op akkoord eigenaar**
+- Volgende fase: 4 · design system (pas na akkoord)
 
 ---
 
 ## Huidige stand
 
-- De bestaande GitHub-repository `MartijndBesten/Denckh.` was leeg (geen commits, geen branches). Er is **geen**
-  nieuwe repository aangemaakt.
-- De projectbasis staat erin: `README.md`, `CLAUDE.md`, `HANDOFF.md`, `docs/cases/README.md`, `.editorconfig`,
-  `.gitattributes` en `.gitignore`.
-- Hoofdbranch: `main`.
-- Er is nog geen websitecode, geen framework en geen hosting.
+- Fase 0 (projectbasis) is gereed.
+- Fase 1 (onderzoek) is uitgevoerd, **met een belangrijke beperking:** de live sites (`deegh.nl`,
+  `intusens-demokoffer.nl`, `loflijn.nl`), `denckh.nl` en `cloud86.io` waren vanuit de werkomgeving **niet
+  bereikbaar** (netwerkbeleid). Het onderzoek steunt op de broncode-repositories, DNS en zoekresultaten. Zie
+  `docs/cases/`.
+- Fase 2 en 3 staan als voorstel in:
+  - [`docs/creative-direction.md`](docs/creative-direction.md): concept *Het punt*, bewegingstaal, kleur,
+    typografie, toon;
+  - [`docs/structuur-en-content.md`](docs/structuur-en-content.md): sitemap, homepage-opbouw met concepttekst,
+    case-template, formulier;
+  - [`docs/architectuur.md`](docs/architectuur.md): stack, hosting- en deployanalyse, formulier, privacy, SEO,
+    performance, toegankelijkheid, tests.
+- Er is nog **geen websitecode**. Er zijn geen dependencies geïnstalleerd, er is niets gedeployed en er is niets aan
+  hosting of DNS gewijzigd.
 
 ## Repositorygegevens
 
 | Onderwerp | Waarde |
 |---|---|
 | Remote | `https://github.com/MartijndBesten/Denckh.` |
-| Zichtbaarheid | Publiek (stand 2026-09-28) |
+| Zichtbaarheid | Publiek (stand 2026-09-29) |
 | Hoofdbranch | `main` |
-| Eerste commit | Projectbasis; SHA via `git log --oneline` |
 
 ---
 
 ## Beslissingenlog
 
 Nieuwe beslissingen onderaan toevoegen. Een beslissing herzien? Voeg een nieuwe regel toe die naar de oude verwijst.
-Pas de oude regel niet aan.
+Pas de oude regel niet aan. *Voorstel* = wacht op akkoord van de eigenaar.
 
 | # | Datum | Besluit | Reden | Status |
 |---|---|---|---|---|
@@ -41,7 +49,14 @@ Pas de oude regel niet aan.
 | B-004 | 2026-09-28 | Geen verzonnen claims, cases, klanten, testimonials, cijfers of resultaten. Ontbrekende inhoud wordt een gemarkeerde `[TODO: …]`. | Geloofwaardigheid. Een kleine studio staat of valt met eerlijke cases. | Vast |
 | B-005 | 2026-09-28 | Een project wordt pas als case beschreven na verificatie van de werkelijke inhoud (live site en/of repo). Bron en datum worden vastgelegd in `docs/cases/`. | Voorkomt dat aannames als feit op de site komen. | Vast |
 | B-006 | 2026-09-28 | Belangrijke technische en creatieve beslissingen worden in dit bestand bijgehouden. | Continuïteit tussen sessies en assistenten. | Vast |
-| B-007 | 2026-09-28 | Nog geen techstack gekozen. Er worden geen framework of dependencies toegevoegd vóór een vastgelegde keuze. | De stack volgt uit de creative direction en de hostingrandvoorwaarden, niet andersom. | Open (zie O-03) |
+| B-007 | 2026-09-28 | Nog geen techstack gekozen. Er worden geen framework of dependencies toegevoegd vóór een vastgelegde keuze. | De stack volgt uit de creative direction en de hostingrandvoorwaarden, niet andersom. | Vervangen door B-010 |
+| B-008 | 2026-09-29 | Creatief concept **Het punt**: de punt uit "denckh." wordt het idee. Bovenaan de interactie *krabbel → vorm*; tijdens het scrollen de rode draad *punt → lijn → schets → vlak → vorm*, eindigend in het eerste echte project. De punt keert terug bij het contactformulier. | Maakt "van idee naar vorm" letterlijk ervaarbaar, binnen seconden en zonder de inhoud te blokkeren. Zie `docs/creative-direction.md`. | Voorstel |
+| B-009 | 2026-09-29 | Eén bewegingstaal: **tekenen → invullen** (okerlijn tekent zich, daarna verschijnt de vorm). Scroll-koppeling alleen in de intro op brede schermen; op mobiel in-view; reduced motion toont eindstanden. | Consequent, licht, en mobiel betrouwbaar. Voorkomt "alles tegelijk". | Voorstel |
+| B-010 | 2026-09-29 | Stack: **Next.js (App Router) + TypeScript + Tailwind CSS v4**, **Motion** (LazyMotion) alleen voor de intro en de hero-punt. Vervangt B-007. | Voorkeur eigenaar, onderhoudbaar, React herbruikbaar voor latere demo's. Afweging: Astro zou lichter zijn; het verschil is acceptabel. | Voorstel |
+| B-011 | 2026-09-29 | **Statische export** (`output: 'export'`) op het **bestaande Cloud86-webhostingpakket**; contactformulier via een **PHP-endpoint** op dezelfde hosting; geen externe formulierdienst. | Node.js op Cloud86-webhosting is niet bevestigd (openbare info noemt het alleen bij VPS); de site heeft geen server nodig; geen extra kosten; alles op één plek. Zie `docs/architectuur.md`. | Voorstel |
+| B-012 | 2026-09-29 | Kleuren afgeleid van het bestaande logo (papier `#FAF8F3`, inkt `#363434`, oker `#C8A477`), aangevuld met grafiet, potlood, oker-diep en nacht. **Geen extra frisse accentkleur.** | De punt moet het enige zijn dat "leeft". Contrastwaarden gecontroleerd. | Voorstel |
+| B-013 | 2026-09-29 | Geen analytics, cookies of externe verzoeken bij de start (fonts zelf gehost). | Privacy, snelheid, geen cookiebanner nodig. Later alleen cookieloze statistiek als het nodig blijkt. | Voorstel |
+| B-014 | 2026-09-29 | Een case gaat pas online na verificatie **én** toestemming. Liever twee echte cases dan drie halve. Voorgestelde volgorde: IntuSens-demokoffer → Deegh → Loflijn. Zonder toestemming van TRILUX komt Deegh eerst. | Volgt uit B-004/B-005. De demokoffer doorbreekt het beeld "webdesigner" het sterkst. | Voorstel |
 
 ---
 
@@ -51,9 +66,13 @@ Alleen wat daadwerkelijk is gecontroleerd, met datum.
 
 | Feit | Bron | Gecontroleerd |
 |---|---|---|
-| Repo `MartijndBesten/Denckh.` bestaat, is publiek en was leeg. | GitHub | 2026-09-28 |
-| Er bestaat al een Denckh-logo: donker woordmerk "Denckh" met een punt in een oker/zandkleurige accentkleur, met daaronder de tagline "van idee naar vorm", op een lichte crèmekleurige achtergrond. Het bestand is een PNG van 270×117 px, aangeleverd door de eigenaar. | Ander project van de eigenaar | 2026-09-28 |
-| De repository voor de TRILUX LiveLink 3D-demo is gevonden in het GitHub-account. De inhoud is globaal bekeken. | GitHub | 2026-09-28 |
+| Repo `MartijndBesten/Denckh.` bestaat en is publiek. | GitHub | 2026-09-28 |
+| Er bestaat een Denckh-logo (PNG 270×117): donker woordmerk "Denckh" met een okerpunt en de tagline eronder. Gemeten kleuren: achtergrond `#FAF8F3`, tekst `#363434`, punt `#C8A477`. | Ander project van de eigenaar | 2026-09-29 |
+| `intusens-demokoffer.nl` wijst naar GitHub Pages. De site is de publieke repo `MartijndBesten/intusens-demokoffer` (commit `d8817c7`): statische site, NL/EN/FR, offline-geschikt, `noindex`. | DNS + repo | 2026-09-29 |
+| `deegh.nl` wijst naar een Cloud86-server. De broncode van de nieuwe Deegh-webshop (WordPress/WooCommerce, eigen thema en plugin) staat in een privé-repo. | DNS + repo | 2026-09-29 |
+| `loflijn.nl` wijst naar een Shopify-IP. Er is geen repo voor. | DNS | 2026-09-29 |
+| `denckh.nl` heeft geen A-record (geen website actief). Of het domein geregistreerd is, kon niet worden vastgesteld. | DNS | 2026-09-29 |
+| De werkomgeving blokkeert `deegh.nl`, `intusens-demokoffer.nl`, `loflijn.nl`, `denckh.nl`, `cloud86.io` en `support.cloud86.io`. | curl/WebFetch | 2026-09-29 |
 
 ---
 
@@ -61,14 +80,20 @@ Alleen wat daadwerkelijk is gecontroleerd, met datum.
 
 | # | Onderwerp | Toelichting | Voorstel | Wie |
 |---|---|---|---|---|
-| O-01 | **Reponaam eindigt op een punt** (`Denckh.`) | Werkt op GitHub, maar geeft technisch gedoe. URL's worden `…/Denckh.`, clone-URL's `…/Denckh..git`, en Windows verwijdert een punt aan het eind van mapnamen. Ook bij hostingkoppelingen en CI kan dit onverwacht gedrag geven. | Hernoem de repo naar `denckh`. GitHub stuurt de oude URL automatisch door. De punt blijft deel van het beeldmerk, niet van technische namen. | Eigenaar |
-| O-02 | **Repo is publiek** | Alles in deze repo (ook `HANDOFF.md` en onderzoeksnotities) is openbaar. | Zet de repo op privé zolang er onderzoek en concepten in staan. Of hou vertrouwelijke notities bewust buiten de repo. | Eigenaar |
-| O-03 | **Techstack** | Nog niet gekozen (B-007). | Voorlopige richting: een statische site, bijvoorbeeld met Astro. Die draait op vrijwel elke hosting (ook shared hosting zoals Cloud86), laadt snel en maakt het mogelijk om interactieve demo's per pagina in te bedden. Pas besluiten na de creative direction. | Samen |
-| O-04 | **Logo als bronbestand** | Alleen een kleine PNG (270×117) gevonden. Kleuren en lettertype zijn niet vastgelegd. | Vectorbestand (SVG/AI/PDF) aanleveren. Kleurcodes en het lettertype vastleggen. | Eigenaar |
-| O-05 | **Schrijfwijze merknaam** | "Denckh" of "Denckh." in lopende tekst? | Beslissen in de creative direction. | Eigenaar |
-| O-06 | **TRILUX 3D-demo als case** | Bevat merkmateriaal van derden. Eigendom en toestemming voor publiek gebruik zijn niet vastgelegd. | Vóór publicatie als Denckh-case afstemmen wat mag: naam, logo's, beelden en rol. Tot die tijd niet publiek beschrijven. | Eigenaar |
-| O-07 | **Lokale werkmap op de eigen computer** | Deze basis is gemaakt in een cloudomgeving, niet op de eigen computer. | Clone naar een map zonder punt aan het eind, bijvoorbeeld `C:\Denckh`. Zie hieronder. | Eigenaar |
-| O-08 | **Bronnen voor Deegh, Intusens-demokoffer en Loflijn** | Nog niet onderzocht. Het is nog niet vastgesteld welke repo bij welke live site hoort. | Per case eerst de live site en eventuele repo controleren. | Onderzoeksfase |
+| O-01 | **Reponaam eindigt op een punt** (`Denckh.`) | Geeft technisch gedoe: URL's, `Denckh..git`, Windows verwijdert een punt aan het eind van mapnamen, CI/hosting. | Hernoemen naar `denckh`. GitHub stuurt de oude URL door. | Eigenaar |
+| O-02 | **Repo is publiek** | Onderzoeksdossiers en concepten zijn openbaar. Vertrouwelijke details zijn daarom bewust weggelaten. | Op privé zetten tot de livegang. | Eigenaar |
+| O-03 | **Akkoord op het voorstel** | B-008 t/m B-014. | Akkoord geven of bijsturen, dan start fase 4. | Eigenaar |
+| O-04 | **Logo** | Hoofdletter "Denckh." (bestaand PNG) of kleine letters "denckh." (briefing)? Een vectorbestand ontbreekt. | Kleine letters, opnieuw gezet in de displayletter met een losse SVG-punt. Bevestigen in de typografieproef (fase 4). | Eigenaar |
+| O-05 | **Schrijfwijze in lopende tekst** | "Denckh" of "Denckh."? | In lopende tekst zonder punt: "Denckh". De punt alleen in het logo. | Eigenaar |
+| O-06 | **TRILUX 3D-demo** | Staat niet in de eerste portfolio. | Niet tonen. Later heroverwegen, met dezelfde rechtenvraag als bij O-09. | – |
+| O-07 | **Lokale werkmap** | Zie hieronder. | `C:\Denckh` | Eigenaar |
+| O-08 | **Netwerktoegang werkomgeving** | Live sites konden niet worden bekeken of gescreenshot. | Voeg de domeinen toe aan de toegestane domeinen van de omgeving (of kies een ruimer toegangsniveau), of lever screenshots aan. | Eigenaar |
+| O-09 | **IntuSens: rol en toestemming** | Merk en product van TRILUX; de site staat bewust op `noindex`. | Schriftelijke toestemming voor case, beelden, naam en link. Rol en opdrachtgever bevestigen. Zie `docs/cases/intusens-demokoffer.md`. | Eigenaar |
+| O-10 | **Deegh: live stand, merkrol, beelden** | Is 2.0 live? Wie ontwierp logo en verpakking? Enkele beelden lijken gegenereerd of een mockup. | Bevestigen per punt. Alleen echte beelden gebruiken. Zie `docs/cases/deegh.md`. | Eigenaar |
+| O-11 | **Loflijn: alles** | Nog niets geverifieerd. | Toegang tot de site of screenshots plus toelichting. Zie `docs/cases/loflijn.md`. | Eigenaar |
+| O-12 | **De maker op de site** | Naam tonen? Echte foto beschikbaar? Deegh noemen in "klein, bewust"? | Naam: ja. Foto: pas als er een echte is. Deegh: ja, één zin. | Eigenaar |
+| O-13 | **Bedrijfsgegevens** | KvK-nummer, adres, btw-id, e-mailadres en reactietermijn zijn nodig voor footer, privacy en formulier. | Aanleveren vóór fase 9. | Eigenaar |
+| O-14 | **Domein en hosting** | Is `denckh.nl` geregistreerd en waar? Past een extra website in het huidige Cloud86-pakket? | Controleren in de registrar en in Plesk. Niets wijzigen (B-003). | Eigenaar |
 
 ### Lokaal clonen (O-07)
 
@@ -90,12 +115,9 @@ git remote set-url origin https://github.com/MartijndBesten/denckh.git
 
 ## Volgende stappen
 
-1. **Open punten O-01 en O-02 beslissen** (reponaam en zichtbaarheid). Dit gaat vóór alle inhoud.
-2. **Onderzoek cases** (fase 1), per case volgens het protocol in `docs/cases/README.md`:
-   - https://deegh.nl
-   - https://intusens-demokoffer.nl
-   - https://loflijn.nl
-   - TRILUX LiveLink 3D-demo (repository; eerst O-06)
-3. **Creative direction** (fase 2): positionering, toon, beeldtaal, kleur, typografie, sitestructuur.
-4. **Techniekkeuze** (O-03) vastleggen als beslissing. Daarna pas de bouw.
-5. Hosting, DNS en livegang pas na expliciet akkoord (B-003).
+1. **Eigenaar:** akkoord of bijsturing op B-008 t/m B-014 (O-03), plus O-01 en O-02.
+2. **Eigenaar:** netwerktoegang of screenshots (O-08), zodat de live sites alsnog bekeken kunnen worden.
+3. **Fase 4 · design system:** typografieproef (Young Serif/Manrope tegen de alternatieven), tokens, logo-opzet, een
+   prototype van de punt (krabbel → vorm).
+4. **Fase 5 · eerste werkende homepage** in Next.js (statische export), met tests.
+5. Fase 6 t/m 10 volgens de briefing. Hosting, DNS en livegang pas na expliciet akkoord (B-003).

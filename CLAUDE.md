@@ -41,8 +41,10 @@ voordat je iets wijzigt: daar staat de actuele stand.
   marketingtaal.
 - **Git:** `main` is de hoofdbranch. Kleine, beschrijvende commits. Grotere wijzigingen via een aparte branch en
   een pull request. Nooit force-pushen naar `main`.
-- **Techniek:** er is nog **geen stack gekozen**. Voeg geen framework, dependencies of buildtooling toe voordat
-  de keuze in `HANDOFF.md` is vastgelegd.
+- **Techniek:** het stackvoorstel staat in `HANDOFF.md` (B-010, B-011) en `docs/architectuur.md`. Voeg geen
+  framework, dependencies of buildtooling toe zolang die besluiten de status *Voorstel* hebben.
+- **Ontwerp:** volg `docs/creative-direction.md`. Er is één bewegingstaal (tekenen → invullen). Voeg geen losse
+  effecten toe die daarbuiten vallen.
 - **Twijfel:** stel een korte, gerichte vraag aan de eigenaar in plaats van een harde aanname te maken.
 
 ## Naam en schrijfwijze

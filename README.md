@@ -17,10 +17,12 @@ een prototype, een tool of een ander concept dat een idee concreet en toetsbaar 
 | Fase | Stand |
 |---|---|
 | 0 · Projectbasis (repo, documentatie, werkafspraken) | **Gereed** |
-| 1 · Onderzoek bestaande projecten/cases | Nog niet gestart |
-| 2 · Creative direction | Nog niet gestart |
-| 3 · Techniekkeuze en bouw | Nog niet gestart |
-| 4 · Hosting, DNS en livegang (denckh.nl) | **Bewust buiten scope** tot expliciet akkoord |
+| 1 · Onderzoek bestaande projecten | Uitgevoerd (live sites nog niet bekeken, zie `HANDOFF.md`) |
+| 2 · Creative direction | Voorstel: [`docs/creative-direction.md`](docs/creative-direction.md) |
+| 3 · Structuur en content | Voorstel: [`docs/structuur-en-content.md`](docs/structuur-en-content.md) |
+| Architectuur en deployment | Voorstel: [`docs/architectuur.md`](docs/architectuur.md) |
+| 4–10 · Design system, bouw, QA | Start na akkoord op het voorstel |
+| Hosting, DNS en livegang (denckh.nl) | **Bewust buiten scope** tot expliciet akkoord |
 
 De actuele stand, genomen beslissingen en open punten staan in [`HANDOFF.md`](HANDOFF.md).
 
@@ -41,13 +43,16 @@ De actuele stand, genomen beslissingen en open punten staan in [`HANDOFF.md`](HA
 ├── CLAUDE.md          ← werkinstructies voor Claude (en andere AI-assistenten) in deze repo
 ├── HANDOFF.md         ← actuele stand, beslissingenlog, open punten, volgende stappen
 ├── docs/
-│   └── cases/         ← caseregister en verificatieprotocol
+│   ├── cases/                  ← caseregister, verificatieprotocol en dossier per case
+│   ├── creative-direction.md   ← concept, bewegingstaal, kleur, typografie, toon
+│   ├── structuur-en-content.md ← sitemap, homepage-opbouw, concepttekst, formulier
+│   └── architectuur.md         ← stack, hosting, deploy, privacy, SEO, performance, a11y
 ├── .editorconfig
 ├── .gitattributes
 └── .gitignore
 ```
 
-De mappen voor de websitecode volgen pas na de techniekkeuze (fase 3).
+De websitecode (Next.js, statische export) volgt in fase 5. Zie `docs/architectuur.md`.
 
 ## Repository
 
