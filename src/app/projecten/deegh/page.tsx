@@ -27,7 +27,7 @@ export default function DeeghCase() {
           <section><h2>Vorm</h2><p>Een webshop met pizzabol- en deegpakketten, bereiding, recepten, verkooppunten, een zakelijke route en een helder merkverhaal.</p></section>
         </div>
         <aside className="case-page__source"><strong>Wat hier staat</strong><p>Deze case is gebaseerd op de live webshop en de broncode. Beelden van Deegh worden hier nog niet hergebruikt; de herkomst en publicatietoestemming worden per beeld bevestigd.</p></aside>
-        <div className="case-page__next"><p>Heb je zelf iets dat vorm mag krijgen?</p><a className="button button--dark" href="/#contact">Vertel het me</a></div>
+        <div className="case-page__next"><p>Heb je zelf iets dat vorm mag krijgen?</p><Link className="button button--dark" href="/#contact">Vertel het me</Link></div>
         <Footer />
       </div>
     </main>

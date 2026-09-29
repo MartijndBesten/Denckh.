@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import Link from "next/link";
 
 type FormState = {
   name: string;
@@ -54,7 +55,7 @@ export function ContactForm() {
         <input type="url" placeholder="Een link is genoeg" value={values.link} onChange={(event) => update("link", event.target.value)} />
       </label>
       <div className="form-bottom">
-        <p>Ik gebruik je gegevens alleen om te reageren. Lees meer in de <a href="/privacy/">privacyverklaring</a>.</p>
+        <p>Ik gebruik je gegevens alleen om te reageren. Lees meer in de <Link href="/privacy/">privacyverklaring</Link>.</p>
         <button className="button button--dark" type="submit">Vertel het me</button>
       </div>
       <p className="form-status" role="status">{message}</p>

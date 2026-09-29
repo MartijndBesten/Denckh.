@@ -30,6 +30,10 @@ beslissingen, open punten en de volgende stappen. **Bijwerken aan het eind van e
   wordt pas toegevoegd als mailbox, privacygegevens en spammaatregelen zijn bevestigd.
 - De projectschetsen zijn eigen, abstracte diagrammen. Er zijn geen Deegh-, Loflijn-, TRILUX- of LiveLink-beelden of
   logo's gekopieerd.
+- Lokale QA op 2026-09-29: `npm run lint`, `npm run typecheck` en `npm run build` slagen. De homepage is visueel
+  gecontroleerd op 390 px mobiel, 768 px tablet en 1440 px desktop zonder horizontale overflow. De hero-punt werkt
+  met het toetsenbord, de Deegh-link opent de juiste case en het formulier valideert zonder iets te verzenden. Tijdens
+  deze controles waren er geen console-errors.
 
 ## Repositorygegevens
 
@@ -64,6 +68,7 @@ Pas de oude regel niet aan. *Voorstel* = wacht op akkoord van de eigenaar.
 | B-014 | 2026-09-29 | Een case gaat pas online na verificatie **én** toestemming. Liever twee echte cases dan drie halve. Voorgestelde volgorde: IntuSens-demokoffer → Deegh → Loflijn. Zonder toestemming van TRILUX komt Deegh eerst. | Volgt uit B-004/B-005. De demokoffer doorbreekt het beeld "webdesigner" het sterkst. | Voorstel |
 | B-015 | 2026-09-29 | De eerste bouwstap gebruikt Next.js 16 met TypeScript, Tailwind CSS 4 en statische export. De interactie is bewust met native browser-API's gebouwd; Motion is niet nodig voor deze eerste, lichte versie. | Voldoet aan B-010/B-011 zonder extra runtimegewicht. | Vast op basis van de opdracht van de eigenaar |
 | B-016 | 2026-09-29 | Zolang portfolio-rechten per merk/beeld niet zijn bevestigd, gebruikt de site alleen eigen abstracte diagrams en gecontroleerde tekst. | Een publieke GitHub-repo en later publieke site mogen geen herpublicatierecht suggereren. | Vast |
+| B-017 | 2026-09-29 | Metadata-routes `robots.txt` en `sitemap.xml` worden expliciet statisch gegenereerd. | Vereist voor een betrouwbare Next.js static export. | Vast |
 
 ---
 

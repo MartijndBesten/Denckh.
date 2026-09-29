@@ -20,9 +20,9 @@ export function Header({ compact = false }: HeaderProps) {
         <Wordmark />
       </Link>
       <nav aria-label="Hoofdnavigatie">
-        <a href="/#projecten">Projecten</a>
-        <a href="/#werkwijze">Werkwijze</a>
-        <a href="/#contact">Vertel het me</a>
+        <Link href="/#projecten">Projecten</Link>
+        <Link href="/#werkwijze">Werkwijze</Link>
+        <Link href="/#contact">Vertel het me</Link>
       </nav>
     </header>
   );
@@ -36,8 +36,8 @@ export function Footer() {
         <p>Een kleine conceptstudio voor ideeën die vorm mogen krijgen.</p>
       </div>
       <div className="footer-links">
-        <a href="/#projecten">Projecten</a>
-        <a href="/#contact">Contact</a>
+        <Link href="/#projecten">Projecten</Link>
+        <Link href="/#contact">Contact</Link>
         <Link href="/privacy/">Privacy</Link>
       </div>
       <p className="footer-note">Zonder tracking. Zonder cookie-banner.</p>
