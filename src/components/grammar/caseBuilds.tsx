@@ -1,7 +1,7 @@
 // Drie projecten, drie soorten denken. Alleen geverifieerde inhoud (zie docs/cases/). Geen logo's of beelden van derden:
 // de eindbeelden zijn schematische weergaven, zo gemarkeerd.
 import { SHAPES } from "@/lib/ink/shapes";
-import { linePath, resample } from "@/lib/ink/geometry";
+import { resample } from "@/lib/ink/geometry";
 import { rr, type Build } from "./Construct";
 
 const D = (d: string, key: number) => <path key={key} d={d} pathLength={1} className="c-anim" />;
@@ -78,46 +78,75 @@ export const kofferBuild: Build = (w, h) => {
   };
 };
 
-/** Loflijn: kaart scannen → op de tijdlijn leggen → uitleg en bestellen. Schematisch: geen kaartontwerpen of productfoto's
- *  overgenomen. Teksten van de live site (docs/cases/loflijn.md). */
+/** Loflijn: een beurt in het spel. Kaart (QR) → lied → plek op de tijdlijn. Schematisch: geen kaartontwerpen,
+ *  productfoto's of muziek overgenomen. Spelstappen van de live site (docs/cases/loflijn.md). */
 export const spelBuild: Build = (w, h) => {
-  const card = SHAPES.spel({ w, h });
-  const line = resample([{ x: w * 0.08, y: h * 0.62 }, { x: w * 0.92, y: h * 0.62 }], 128);
-  const cw = Math.min(56, w * 0.11), ch = cw * 1.4;
-  const slots = [0.2, 0.4, 0.6, 0.8].map((t) => w * t);
-  const shop = SHAPES.webshop({ w, h });
-  const W = Math.min(w * 0.86, h * 1.5), H = W / 1.5, x = (w - W) / 2, y = (h - H) / 2;
-  const fs = Math.max(8, Math.min(12, W / 44));
-  const steps = ["Scan de QR-code", "Luister naar het lied", "Leg de kaart op de tijdlijn"];
-  const sw = (W - 48) / 3;
+  // 1 · de kaart, met een abstracte QR-code
+  const cH = h * 0.78, cW = cH * 0.68, cx = (w - cW) / 2, cy = (h - cH) / 2;
+  const card = resample(rrPts(cx, cy, cW, cH, 12), 128);
+  const q = cW * 0.66, qx = cx + (cW - q) / 2, qy = cy + cH * 0.18, m = q / 9;
+  const sq = (a: number, b: number, s: number) => `M${qx + a * m} ${qy + b * m} h${s * m} v${s * m} h${-s * m} Z`;
+  const finders = [[0, 0], [6, 0], [0, 6]];
+  const modules = [[4, 0], [3, 1], [5, 1], [4, 2], [0, 4], [2, 4], [4, 4], [5, 5], [7, 4], [8, 5], [3, 6], [4, 7], [6, 6], [7, 7], [8, 8], [5, 8], [3, 8]];
+  const cardDetails = [
+    <path key="f" d={finders.map(([a, b]) => rr(qx + a * m, qy + b * m, m * 3, m * 3, 2)).join(" ")} pathLength={1} className="c-anim" />,
+    <path key="m" d={[...finders.map(([a, b]) => sq(a + 0.9, b + 0.9, 1.2)), ...modules.map(([a, b]) => sq(a + 0.08, b + 0.08, 0.84))].join(" ")} className="c-fade" />,
+    <path key="l" d={`M${cx + cW * 0.3} ${cy + cH * 0.86} H${cx + cW * 0.7}`} pathLength={1} className="c-anim" />,
+  ];
+
+  // 2 · het lied: de lijn gaat trillen
+  const x0 = w * 0.1, x1 = w * 0.9, mid = h * 0.46;
+  const wave = Array.from({ length: 128 }, (_, i) => {
+    const t = i / 127, env = Math.sin(Math.PI * t) * (0.55 + 0.45 * Math.sin(t * 9.3));
+    return { x: x0 + (x1 - x0) * t, y: mid + Math.sin(t * Math.PI * 18) * h * 0.2 * env };
+  });
+  const pr = Math.min(18, h * 0.07), px = w / 2, py = h * 0.84;
+  const waveDetails = [`M${px - pr} ${py} a${pr} ${pr} 0 1 0 ${2 * pr} 0 a${pr} ${pr} 0 1 0 ${-2 * pr} 0`,
+    `M${px - pr * 0.3} ${py - pr * 0.45} L${px + pr * 0.5} ${py} L${px - pr * 0.3} ${py + pr * 0.45} Z`,
+    `M${x0} ${py} H${px - pr - 10} M${px + pr + 10} ${py} H${x1}`];
+
+  // 3 · de tijdlijn: drie kaarten liggen er al, de nieuwe zoekt zijn plek
+  const ly = h * 0.7, lx0 = w * 0.06, lx1 = w * 0.94;
+  const line = resample([{ x: lx0, y: ly }, { x: lx1, y: ly }], 128);
+  const tw = Math.min(54, w * 0.1), th = tw * 1.4;
+  const placed = [0.2, 0.5, 0.8].map((t) => lx0 + (lx1 - lx0) * t);
+  const gap = (placed[1] + placed[2]) / 2;
+  const lineDetails = [
+    ...placed.map((x, i) => <path key={`p${i}`} d={`${rr(x - tw / 2, ly - th - 10, tw, th, 5)} M${x} ${ly - 6} V${ly + 6}`} pathLength={1} className="c-anim" />),
+    <path key="new" d={`${rr(gap - tw / 2, ly - th * 2 - 22, tw, th, 5)} M${gap} ${ly - th - 18} V${ly - 8}`} pathLength={1} className="c-anim c-idea" />,
+  ];
+
+  // eindbeeld: een volle tijdlijn, van psalm tot praise (op dezelfde lijn als stap 3)
+  const n = 7, slot = (lx1 - lx0) / n, fw = Math.min(42, slot * 0.72), fh = fw * 1.4, fs = Math.max(10, Math.min(13, w / 40));
   return {
     stages: [
-      { ...card, caption: "scan de kaart", details: card.details.map(D) },
-      { outline: line, closed: false, caption: "leg hem op de tijdlijn", details: slots.map((sx, i) => (
-        <g key={i}>
-          <path d={rr(sx - cw / 2, h * 0.62 - ch - 12, cw, ch, 6)} pathLength={1} className="c-anim" />
-          <path d={linePath([{ x: sx, y: h * 0.62 - 6 }, { x: sx, y: h * 0.62 + 6 }])} pathLength={1} className="c-anim" />
-        </g>
-      )) },
-      { ...shop, caption: "uitleg en bestellen", details: shop.details.map(D) },
+      { outline: card, closed: true, caption: "scan de kaart", details: cardDetails },
+      { outline: wave, closed: false, caption: "luister naar het lied", details: waveDetails.map(D) },
+      { outline: line, closed: false, caption: "leg hem op de tijdlijn", details: lineDetails },
     ],
     final: (
       <g className="loflijn-shot">
-        <path d={rr(x, y, W, H, 10)} fill="#ffffff" stroke="#211f1d" strokeOpacity=".3" />
-        <text x={x + 16} y={y + 24} fontSize={fs + 2} fontWeight="700" fill="#211f1d">Loflijn</text>
-        <text x={x + 16} y={y + 58} fontSize={fs + 7} fontWeight="700" fill="#211f1d">Van Psalm tot Praise</text>
-        {steps.map((t, i) => (
-          <g key={t}>
-            <circle cx={x + 24 + i * (sw + 8) + 10} cy={y + 90} r={10} fill="none" stroke="#211f1d" strokeOpacity=".6" />
-            <text x={x + 24 + i * (sw + 8) + 10} y={y + 94} fontSize={fs} fontWeight="700" textAnchor="middle" fill="#211f1d">{i + 1}</text>
-            <text x={x + 24 + i * (sw + 8)} y={y + 122} fontSize={fs - 1} fill="#211f1d">{t}</text>
-          </g>
-        ))}
-        <path d={rr(x + W - 124, y + H - 40, 108, 24, 12)} fill="#211f1d" />
-        <text x={x + W - 70} y={y + H - 24} fontSize={fs - 1} fontWeight="700" textAnchor="middle" fill="#f7f4ee">bestellen</text>
+        <path d={`M${lx0} ${ly} H${lx1}`} fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" />
+        {Array.from({ length: n }, (_, i) => {
+          const x = lx0 + slot * (i + 0.5);
+          return <path key={i} d={rr(x - fw / 2, ly - fh - 10, fw, fh, 5)} className={i === 4 ? "loflijn-shot__new" : "loflijn-shot__card"} />;
+        })}
+        <text x={lx0} y={ly + 26} fontSize={fs}>psalm</text>
+        <text x={lx1} y={ly + 26} fontSize={fs} textAnchor="end">praise</text>
       </g>
     ),
   };
 };
+
+/** Afgeronde rechthoek als puntenreeks (voor vormen die moeten kunnen morphen). */
+function rrPts(x: number, y: number, w: number, h: number, r: number) {
+  const pts: { x: number; y: number }[] = [];
+  const corner = (ccx: number, ccy: number, a0: number) => {
+    for (let i = 0; i <= 8; i++) { const a = a0 + (i / 8) * (Math.PI / 2); pts.push({ x: ccx + Math.cos(a) * r, y: ccy + Math.sin(a) * r }); }
+  };
+  corner(x + r, y + r, Math.PI); corner(x + w - r, y + r, -Math.PI / 2); corner(x + w - r, y + h - r, 0); corner(x + r, y + h - r, Math.PI / 2);
+  pts.push({ ...pts[0] });
+  return pts;
+}
 
 export const BUILDS = { deegh: deeghBuild, koffer: kofferBuild, spel: spelBuild };

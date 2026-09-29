@@ -4,6 +4,8 @@ import { PuntStage } from "@/components/punt/PuntStage";
 import { ContactReturn } from "@/components/grammar/ContactReturn";
 import { Construct } from "@/components/grammar/Construct";
 import { InkRule } from "@/components/grammar/InkRule";
+import { LoflijnTurn } from "@/components/grammar/LoflijnTurn";
+import { MoreWork } from "@/components/grammar/MoreWork";
 import { Outcomes } from "@/components/grammar/Outcomes";
 import { SettleTitle } from "@/components/grammar/SettleTitle";
 import { Werkwijze } from "@/components/grammar/Werkwijze";
@@ -65,20 +67,29 @@ export default function Home() {
           </div>
         </article>
 
-        <article className="case">
-          <Construct project="spel" label="loflijn.nl, schematisch" ratio={0.62} />
+        <article className="case case--flip case--play">
+          <Construct project="spel" label="Loflijn, schematisch: een beurt van kaart tot tijdlijn" end="van psalm tot praise" ratio={0.62} />
           <div className="case__text">
-            <p className="case__kind">fysiek spel → uitleg en verkoop</p>
+            <p className="case__kind">spel op tafel → uitleg in drie tellen</p>
             <h3>Loflijn</h3>
-            <p className="case__lead">Een muziekspel voor op tafel kreeg een plek online: uitleg in drie stappen en een route naar bestellen.</p>
+            <p className="case__lead">Een muziekspel voor op tafel. Online moest je in een paar tellen snappen hoe een beurt werkt.</p>
             <dl className="case__facts">
-              <div><dt>Aanleiding</dt><dd>Van Psalm tot Praise is een fysiek muziekspel. Wie het nog niet kent, moet in een paar tellen snappen hoe het werkt.</dd></div>
-              <div><dt>Denckh</dt><dd>De website en webshop: het spel uitgelegd in drie stappen (scan de QR-code, luister naar het lied, leg de kaart op de tijdlijn), productinformatie en een kooproute.</dd></div>
+              <div><dt>Aanleiding</dt><dd>Van Psalm tot Praise is een fysiek muziekspel: je scant een kaart, luistert naar het lied en legt de kaart op de tijdlijn. Wie het nog niet kent, moet dat meteen zien.</dd></div>
+              <div><dt>Denckh</dt><dd>De website en webshop: een beurt uitgelegd in drie stappen, productinformatie en een route naar bestellen.</dd></div>
               <div><dt>Vorm</dt><dd>loflijn.nl, waar je het spel leert kennen en bestelt.</dd></div>
             </dl>
             <p className="case__links"><a className="link-draw" href="https://loflijn.nl" rel="noopener">loflijn.nl</a></p>
           </div>
+          <LoflijnTurn />
         </article>
+      </section>
+
+      <section className="shell more-section" id="ook-gemaakt" aria-labelledby="ook-titel">
+        <header className="projects__head">
+          <h2 id="ook-titel">Ook gemaakt.</h2>
+          <p>Kleinere vormen, dezelfde manier van denken.</p>
+        </header>
+        <MoreWork />
       </section>
 
       <section className="shell outcomes-section" aria-labelledby="uitkomst-titel">

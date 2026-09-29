@@ -104,6 +104,36 @@ export const SHAPES: Record<string, (b: Box) => Shape> = {
     const pts = xs.map((x, i) => ({ x, y: y + (i % 2 ? -22 : 22) }));
     return { outline: resample(pts, SN), closed: false, details: pts.map((p) => C(p.x, p.y, 14)) };
   },
+  agenda: ({ w, h }) => {
+    const W = Math.min(w * 0.72, h * 1.25), H = W * 0.7, x = (w - W) / 2, y = (h - H) / 2 + 6;
+    const cols = 3, rows = 3, pad = 12, gx = 8, top = y + 30;
+    const sw = (W - pad * 2 - gx * (cols - 1)) / cols, sh = (y + H - pad - top - gx * (rows - 1)) / rows;
+    const slot = (c: number, r: number) => R(x + pad + c * (sw + gx), top + r * (sh + gx), sw, sh, 4);
+    const cx = x + pad + 1 * (sw + gx) + sw / 2, cy = top + 1 * (sh + gx) + sh / 2, k = Math.min(sw, sh) * 0.22;
+    return { outline: rrect(x, y, W, H, 10), closed: true, details: [
+      L(x, y + 22, x + W, y + 22), L(x + W * 0.28, y - 8, x + W * 0.28, y + 8), L(x + W * 0.72, y - 8, x + W * 0.72, y + 8),
+      ...[0, 1, 2].flatMap((r) => [0, 1, 2].map((c) => slot(c, r))),
+      `M${cx - k} ${cy} L${cx - k * 0.2} ${cy + k * 0.8} L${cx + k * 1.2} ${cy - k * 0.8}`,
+    ] };
+  },
+  gebouw: ({ w, h }) => {
+    // isometrisch kantoor: lange gevel links, korte zijgevel rechts, verdiepingen en ramen; erboven loopt de zon over de dag
+    const H = h * 0.34, Wl = Math.min(w * 0.3, h * 0.6), Dr = Wl * 0.52, cx = w * 0.56, yb = h * 0.92;
+    const Lx = -Wl * 0.87, Ly = -Wl * 0.5, Rx = Dr * 0.87, Ry = -Dr * 0.5;
+    const B0 = { x: cx, y: yb }, B1 = { x: cx + Lx, y: yb + Ly }, B2 = { x: cx + Rx, y: yb + Ry };
+    const up = (p: Pt, k = 1) => ({ x: p.x, y: p.y - H * k });
+    const at = (a: Pt, b: Pt, t: number) => ({ x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t });
+    const T0 = up(B0), T1 = up(B1), T2 = up(B2), T3 = { x: T0.x + Lx + Rx, y: T0.y + Ly + Ry };
+    const floors = [1 / 3, 2 / 3].map((k) => `M${up(B1, k).x} ${up(B1, k).y} L${up(B0, k).x} ${up(B0, k).y} L${up(B2, k).x} ${up(B2, k).y}`);
+    const mullions = [0.25, 0.5, 0.75].map((t) => { const a = at(B1, B0, t); return L(a.x, a.y, a.x, a.y - H); });
+    const side = at(B0, B2, 0.5);
+    const s0 = { x: w * 0.06, y: h * 0.3 }, s1 = { x: w * 0.96, y: h * 0.26 }, sc = { x: w * 0.5, y: -h * 0.2 };
+    const t = 0.72, sx = (1 - t) ** 2 * s0.x + 2 * (1 - t) * t * sc.x + t * t * s1.x, sy = (1 - t) ** 2 * s0.y + 2 * (1 - t) * t * sc.y + t * t * s1.y;
+    return { outline: resample([B1, B0, B2, T2, T3, T1, B1], SN), closed: true, details: [
+      L(B0.x, B0.y, T0.x, T0.y), `M${T1.x} ${T1.y} L${T0.x} ${T0.y} L${T2.x} ${T2.y}`, ...floors, ...mullions, L(side.x, side.y, side.x, side.y - H),
+      `M${s0.x} ${s0.y} Q${sc.x} ${sc.y} ${s1.x} ${s1.y}`, C(sx, sy, Math.min(w, h) * 0.045),
+    ] };
+  },
   knop: ({ w, h }) => ({ outline: circle(w / 2, h / 2, Math.min(w, h) * 0.32), closed: true, details: [L(w / 2, h / 2, w / 2, h / 2 - Math.min(w, h) * 0.22)] }),
   deegbol: ({ w, h }) => ({ outline: circle(w / 2, h * 0.56, Math.min(w, h) * 0.26), closed: true, details: [`M${w / 2 - Math.min(w, h) * 0.12} ${h * 0.5} q${Math.min(w, h) * 0.08} ${-Math.min(w, h) * 0.05} ${Math.min(w, h) * 0.16} 0`] }),
   pizza: ({ w, h }) => {
