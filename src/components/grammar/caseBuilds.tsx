@@ -25,6 +25,15 @@ export const deeghBuild: Build = (w, h) => {
   const nav = ["Webshop", "Zo werkt Deegh", "Verkooppunten", "Zakelijk"];
   const products = [["Deegh Gezin", "6 pizzabollen"], ["Deegh Voorraad", "12 pizzabollen"], ["Deegh Pizza-avond", "24 pizzabollen"]];
   const fs = Math.max(8, Math.min(11, W / 48));
+  // tekstbreedte in em: gemeten in Manrope plus 8 % marge (andere woorden: ruim geschat per teken). Op een smal scherm
+  // krimpt de letter mee in plaats van dat woorden over elkaar schuiven.
+  const EM: Record<string, number> = { deegh: 3.07, Webshop: 4.35, "Zo werkt Deegh": 7.2, Verkooppunten: 7.05, Zakelijk: 3.45 };
+  const em = (t: string, bold = false) => (EM[t] ?? t.length * (bold ? 0.62 : 0.56)) * 1.08;
+  const navFrom = x + 14 + em("deegh", true) * (fs + 3) + 16, navTo = x + W - 14, gap = 1.6;
+  const navEm = nav.reduce((sum, n) => sum + em(n), 0) + gap * (nav.length - 1);
+  const nfs = Math.min(fs, (navTo - navFrom) / navEm);
+  const navX = nav.map((_, i) => Math.max(navFrom, navTo - navEm * nfs) + (nav.slice(0, i).reduce((sum, n) => sum + em(n), 0) + gap * i) * nfs);
+  const pfs = Math.min(fs, tw / Math.max(...products.map(([n]) => em(n, true))));
   return {
     stages: [
       { ...bol, caption: "een deegbol", details: bol.details.map(D) },
@@ -38,14 +47,14 @@ export const deeghBuild: Build = (w, h) => {
         <path d={rr(x, y, W, H, 10)} fill="#ffffff" stroke="#554f4f" strokeOpacity=".35" />
         <path d={rr(x, y, W, 26, 10)} fill="#f0e8d3" />
         <text x={x + 14} y={y + 17} fontSize={fs + 3} fontWeight="700" fill="#554f4f">deegh</text>
-        {nav.map((n, i) => <text key={n} x={x + W * 0.3 + i * (W * 0.165)} y={y + 17} fontSize={fs} fill="#554f4f">{n}</text>)}
+        {nav.map((n, i) => <text key={n} x={navX[i]} y={y + 17} fontSize={nfs} fill="#554f4f">{n}</text>)}
         <text x={x + 16} y={y + 56} fontSize={fs + 5} fontWeight="700" fill="#554f4f">Ons deeg</text>
         {products.map(([n, s], i) => (
           <g key={n}>
             <path d={rr(x + 16 + i * (tw + 12), y + 70, tw, H * 0.38, 6)} fill="#f0e8d3" />
             <circle cx={x + 16 + i * (tw + 12) + tw / 2} cy={y + 70 + H * 0.19} r={Math.min(tw, H * 0.38) * 0.22} fill="#fbf7ec" stroke="#554f4f" strokeOpacity=".25" />
-            <text x={x + 16 + i * (tw + 12)} y={y + 86 + H * 0.38} fontSize={fs} fontWeight="700" fill="#554f4f">{n}</text>
-            <text x={x + 16 + i * (tw + 12)} y={y + 100 + H * 0.38} fontSize={fs - 1} fill="#554f4f">{s}</text>
+            <text x={x + 16 + i * (tw + 12)} y={y + 86 + H * 0.38} fontSize={pfs} fontWeight="700" fill="#554f4f">{n}</text>
+            <text x={x + 16 + i * (tw + 12)} y={y + 100 + H * 0.38} fontSize={pfs - 1} fill="#554f4f">{s}</text>
           </g>
         ))}
       </g>
