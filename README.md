@@ -21,7 +21,9 @@ een prototype, een tool of een ander concept dat een idee concreet en toetsbaar 
 | 2 · Creative direction | Voorstel: [`docs/creative-direction.md`](docs/creative-direction.md) |
 | 3 · Structuur en content | Voorstel: [`docs/structuur-en-content.md`](docs/structuur-en-content.md) |
 | Architectuur en deployment | Voorstel: [`docs/architectuur.md`](docs/architectuur.md) |
-| 4–10 · Design system, bouw, QA | Start na akkoord op het voorstel |
+| 4 · Design system | Eerste tokens en uitwerking in de websitecode gereed |
+| 5–7 · Homepage en eerste case | Eerste werkende versie in opbouw; zie `HANDOFF.md` |
+| 8–10 · Cases, contact, QA | Vervolg na de eerste technische controle |
 | Hosting, DNS en livegang (denckh.nl) | **Bewust buiten scope** tot expliciet akkoord |
 
 De actuele stand, genomen beslissingen en open punten staan in [`HANDOFF.md`](HANDOFF.md).
@@ -52,7 +54,7 @@ De actuele stand, genomen beslissingen en open punten staan in [`HANDOFF.md`](HA
 └── .gitignore
 ```
 
-De websitecode (Next.js, statische export) volgt in fase 5. Zie `docs/architectuur.md`.
+De websitecode staat in `src/` en gebruikt Next.js met statische export. Zie `docs/architectuur.md` en `HANDOFF.md`.
 
 ## Repository
 

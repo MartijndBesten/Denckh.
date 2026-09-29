@@ -8,6 +8,8 @@ build/
 .vite/
 .cache/
 out/
+.next/
+*.tsbuildinfo
 
 # Omgevingsvariabelen en secrets
 .env

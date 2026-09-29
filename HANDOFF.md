@@ -4,8 +4,8 @@ Overdrachtsdocument voor de Denckh-website. Hier staan de actuele stand, alle be
 beslissingen, open punten en de volgende stappen. **Bijwerken aan het eind van elke werksessie.**
 
 - Laatst bijgewerkt: 2026-09-29
-- Fase: **1–3 (onderzoek, creative direction, structuur/content): voorstel gereed, wacht op akkoord eigenaar**
-- Volgende fase: 4 · design system (pas na akkoord)
+- Fase: **4–7 (eerste design system, homepage en eerste case): basis gebouwd, technische eindcontrole open**
+- Volgende fase: lokale preview en volledige QA, daarna de resterende case- en contactstappen
 
 ---
 
@@ -23,8 +23,13 @@ beslissingen, open punten en de volgende stappen. **Bijwerken aan het eind van e
     case-template, formulier;
   - [`docs/architectuur.md`](docs/architectuur.md): stack, hosting- en deployanalyse, formulier, privacy, SEO,
     performance, toegankelijkheid, tests.
-- Er is nog **geen websitecode**. Er zijn geen dependencies geïnstalleerd, er is niets gedeployed en er is niets aan
-  hosting of DNS gewijzigd.
+- De eerste websitecode staat in `src/`: homepage, Deegh-case, privacy- en 404-pagina, semantische navigatie,
+  interactieve punt, reduced-motion-weergave, metadata, sitemap, robots en favicon. Er is bewust geen productie-deploy
+  en niets aan hosting of DNS gewijzigd.
+- De contact-UI valideert lokaal, maar verstuurt nog niets. Dit is expliciet zichtbaar voor de bezoeker; een PHP/mailroute
+  wordt pas toegevoegd als mailbox, privacygegevens en spammaatregelen zijn bevestigd.
+- De projectschetsen zijn eigen, abstracte diagrammen. Er zijn geen Deegh-, Loflijn-, TRILUX- of LiveLink-beelden of
+  logo's gekopieerd.
 
 ## Repositorygegevens
 
@@ -57,6 +62,8 @@ Pas de oude regel niet aan. *Voorstel* = wacht op akkoord van de eigenaar.
 | B-012 | 2026-09-29 | Kleuren afgeleid van het bestaande logo (papier `#FAF8F3`, inkt `#363434`, oker `#C8A477`), aangevuld met grafiet, potlood, oker-diep en nacht. **Geen extra frisse accentkleur.** | De punt moet het enige zijn dat "leeft". Contrastwaarden gecontroleerd. | Voorstel |
 | B-013 | 2026-09-29 | Geen analytics, cookies of externe verzoeken bij de start (fonts zelf gehost). | Privacy, snelheid, geen cookiebanner nodig. Later alleen cookieloze statistiek als het nodig blijkt. | Voorstel |
 | B-014 | 2026-09-29 | Een case gaat pas online na verificatie **én** toestemming. Liever twee echte cases dan drie halve. Voorgestelde volgorde: IntuSens-demokoffer → Deegh → Loflijn. Zonder toestemming van TRILUX komt Deegh eerst. | Volgt uit B-004/B-005. De demokoffer doorbreekt het beeld "webdesigner" het sterkst. | Voorstel |
+| B-015 | 2026-09-29 | De eerste bouwstap gebruikt Next.js 16 met TypeScript, Tailwind CSS 4 en statische export. De interactie is bewust met native browser-API's gebouwd; Motion is niet nodig voor deze eerste, lichte versie. | Voldoet aan B-010/B-011 zonder extra runtimegewicht. | Vast op basis van de opdracht van de eigenaar |
+| B-016 | 2026-09-29 | Zolang portfolio-rechten per merk/beeld niet zijn bevestigd, gebruikt de site alleen eigen abstracte diagrams en gecontroleerde tekst. | Een publieke GitHub-repo en later publieke site mogen geen herpublicatierecht suggereren. | Vast |
 
 ---
 
@@ -73,6 +80,7 @@ Alleen wat daadwerkelijk is gecontroleerd, met datum.
 | `loflijn.nl` wijst naar een Shopify-IP. Er is geen repo voor. | DNS | 2026-09-29 |
 | `denckh.nl` heeft geen A-record (geen website actief). Of het domein geregistreerd is, kon niet worden vastgesteld. | DNS | 2026-09-29 |
 | De werkomgeving blokkeert `deegh.nl`, `intusens-demokoffer.nl`, `loflijn.nl`, `denckh.nl`, `cloud86.io` en `support.cloud86.io`. | curl/WebFetch | 2026-09-29 |
+| `deegh.nl`, `intusens-demokoffer.nl` en `loflijn.nl` zijn daarna live bekeken via een geautoriseerde browsersessie. De inhoudelijke bevindingen zijn verwerkt in de drie casedossiers; geen externe beelden zijn gekopieerd. | Live sites + publieke bron waar beschikbaar | 2026-09-29 |
 
 ---
 
@@ -117,7 +125,8 @@ git remote set-url origin https://github.com/MartijndBesten/denckh.git
 
 1. **Eigenaar:** akkoord of bijsturing op B-008 t/m B-014 (O-03), plus O-01 en O-02.
 2. **Eigenaar:** netwerktoegang of screenshots (O-08), zodat de live sites alsnog bekeken kunnen worden.
-3. **Fase 4 · design system:** typografieproef (Young Serif/Manrope tegen de alternatieven), tokens, logo-opzet, een
-   prototype van de punt (krabbel → vorm).
-4. **Fase 5 · eerste werkende homepage** in Next.js (statische export), met tests.
-5. Fase 6 t/m 10 volgens de briefing. Hosting, DNS en livegang pas na expliciet akkoord (B-003).
+3. **Lokale technische controle:** afgeronde production build, visuele controles op 390 px, tablet en desktop,
+   toetsenbord, reduced motion en console.
+4. **Fase 8–10:** casepagina's pas uitbreiden met goedgekeurde beelden en namen; werkende contactroute, juridische
+   gegevens en privacytekst alleen na bevestiging.
+5. Hosting, DNS en livegang blijven buiten scope tot expliciet akkoord (B-003).
