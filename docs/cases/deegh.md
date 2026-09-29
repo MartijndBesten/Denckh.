@@ -80,3 +80,8 @@ Juist bij een site die "geen nep" als principe heeft, ondermijnt één gegeneree
 - Gebruik: in de projectconstructie als stap "een merk": de deegbol rijst en wordt de cirkel van het logo.
 - Wens: een scherpere versie (SVG of groter bestand); het huidige beeld is 429×571 en wordt op grote schermen iets
   vergroot.
+
+## Eigen werk (2026-09-29)
+
+Eigenaar: het Deegh-logo en het merk zijn door hemzelf bedacht en ontwikkeld, destijds samen met zijn broers. Denckh mag
+dit als eigen werk presenteren; "deegbol → merk → webshop" klopt. (HANDOFF B-053)

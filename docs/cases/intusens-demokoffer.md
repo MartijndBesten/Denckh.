@@ -15,7 +15,9 @@ Een interactieve website bij een fysieke demokoffer met TRILUX IntuSens-sensoren
 
 ## Aanleiding / vraag
 
-[TE BEVESTIGEN: wat was de aanleiding, wie vroeg erom, voor wie is het bedoeld (sales, installateurs, klanten)?]
+Bevestigd door de eigenaar (2026-09-29): hij was zelf initiatiefnemer en formuleerde zelf de ontwerp-/gebruiksvraag.
+Strekking: een demokoffer vol sensortechniek moest ook zonder uitgebreide uitleg snel te begrijpen en te gebruiken
+zijn. Geen externe klantvraag. (HANDOFF B-053)
 
 Uit de bron blijkt: de site hoort bij een fysieke koffer (QR-stickers voor op de koffer zitten in de repo) en moet ook
 zonder internet werken "bij de klant" (comment in de service worker).
@@ -50,7 +52,7 @@ doorlopen, of de demo als presentatie afspelen. Ook offline.
 
 ## Te bevestigen
 
-- [TE BEVESTIGEN] Aanleiding en opdrachtgever: eigen initiatief of opdracht, en van wie?
+- Aanleiding: eigen initiatief van de eigenaar (bevestigd 2026-09-29, B-053).
 - [TE BEVESTIGEN] Is de fysieke koffer (indeling, opdruk) ook door Denckh/Martijn bedacht of gemaakt, of alleen de site?
 - [TE BEVESTIGEN] Wordt de koffer met site daadwerkelijk ingezet, en door wie? Geen aantallen of effecten claimen
   zonder bron.

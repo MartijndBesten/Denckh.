@@ -185,7 +185,7 @@ nav .link-draw:hover, nav .link-draw:focus-visible { background-size: 100% 6px, 
 @keyframes rise { from { opacity: 0; transform: translateY(6px); } }
 
 .punt__ink { fill: var(--idea); }
-.punt__ghost { fill: none; stroke: var(--pencil); stroke-width: 1.2; stroke-dasharray: 0.006 0.012; stroke-linecap: round; opacity: 0; animation: appear 1.2s var(--ease) 0.9s forwards; }
+.punt__ghost { fill: none; stroke: var(--pencil); stroke-width: 1.2; stroke-dasharray: 0.004 0.009; stroke-linecap: round; opacity: 0; animation: appear 1.2s var(--ease) 0.9s forwards; }
 .punt__form { fill: none; stroke: var(--ink); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
 .look-line { fill: none; stroke: var(--menie); stroke-width: 1.4; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 0.5s var(--ease) forwards; }
 .look-line--thin { stroke-width: 1; }
@@ -449,11 +449,12 @@ nav .link-draw:hover, nav .link-draw:focus-visible { background-size: 100% 6px, 
 .lab { max-width: 1100px; margin: 0 auto; padding: clamp(1.5rem, 5vw, 4rem) var(--gutter) 6rem; }
 .lab__head { max-width: 44rem; margin-bottom: 3rem; }
 .lab__head h1 { font-size: clamp(2.4rem, 6vw, 4rem); margin-bottom: 1rem; }
-.lab__head p { color: var(--graphite); }
+.lab__head p, .lab__note { color: var(--graphite); }
+.lab__note { max-width: 44rem; font-size: 0.92rem; margin: 0 0 1.2rem; }
 .lab__kicker { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--menie) !important; margin-bottom: 0.6rem; }
 .lab__row { padding-block: 2.5rem; border-top: 1px solid color-mix(in srgb, var(--ink) 14%, transparent); }
-.lab__row h2 { font-family: var(--font-sans); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--graphite); margin-bottom: 1.4rem; }
-.lab__mark { display: block; width: 100%; height: auto; color: var(--ink); overflow: visible; }
+.lab__row h2, .lab__row h3, .lab__old summary { font-family: var(--font-sans); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--graphite); margin-bottom: 0.8rem; }
+.lab__mark, .lab__wm { display: block; width: 100%; height: auto; color: var(--ink); overflow: visible; }
 .lab__dot { fill: var(--ochre); }
 .lab__trail { fill: var(--ochre); }
 .lab__big { max-width: 900px; margin-bottom: 1.8rem; }
@@ -461,8 +462,32 @@ nav .link-draw:hover, nav .link-draw:focus-visible { background-size: 100% 6px, 
 .lab__paper, .lab__night { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 1.6rem 2rem; padding: 1.4rem; border-radius: 4px; }
 .lab__paper { background: var(--paper-2); }
 .lab__night { background: var(--night); }
-.lab__night .lab__mark { color: var(--night-ink); }
-.lab__header .lab__mark { height: 34px; width: auto; }
-.lab__small .lab__mark { width: 100px; }
-.lab__mid .lab__mark { width: 260px; }
-@media (max-width: 760px) { .lab__sizes { grid-template-columns: 1fr; } }
+.lab__night .lab__mark, .lab__night .lab__wm { color: var(--night-ink); }
+.lab__header .lab__wm { height: 34px; width: auto; }
+.lab__small .lab__wm { width: 100px; }
+.lab__mid .lab__wm { width: 260px; }
+.lab__krul { display: block; height: 100%; width: auto; overflow: visible; }
+.lab__krul-line { fill: none; stroke: var(--idea); stroke-width: 6; stroke-linecap: round; }
+.lab__krul-dot { fill: var(--ochre); }
+.lab__krul-line--draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1.6s var(--ease) 0.4s forwards; }
+.lab__krul-dot--draw { opacity: 0; animation: appear 0.4s var(--ease) 1.9s forwards; }
+.lab__sig { align-items: center; margin-bottom: 1rem; }
+.lab__sig .lab__wm { width: min(520px, 62%); }
+.lab__sig .lab__krul { height: 150px; }
+.lab__og { display: block; width: 100%; max-width: 600px; height: auto; border: 1px solid color-mix(in srgb, var(--ink) 14%, transparent); }
+.lab__krullen { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.lab__krullen > div { justify-content: center; height: 260px; }
+.lab__hero { display: block; width: 100%; max-width: 560px; height: auto; }
+.lab__hero-word { font-family: var(--font-display); font-size: 64px; font-weight: 560; letter-spacing: -0.04em; fill: var(--ink); }
+.lab__ghost { fill: none; stroke: var(--pencil); stroke-width: 1.2; stroke-dasharray: 0.004 0.009; stroke-linecap: round; }
+.lab__favs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.lab__fav { padding: 1.2rem 1.4rem; background: var(--paper-2); border-radius: 4px; }
+.lab__fav p { margin: 0 0 0.9rem; font-weight: 650; }
+.lab__fav-row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 1.4rem; }
+.lab__fav-cell { display: grid; justify-items: center; gap: 0.4rem; font-size: 0.75rem; color: var(--graphite); }
+.lab__fav-cell img { display: block; image-rendering: auto; }
+.lab__fav-cell--dark { padding: 0.5rem 0.7rem; background: #2b2b2b; color: var(--night-ink); border-radius: 6px; }
+.lab__old { margin-top: 3rem; }
+.lab__old summary { cursor: pointer; }
+.lab__row--old { padding-block: 1.4rem; }
+@media (max-width: 760px) { .lab__sizes, .lab__krullen, .lab__favs { grid-template-columns: 1fr; } .lab__sig .lab__wm { width: 100%; } }

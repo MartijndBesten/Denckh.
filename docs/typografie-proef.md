@@ -52,3 +52,9 @@ Op branch `creatief/ronde-3` staat een interne proefpagina `/logo-lab/` (noindex
 het huidige woordmerk naast zeven varianten met elk één ingreep aan de onderkant: naad d, snede e, inkeping n, open c,
 onderbreking k, voet h en spoor punt. Per variant groot, headerformaat, ca. 100 px en licht op donker. Er is geen
 winnaar gekozen (HANDOFF B-046, O-34). De contouren staan sindsdien in `src/components/wordmarkPaths.ts`.
+
+## Krul als merkelement (2026-09-29)
+
+Besluit B-048: het woordmerk blijft; de lettersnedes worden niet toegepast. De okerkleurige krul uit het OG-beeld is
+het grafische merkelement (bron: `src/lib/ink/krul.ts`). Hiërarchie: compact `denckh.`, signatuur `denckh.` + krul,
+krul los. Favicon blijft de punt (B-052). `/logo-lab/` toont dit als merkproefpagina.

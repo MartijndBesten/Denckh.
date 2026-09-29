@@ -221,8 +221,9 @@ function Route({ form, concept }: { form: Extract<Form, { kind: "route" }>; conc
   );
 }
 
-function ConceptMap({ form, concept }: { form: Extract<Form, { kind: "kaart" }>; concept?: Concept }) {
+function ConceptMap({ form, concept, onPick }: { form: Extract<Form, { kind: "kaart" }>; concept?: Concept; onPick?: (name: string | null) => void }) {
   const [active, setActive] = useState<number | null>(null);
+  const pick = (i: number) => { setActive(i); onPick?.(form.names[i] ?? null); };
   const labels = concept ? [concept.subject ?? "idee", ...concept.map]
     : form.names;
   return (
@@ -233,7 +234,7 @@ function ConceptMap({ form, concept }: { form: Extract<Form, { kind: "kaart" }>;
       ))}
       {form.nodes.map((n, i) => (
         <g key={i} role="button" tabIndex={0} aria-pressed={active === i} aria-label={labels[i]} className={`fw-node${active === i ? " is-done" : ""}`}
-          onClick={() => setActive(i)} onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setActive(i); } }}>
+          onClick={() => pick(i)} onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(i); } }}>
           <circle cx={n.x} cy={n.y} r={30} className="fw-hit" />
           <circle cx={n.x} cy={n.y} r={16} className="fw-node-circle" />
           <Say c={concept} x={n.x} y={n.y + 34} className={`fw-label fw-label--center${concept && i === 0 ? " fw-label--idea" : ""}`}>{labels[i]}</Say>
@@ -243,14 +244,14 @@ function ConceptMap({ form, concept }: { form: Extract<Form, { kind: "kaart" }>;
   );
 }
 
-export function FormWidget({ form, concept }: { form: Form; concept?: Concept }) {
+export function FormWidget({ form, concept, onPick }: { form: Form; concept?: Concept; onPick?: (name: string | null) => void }) {
   switch (form.kind) {
     case "knop": return <Knob form={form} concept={concept} />;
     case "schuif": return <Slider form={form} concept={concept} />;
     case "scherm": return <Screen form={form} concept={concept} />;
     case "grafiek": return <Chart form={form} concept={concept} />;
     case "route": return <Route form={form} concept={concept} />;
-    case "kaart": return <ConceptMap form={form} concept={concept} />;
+    case "kaart": return <ConceptMap form={form} concept={concept} onPick={onPick} />;
     default: return null;
   }
 }

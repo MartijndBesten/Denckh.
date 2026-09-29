@@ -9,12 +9,23 @@ import { conceptPlan, conceptReply, makeConcept, type Concept } from "@/lib/ink/
 import { buildForm, N, type Form } from "@/lib/ink/forms";
 import { bbox, clamp, dist, easeInOut, easeOut, lerp, linePath, outlinePath, resample, smooth, type InkPt, type Pt } from "@/lib/ink/geometry";
 import { READINGS, readingFor } from "@/lib/ink/interpret";
+import { KRUL_START, krulFit, krulPath } from "@/lib/ink/krul";
 import { normalize, place, setSketch } from "@/lib/ink/store";
 import { useReducedMotion } from "@/lib/ink/useReducedMotion";
 import { FormWidget } from "./FormWidget";
 
 type Phase = "idle" | "drawing" | "kijken" | "lezen" | "vormen" | "vorm";
 type Zone = { x: number; y: number; w: number; h: number };
+
+/** Eén korte vraag per punt op de ideeënkaart. Alleen zolang er nog geen idee is verteld. */
+const NODE_QUESTIONS: Record<string, string> = {
+  "de kern": "Is dit waar het eigenlijk om draait?",
+  "een zijsprong": "Hoort dit erbij, of is dit misschien een ander idee?",
+  "waar je begon": "Was dit ook het begin van je gedachte?",
+  "waar je eindigde": "Kwam je hier bewust uit?",
+  "nog een gedachte": "Is dit een tweede idee, of hoort het bij het eerste?",
+  "een uitloper": "Hoort dit er nog bij?",
+};
 
 const MIN_W = 1.6;
 const MAX_W = 7.5;
@@ -43,6 +54,7 @@ export function PuntStage() {
   const [idea, setIdea] = useState("");
   const [reply, setReply] = useState("");
   const [concept, setConcept] = useState<Concept | null>(null);
+  const [nodeQuestion, setNodeQuestion] = useState<string | null>(null);
   const [keyboard, setKeyboard] = useState(false);
   const [size, setSize] = useState({ w: 0, h: 0 });
   const phaseRef = useRef<Phase>("idle");
@@ -147,7 +159,7 @@ export function PuntStage() {
   // --- start, bewegen, loslaten
   function reset(keepFocus = true) {
     raw.current = [];
-    setInk([]); setForm(null); setFeatures(null); setMorph(0); setReply(""); setConcept(null); setKeyboard(false);
+    setInk([]); setForm(null); setFeatures(null); setMorph(0); setReply(""); setConcept(null); setNodeQuestion(null); setKeyboard(false);
     setPhase("idle");
     paint();
     placeDot(home.current);
@@ -244,16 +256,20 @@ export function PuntStage() {
     }
   }
 
-  // --- voorbeeld afspelen (voor wie niet wil of kan tekenen)
+  // --- voorbeeld afspelen (voor wie niet wil of kan tekenen): een uit de hand getekende cirkel, met de verhoudingen
+  //     van de cirkel in het Deegh-logo (public/images/deegh-logo.jpg). Eén rustige streek; daarna leest de engine
+  //     hem zoals elke eigen tekening.
   function playExample() {
     if (phase !== "idle") reset(false);
     const z = zone.current;
     const shape: Pt[] = [];
-    for (let i = 0; i <= 90; i++) {
-      const a = (i / 90) * Math.PI * 2 * 1.02 - Math.PI / 2;
-      shape.push({ x: 0.5 + Math.cos(a) * 0.42 + Math.sin(i * 0.9) * 0.012, y: 0.5 + Math.sin(a) * 0.4 });
+    for (let i = 0; i <= 96; i++) {
+      const t = i / 96;
+      const a = t * Math.PI * 2 * 1.03 - Math.PI * 0.62;
+      const r = 0.42 * (1 + 0.035 * Math.sin(t * Math.PI * 2 * 1.5 + 0.8) + 0.02 * Math.sin(t * Math.PI * 2 * 3.2));
+      shape.push({ x: 0.5 + Math.cos(a) * r, y: 0.5 + Math.sin(a) * r * 0.98 });
     }
-    const target = place(shape, z.x + z.w * 0.2, z.y + z.h * 0.18, z.w * 0.6, z.h * 0.64);
+    const target = place(shape, z.x + z.w * 0.2, z.y + z.h * 0.16, z.w * 0.6, z.h * 0.68);
     const start = home.current;
     const path = [start, ...resample([start, target[0]], 12).slice(1), ...target];
     raw.current = [{ ...start, w: MAX_W }];
@@ -345,7 +361,7 @@ export function PuntStage() {
         {phase === "vorm" && form && (
           <>
             <path d={linePath(form.outline, form.closed)} className="punt__form" />
-            <FormWidget form={form} concept={concept ?? undefined} />
+            <FormWidget form={form} concept={concept ?? undefined} onPick={(name) => setNodeQuestion(name ? NODE_QUESTIONS[name] ?? null : null)} />
             {concept && <IdeaMarks form={form} concept={concept} zone={zone.current} stage={size} />}
           </>
         )}
@@ -382,7 +398,7 @@ export function PuntStage() {
         )}
         {phase === "vorm" && (
           <div className="punt__reading">
-            <p className="punt__say">{READINGS[kind].caption}</p>
+            <p className="punt__say">{nodeQuestion && !concept ? nodeQuestion : READINGS[kind].caption}</p>
             <form className="punt__ask" onSubmit={submitIdea}>
               <label htmlFor="punt-idee">{concept ? "Iets anders in je hoofd? Probeer maar." : "Wat zat er ongeveer in je hoofd?"}</label>
               <div className="punt__ask-row">
@@ -499,10 +515,16 @@ function reach(form: Form) {
   }
 }
 
-/** Een potloodspoor van de punt naar het tekenvlak: zo zie je zonder uitleg wat de bedoeling is. */
+/** De hulplijn vóór het tekenen: van de punt naar het tekenvlak, en daar de Denckh-krul (dezelfde lijn als in het
+ *  Open Graph-beeld). Gestippeld en potloodgrijs: een voorstel, geen opdracht om over te trekken. */
 function GhostHint({ from, zone }: { from: Pt; zone: Zone }) {
-  const cx = zone.x + zone.w * 0.5, cy = zone.y + zone.h * 0.48, r = Math.min(zone.w, zone.h) * 0.22;
-  const d = `M${from.x + 18} ${from.y} C ${from.x + zone.w * 0.3} ${from.y - 40}, ${cx - r * 1.6} ${cy + r * 0.2}, ${cx - r} ${cy} ` +
-    `C ${cx - r} ${cy - r * 1.1}, ${cx + r * 1.1} ${cy - r * 1.1}, ${cx + r} ${cy - r * 0.1} C ${cx + r * 1.05} ${cy + r * 0.9}, ${cx - r * 0.2} ${cy + r * 1.1}, ${cx - r * 0.5} ${cy + r * 0.55}`;
+  const m = Math.min(zone.w, zone.h) * 0.08;
+  const fit = krulFit(zone.x + m, zone.y + m, zone.w - m * 2, zone.h - m * 2);
+  const a = fit(KRUL_START);
+  const p0 = { x: from.x + 18, y: from.y };
+  // aanloop: eerst weg van de kop, dan met een boog van linksonder de krul in
+  const c1 = { x: p0.x + (a.x - p0.x) * 0.15, y: p0.y + (a.y - p0.y) * 0.55 };
+  const c2 = { x: a.x - Math.max(40, (a.x - p0.x) * 0.3), y: a.y + 24 };
+  const d = `M${p0.x.toFixed(1)} ${p0.y.toFixed(1)} C ${c1.x.toFixed(1)} ${c1.y.toFixed(1)}, ${c2.x.toFixed(1)} ${c2.y.toFixed(1)}, ${a.x.toFixed(1)} ${a.y.toFixed(1)} ${krulPath(fit).replace(/^M[^C]*/, "")}`;
   return <path d={d} pathLength={1} className="punt__ghost" />;
 }

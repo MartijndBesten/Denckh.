@@ -4,7 +4,7 @@ Overdrachtsdocument voor de Denckh-website. Hier staan de actuele stand, alle be
 beslissingen, open punten en de volgende stappen. **Bijwerken aan het eind van elke werksessie.**
 
 - Laatst bijgewerkt: 2026-09-29
-- Live (`main`): "begin met een punt" (B-031) plus ronde 2 (gemerged uit `creatief/ronde-2`, B-038)
+- Live (`main`): "begin met een punt" (B-031), ronde 2 (B-038) en ronde 3 (merge `5427b8e`, B-047)
 
 ---
 
@@ -44,7 +44,11 @@ Nieuw werk: op een aparte branch; merge naar `main` = livegang.
 - 33/33 e2e-controles, axe 0 overtredingen op `/`, `/projecten/deegh/`, `/privacy/` en de hero met vorm en idee.
 - Hero: je idee maakt de eerste vorm concreet (onderwerp, drie delen, labels en aantekeningen) (B-037).
 
-**Branch `creatief/ronde-3` (niet live).** Eerder en vloeiender starten, stappen bij aanwijzen, Deegh-logo als stap
+**Afwerking krul (B-048 t/m B-053):** de krul uit het OG-beeld als merkelement, als hulplijn in de hero, rustiger
+voorbeeld op basis van de Deegh-cirkel, één vraag per kaartpunt, favicon blijft de punt, logo-lab als merkproefpagina,
+dossiers Deegh en demokoffer gesloten.
+
+**Ronde 3 (live sinds 2026-09-29, B-047).** Eerder en vloeiender starten, stappen bij aanwijzen, Deegh-logo als stap
 "een merk", concreet voorstel in de mail, kaartlabels uit de krabbel (B-039 t/m B-042), echt portret (B-043),
 aangescherpte positionering (B-044), Loflijn-beurt verwijderd (B-045) en de interne logo-proef (B-046, open).
 
@@ -55,7 +59,7 @@ aangescherpte positionering (B-044), Loflijn-beurt verwijderd (B-045) en de inte
 | Remote | `https://github.com/MartijndBesten/denckh` |
 | Zichtbaarheid | Publiek |
 | Hoofdbranch | `main` (live) |
-| Laatste werkbranch | `creatief/ronde-2` (gemerged, B-038) |
+| Laatste werkbranch | `creatief/ronde-3` (gemerged, B-047) |
 
 ---
 
@@ -112,6 +116,13 @@ Pas de oude regel niet aan. *Voorstel* = wacht op akkoord van de eigenaar.
 | B-044 | 2026-09-29 | Positionering aangescherpt, zonder nieuwe claims. "Van idee naar vorm": je hoeft nog niet te weten wat het moet worden; Denckh zoekt de vorm die bij het idee past en maakt die. "Wat kan eruit komen?" heet nu "Wat kan een idee worden?", met "De vorm volgt uit wat het idee nodig heeft" en "bijvoorbeeld" boven de vormen (voorbeelden, geen dienstenlijst). Werkwijze: Vertel (idee, probleem of losse gedachte), Denckh (samen uitzoeken wat nodig is en welke vorm past), Vorm (zichtbaar, testbaar of bruikbaar; waar nodig verder uitgebouwd). "Klein, bewust": concreet waar Denckh graag aan werkt, afgeleid uit de cases (techniek uitleggen, een product een plek geven, iets regelen). Contact: één regel dat een half idee, vraag of probleem genoeg is. Demokoffer-aanleiding als vraag geformuleerd. Metabeschrijving mee aangepast. Geen "we": Denckh of "ik". | Review eigenaar (via ChatGPT): het belangrijkste onderscheid is dat je je oplossing nog niet hoeft te kennen. Tekst mag niet als dienstenmenu of bureau lezen. | Vast |
 | B-045 | 2026-09-29 | Speelbare Loflijn-voorbeeldbeurt verwijderd (component, styles, tests). De Loflijn-case eindigt bij de constructie kaart → lied → tijdlijn, de uitleg en de link. Vervangt het tweede deel van B-034. | Review eigenaar: de beurt trekt de aandacht naar het spel in plaats van naar wat Denckh deed. De constructie is zelf al onderscheidend genoeg. | Vast |
 | B-046 | 2026-09-29 | Interne logo-proef op `/logo-lab/` (noindex, niet gelinkt, niet in de sitemap): het huidige woordmerk plus zeven varianten met elk één ingreep aan de onderkant (naad d, snede e, inkeping n, open c, onderbreking k, voet h, spoor punt). Het woordmerk op de site is niet veranderd. | Eigenaar wil eerst zelf vergelijken. | Open (O-34) |
+| B-047 | 2026-09-29 | `creatief/ronde-3` naar `main` gemerged (merge `5427b8e`): livegang ronde 3, inclusief `/logo-lab/` (noindex, niet gelinkt, niet in de sitemap). Woordmerk, OG-beeld (`/og.png`, okerkleurige krul) en favicon ongewijzigd. Deploy-run 36575797140 geslaagd. | Eigenaar: "Zet de huidige stand van creatief/ronde-3 live … /logo-lab/ mag mee online". | Vast |
+| B-048 | 2026-09-29 | De okerkleurige krul uit het OG-beeld is het grafische merkelement van Denckh, als bron vastgelegd in `src/lib/ink/krul.ts` (vier bochten, eindigend in de punt). Merkhiërarchie: compact `denckh.` (header, klein), signatuur `denckh.` + krul (OG, social), krul los waar het iets toevoegt. Het woordmerk zelf verandert niet; de lettersnedes uit ronde 3 worden niet toegepast en staan in `/logo-lab/` onder "eerdere proeven". | Eigenaar: woordmerk is akkoord; de krul is sterk en mag merkelement worden. | Vast |
+| B-049 | 2026-09-29 | Hero: de gestippelde hulplijn vóór het tekenen volgt nu de geometrie van de krul (aanloop vanaf de punt achter "Mooi", dan de vier bochten). Zelfde potloodgrijze stippeling, iets fijner; verdwijnt zodra je tekent. | Eigenaar: dezelfde lijn als in de identiteit is de eerste uitnodiging om te tekenen. | Vast |
+| B-050 | 2026-09-29 | "Bekijk een voorbeeld" tekent één rustige, uit de hand getekende cirkel met de verhoudingen van de cirkel in het Deegh-logo (langzame variatie in de straal, geen hoogfrequente wiebel meer). De engine leest hem als elke eigen tekening ("rond en gesloten"). Het woord in het logo is bewust niet meegenomen: in één streek wordt dat een krabbel met kruisingen. | Eigenaar: geen wilde krabbel; het echte Deegh-logo als referentie; niet hardcoderen. | Vast |
+| B-051 | 2026-09-29 | Ideeënkaart: een aangeraakt punt toont één korte vraag op de plek van het bijschrift ("de kern → Is dit waar het eigenlijk om draait?", enz.). Alleen zolang er nog geen idee is verteld; daarna zijn de punten de delen van het idee. | Proef uit de opdracht; blijft rustig (één regel, geen extra UI), dus toegepast. | Vast |
+| B-052 | 2026-09-29 | Favicon blijft de punt. De krul-proef (`public/favicon-krul.svg`, vergelijking in `/logo-lab/` §5) is op 32 en 48 px herkenbaar, maar op 16 px een onduidelijk kronkeltje. | Regel uit de opdracht: alleen vervangen als de krul op 16 px rustig herkenbaar blijft. | Vast |
+| B-053 | 2026-09-29 | Deegh: logo en merk zijn eigen werk van de eigenaar (destijds samen met zijn broers); Denckh presenteert "deegbol → merk → webshop" als eigen werk. Demokoffer: de eigenaar was initiatiefnemer en formuleerde zelf de ontwerpvraag ("een demokoffer vol sensortechniek moest ook zonder uitgebreide uitleg snel te begrijpen en te gebruiken zijn"). Beide dossiers bijgewerkt; sitetekst ongewijzigd. | Bevestiging eigenaar 2026-09-29. Sluit O-35 en het open punt "aanleiding" in het koffer-dossier. | Vast |
 
 ---
 
@@ -140,17 +151,17 @@ Pas de oude regel niet aan. *Voorstel* = wacht op akkoord van de eigenaar.
 | O-21 | **Definitieve woordmerktekening** (B-028): de ligatuur is nu opgebouwd uit fontcontouren plus een balk. | Laten tekenen/verfijnen voor print en groot formaat. |
 | O-23 | **Echte AI:** publiek, alleen demo, of niet? Model, endpoint, budget. | Eerst niet publiek; besluit na `docs/ai-onderzoek.md`. |
 | O-24 | **Contact:** mailto volstaat, of een echte verzendroute (serverless)? | Mailto voor nu. |
-| O-25 | **Beelden Loflijn en Deegh** (naam en link mogen, B-029). Deegh-logo is binnen (B-040). | Scherpere logoversie (SVG) en screenshots of foto's aanleveren; de schematische constructie eindigt dan in het echte beeld. |
+| O-25 | **Beelden Loflijn en Deegh** (naam en link mogen, B-029). Deegh-logo is binnen (B-040, eigen werk B-053). | Scherpere logoversie (SVG) en screenshots of foto's aanleveren; de schematische constructie eindigt dan in het echte beeld. |
 | O-30 | **Handelsnaam Denckh bij KvK.** De site noemt KvK 83176896 (de inschrijving van Deegh). | Controleren dat Denckh als handelsnaam bij deze inschrijving staat; zo niet, laten toevoegen bij KvK. |
 | O-26 | **Deegh-beelden:** welke foto's zijn echt en van jou? | Pas daarna echte beelden in de Deegh-case. |
 | O-27 | **Naam** in "klein, bewust" (portret staat er sinds B-043). | Naam tonen, of bewust weglaten. |
 | O-28 | **JS-gewicht:** 192 KB gzip, waarvan ca. 150 KB Next.js-runtime. Accepteren, of later naar Astro? | Accepteren; herzien als de site groeit. |
-| O-34 | **Logo-lab** (`/logo-lab/`, B-046): welke variant, of het huidige woordmerk houden? | Zelf vergelijken; daarna één variant uitwerken of `/logo-lab/` weghalen vóór livegang (anders staat hij publiek, al is hij niet vindbaar). |
-| O-35 | **Deegh als merk:** de stap "een merk" suggereert dat Denckh het Deegh-logo maakte. | Bevestigen dat het logo van jou is; anders de stap anders noemen. |
+| O-34 | **Logo-lab** (`denckh.nl/logo-lab/`): nu merkproefpagina (B-048). Woordmerk blijft; lettersnedes staan als archief onder "eerdere proeven". | Pagina weghalen of houden zodra de krul-toepassingen vaststaan. |
+| O-36 | **GitHub Pages meldt `http://denckh.nl/` als omgeving-URL.** Mogelijk staat "Enforce HTTPS" uit. | Eigenaar controleert in GitHub → Settings → Pages; niet door Claude aangepast (buiten scope). |
 | O-02 | Repo is publiek. | Op privé zetten kan alleen met betaald GitHub-plan voor Pages; anders bewust publiek laten en niets vertrouwelijks opnemen. |
 
 Afgehandeld: O-01 (repo hernoemd naar `denckh`), O-08 (live sites via geautoriseerde browsersessie bekeken, zie
-cases), O-14 (domein actief op GitHub Pages), O-31/O-32/O-33 (B-038).
+cases), O-14 (domein actief op GitHub Pages), O-31/O-32/O-33 (B-038), O-35 (B-053).
 
 ---
 
