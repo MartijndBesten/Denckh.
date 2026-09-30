@@ -51,7 +51,7 @@ const stops = HOME_STOPS.map((s) => `<div class="stop">
 
 const form = (it) => `<div class="form">
   <div class="form__top"><h3>${esc(it.name)}</h3><p class="form__price"><span class="from">vanaf</span> €${it.price}</p></div>
-  <p class="form__text">${esc(it.text)}</p>${it.aside ? `<p class="form__aside">${esc(it.aside)}</p>` : ""}${it.domain ? `<p class="form__domain">${esc(DOMAIN_NOTE)}</p>` : ""}
+  <p class="form__text">${esc(it.text)}</p>${it.aside ? `<p class="form__aside">${esc(it.aside)}</p>` : ""}
 </div>`;
 
 const STEPS = [
@@ -153,7 +153,7 @@ footer span:last-child { margin-left: auto; }
     <svg viewBox="0 0 ${W} 12"><path d="${priceLine(xs, 6, GW)}" fill="none" stroke="${C.idea}" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     <div class="stops">${stops}</div>
   </div>
-  <div class="forms-head"><h2>Richtprijzen per vorm.</h2><p>Alle bedragen zijn vanafprijzen, exclusief btw.</p></div>
+  <div class="forms-head"><h2>Richtprijzen per vorm.</h2><p>Alle bedragen zijn vanafprijzen, exclusief btw.<br>Voor particuliere opdrachten vermeld ik vooraf ook de prijs inclusief btw.</p></div>
   <div class="forms">${FORM_PRICES.map(form).join("")}</div>
   ${foot(1)}
 </section>
@@ -172,7 +172,7 @@ footer span:last-child { margin-left: auto; }
       <p class="small">Heb je iets hiervan nodig? Dan spreken we het vooraf apart af.</p></div>
   </div>
   <div class="block">
-    <h3>Je eigen webadres en hosting</h3><p class="small" style="color:${C.ochreDeep}">Website, Uitgebreidere website en Webshop: ${esc(DOMAIN_NOTE.charAt(0).toLowerCase() + DOMAIN_NOTE.slice(1))}</p>
+    <h3>Je eigen webadres en hosting</h3><p class="small" style="color:${C.ochreDeep}">Bij elke website en webshop: ${esc(DOMAIN_NOTE.charAt(0).toLowerCase() + DOMAIN_NOTE.slice(1))}</p>
     <ul class="not two">${WEB_ADDRESS.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>
   </div>
   <div class="close"><h2>Benieuwd wat jouw idee kost?</h2><p>Vertel je idee: <b>info@denckh.nl</b> · denckh.nl</p></div>

@@ -77,7 +77,7 @@ export const FORM_PRICES: FormPrice[] = [
   { key: "website", group: "online", name: "Website", price: 295, shape: "website", domain: true, text: "Een compacte responsive website voor één helder aanbod of idee, op basis van inhoud die jij aanlevert." },
   { key: "website-plus", group: "online", name: "Uitgebreidere website", price: 495, shape: "websitePlus", domain: true, text: "Meer pagina’s, meer eigen ontwerp of extra interactie dan de compacte website." },
   { key: "webshop", group: "online", name: "Webshop", price: 595, shape: "webshop", domain: true, text: "Een compacte webshop op een bestaand platform, met basisinrichting en een geteste mobiele checkout. Geen complexe maatwerk e-commerce." },
-  { key: "webshop-plus", group: "online", name: "Uitgebreidere webshop", price: 795, shape: "webshopPlus", text: "Meer eigen uitstraling, extra inrichting of interactie en uitgebreidere oplevering." },
+  { key: "webshop-plus", group: "online", name: "Uitgebreidere webshop", price: 795, shape: "webshopPlus", domain: true, text: "Meer eigen uitstraling, extra inrichting of interactie en uitgebreidere oplevering." },
 ];
 
 export const INCLUDED = [

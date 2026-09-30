@@ -171,6 +171,7 @@ Pas de oude regel niet aan. *Voorstel* = wacht op akkoord van de eigenaar.
 | B-070 | 2026-09-29 | `/prijzen/`: vormen gegroepeerd in *Zichtbaar maken*, *Digitaal maken* en *Online zetten* (groepsnaam boven de eerste vorm, `FORM_GROUPS` in `prices.ts`); mobiel compacter (kleinere vaste figuur, rijen en letters). "Website Plus" heet "Uitgebreidere website". Teksten aangescherpt: Iets zonder naam (gesprek, zelf uitzoeken, concrete richting) versus Even Denckh (60 minuten samen denken); Website op basis van aangeleverde inhoud; Webshop op een bestaand platform, geen complexe maatwerk e-commerce; domeinregel met "Hosting is niet inbegrepen". Prijzen ongewijzigd; prijslijst-PDF opnieuw gemaakt. | Eigenaar, 2026-09-29. | Vast |
 | B-071 | 2026-09-30 | Geen uurtarief meer op de site en in de prijslijst-PDF. In plaats van "Los vervolgwerk: €45 per uur" staat *Iets extra nodig? Werk buiten de afgesproken scope doe ik alleen na overleg. Je hoort vooraf wat het extra kost.* Even Denckh (€45 voor 60 minuten) en de vanafprijzen blijven zichtbaar. Het uurtarief blijft de interne rekenbasis voor meerwerk in offertes. | Eigenaar: Denckh verkoopt een resultaat met een vaste prijs, geen uren; een zichtbaar uurtarief nodigt uit tot narekenen en positioneert als freelancer per uur. | Vast |
 | B-072 | 2026-09-30 | Eén principe op `/prijzen/`: eerst kennismaken, pas als we afspreken dat ik voor je aan het werk ga, kost het iets. Onder Kennismaken: *Kost niets. Wil je daarna echt samen aan de slag, dan spreken we dat eerst af.* Iets zonder naam: *We bespreken je idee. Daarna zoek ik het zelf verder uit en werk ik een concrete richting of voorstel voor je uit. Vooraf spreken we af wat je krijgt.* Geen administratieve taal over facturen. | Eigenaar: onduidelijk wanneer gratis kennismaken overgaat in betaald werk. | Vast |
+| B-073 | 2026-09-30 | (1) Btw: bij de prijskop op `/prijzen/` en in de prijslijst-PDF staat nu *Alle bedragen zijn vanafprijzen, exclusief btw. Voor particuliere opdrachten vermeld ik vooraf ook de prijs inclusief btw.* Denckh wordt niet beperkt tot ondernemers. (2) Domeinregel ook bij Uitgebreidere webshop: elke website en webshop heeft hem. Daarna geen extra prijsteksten meer. | Eigenaar: de site trekt ook particulieren, verenigingen en stichtingen; een prijs die later hoger blijkt, moet niet verrassen. Een uitgebreidere webshop zonder domein dat de kleinere wel heeft, is vreemd. | Vast |
 
 ---
 
@@ -206,12 +207,11 @@ Pas de oude regel niet aan. *Voorstel* = wacht op akkoord van de eigenaar.
 | O-28 | **JS-gewicht:** 192 KB gzip, waarvan ca. 150 KB Next.js-runtime. Accepteren, of later naar Astro? | Accepteren; herzien als de site groeit. |
 | O-34 | **Logo-lab** (`denckh.nl/logo-lab/`): nu merkproefpagina (B-048). Woordmerk blijft; lettersnedes staan als archief onder "eerdere proeven". | Pagina weghalen of houden zodra de krul-toepassingen vaststaan. |
 | O-36 | **GitHub Pages meldt `http://denckh.nl/` als omgeving-URL.** Mogelijk staat "Enforce HTTPS" uit. | Eigenaar controleert in GitHub → Settings → Pages; niet door Claude aangepast (buiten scope). |
-| O-37 | **Prijzen exclusief btw en consumenten.** Voor prijzen die je aan consumenten laat zien, vraagt de wet (Besluit prijsaanduiding, ACM) een prijs inclusief btw. De site toont nu alles exclusief btw, zoals gevraagd. | Kiezen: (a) zo laten als Denckh zich op ondernemers richt, eventueel met "voor ondernemers"; of (b) incl. btw erbij tonen (bijv. €45 wordt €54,45). |
-| O-38 | **Domeinnaam bij Uitgebreidere webshop.** Staat nu alleen bij Website, Website Plus en Webshop (briefing). | Bevestigen, of ook bij Uitgebreidere webshop zetten (één regel in `prices.ts`). |
+| O-37 | **Consumentenprijzen juridisch controleren.** Tekst over particulieren staat erbij (B-073). Voor prijzen aan consumenten gelden strengere regels dan voor B2B. | Vóór actieve verkoop aan consumenten laten controleren door een deskundige hoe de prijzen op de site gepresenteerd moeten worden; niet door Claude laten invullen. |
 | O-02 | Repo is publiek. | Op privé zetten kan alleen met betaald GitHub-plan voor Pages; anders bewust publiek laten en niets vertrouwelijks opnemen. |
 
 Afgehandeld: O-01 (repo hernoemd naar `denckh`), O-08 (live sites via geautoriseerde browsersessie bekeken, zie
-cases), O-14 (domein actief op GitHub Pages), O-31/O-32/O-33 (B-038), O-35 (B-053), O-39 (B-067).
+cases), O-14 (domein actief op GitHub Pages), O-31/O-32/O-33 (B-038), O-35 (B-053), O-38 (B-073), O-39 (B-067).
 
 ---
 
