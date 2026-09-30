@@ -29,7 +29,7 @@ export const HOME_STOPS: PriceStop[] = [
 
 /** Hoe het begint: kennismaken, samen denken, en een project met een vaste prijs. */
 export const START_STOPS: PriceStop[] = [
-  { glyph: "punt", label: "Kennismaken", price: "vrijblijvend", meta: "circa 20 minuten", text: "Kort je idee vertellen en kijken of Denckh erbij past." },
+  { glyph: "punt", label: "Kennismaken", price: "vrijblijvend", meta: "circa 20 minuten", text: "Kort je idee vertellen en kijken of Denckh erbij past.", note: "Kost niets. Wil je daarna echt samen aan de slag, dan spreken we dat eerst af." },
   {
     glyph: "schets",
     label: "Even Denckh",
@@ -65,7 +65,7 @@ export const FORM_PRICES: FormPrice[] = [
     name: "Iets zonder naam",
     price: 95,
     shape: "schets",
-    text: "Eerst een gesprek over je idee. Daarna zoek ik het zelf kort uit en lever ik een concrete richting of voorstel op, met een vaste prijs voor het vervolg.",
+    text: "We bespreken je idee. Daarna zoek ik het zelf verder uit en werk ik een concrete richting of voorstel voor je uit. Vooraf spreken we af wat je krijgt.",
     aside: "Anders dan Even Denckh (€45): dat is 60 minuten samen denken, zonder uitzoekwerk achteraf.",
   },
   { key: "visual", group: "zichtbaar", name: "Visual / eerste vorm", price: 125, shape: "visualisatie", text: "Een schema, conceptbeeld, visueel verhaal of andere compacte uitwerking." },
