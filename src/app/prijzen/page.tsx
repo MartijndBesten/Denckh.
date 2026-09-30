@@ -46,7 +46,7 @@ export default function Prijzen() {
         <section className="price-page__section" aria-labelledby="vormen-titel">
           <header className="price-page__head">
             <h2 id="vormen-titel">Richtprijzen per vorm.</h2>
-            <p>Alle bedragen zijn vanafprijzen, exclusief btw.</p>
+            <p>Alle bedragen zijn vanafprijzen, exclusief btw. Voor particuliere opdrachten vermeld ik vooraf ook de prijs inclusief btw.</p>
           </header>
           <FormPrices items={FORM_PRICES} />
         </section>
