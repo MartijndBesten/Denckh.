@@ -6,7 +6,7 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { chromium } from "playwright";
-import { DOMAIN_NOTE, FORM_PRICES, HOME_STOPS, HOURLY, INCLUDED, NOT_INCLUDED, PRICE_PDF, WEB_ADDRESS } from "../src/lib/prices.ts";
+import { DOMAIN_NOTE, FORM_PRICES, HOME_STOPS, EXTRA, INCLUDED, NOT_INCLUDED, PRICE_PDF, WEB_ADDRESS } from "../src/lib/prices.ts";
 
 const BRAND = path.resolve("public/brand"), FONTS = path.resolve("public/fonts");
 const OUT = path.join(path.resolve("public"), PRICE_PDF);
@@ -167,7 +167,7 @@ footer span:last-child { margin-left: auto; }
   <div class="steps">${STEPS.map(([t, d]) => `<div class="step"><span class="dot"></span><h3>${t}</h3><p>${d}</p></div>`).join("")}</div>
   <div class="cols">
     <div><h2>Wat zit er standaard bij?</h2><ul>${INCLUDED.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>
-      <h3 style="margin-top:8mm">Los vervolgwerk</h3><p class="hourly">${esc(HOURLY.price)} per uur<span class="meta">excl. btw</span></p><p class="small" style="margin-top:0">${esc(HOURLY.note)}</p></div>
+      <h3 style="margin-top:8mm">${esc(EXTRA.title)}</h3><p class="small" style="margin-top:1.4mm">${esc(EXTRA.text)}</p></div>
     <div><h2>Niet standaard inbegrepen</h2><ul class="not">${NOT_INCLUDED.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>
       <p class="small">Heb je iets hiervan nodig? Dan spreken we het vooraf apart af.</p></div>
   </div>

@@ -372,7 +372,7 @@ const dotOffset = (p) => p.evaluate(() => { const n = document.querySelector(".f
   const start = await p.locator(".pl__stop").evaluateAll((els) => els.map((e) => `${e.querySelector(".pl__label")?.textContent}: ${e.querySelector(".pl__price")?.textContent?.replace(/\s+/g, " ").trim()}`));
   check("prijzen: kennismaken, Even Denckh, project", start.join(" | ") === "Kennismaken: vrijblijvend circa 20 minuten | Even Denckh: €45 excl. btw · 60 minuten | Project: vaste prijs vooraf afgesproken", start.join(" | "));
   const body = (await p.locator("main").textContent()) ?? "";
-  check("prijzen: los vervolgwerk €45 per uur excl. btw, na overleg", /Extra of los vervolgwerk: €45 per uur excl\. btw\./.test(body) && /Alleen na overleg\./.test(body));
+  check("prijzen: meerwerk na overleg, geen uurtarief op de site", /Iets extra nodig\?/.test(body) && /Je hoort vooraf wat het extra kost\./.test(body) && !/per uur/.test(body));
   check("prijzen: webadres op eigen naam, hosting niet standaard", /komt op jouw naam/.test(body) && /Hosting zit er niet standaard bij\./.test(body));
   check("prijzen: standaard en niet standaard", (await p.locator(".scope-list--in li").count()) === 6 && (await p.locator("#niet-titel + ul li").count()) === 12);
   const pdf = fs.existsSync(new URL("../public/downloads/denckh-prijslijst.pdf", import.meta.url));

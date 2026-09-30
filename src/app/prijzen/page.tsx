@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Footer, Header } from "@/components/Header";
 import { FormPrices } from "@/components/grammar/FormPrices";
 import { PriceLine } from "@/components/grammar/PriceLine";
-import { FORM_PRICES, HOURLY, INCLUDED, NOT_INCLUDED, PRICE_PDF, START_STOPS, WEB_ADDRESS } from "@/lib/prices";
+import { EXTRA, FORM_PRICES, INCLUDED, NOT_INCLUDED, PRICE_PDF, START_STOPS, WEB_ADDRESS } from "@/lib/prices";
 
 const description = "Richtprijzen van Denckh: even samen denken voor €45, een eerste vorm vanaf €125 en een werkend resultaat vanaf €295. Na de intake weet je vooraf wat jouw idee kost.";
 
@@ -63,15 +63,14 @@ export default function Prijzen() {
           </div>
         </section>
 
-        <section className="price-page__section price-page__notes" aria-label="Webadres, hosting en vervolgwerk">
+        <section className="price-page__section price-page__notes" aria-label="Webadres, hosting en meerwerk">
           <div>
             <h3>Je eigen webadres en hosting</h3>
             <ul className="scope-list scope-list--small">{WEB_ADDRESS.map((t) => <li key={t}>{t}</li>)}</ul>
           </div>
           <div>
-            <h3>Los vervolgwerk</h3>
-            <p>{HOURLY.text}</p>
-            <p className="price-page__small">{HOURLY.note}</p>
+            <h3>{EXTRA.title}</h3>
+            <p>{EXTRA.text}</p>
           </div>
         </section>
 
