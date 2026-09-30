@@ -131,9 +131,10 @@ export default function Home() {
         </figure>
         <div className="small__text">
           <h2 id="klein-titel">Denckh is klein. Bewust.</h2>
-          <p>Ik ben Martijn. Elektrotechnisch opgeleid en al jaren aan het werk waar techniek en commercie elkaar raken: verlichting, lichtsturing en slimme gebouwen.</p>
-          <p>Daardoor kijk ik van twee kanten naar een vraag: hoe werkt het echt, en hoe maak je het zo eenvoudig dat een ander het begrijpt, gebruikt of kan verkopen? Soms wordt dat een interactieve uitleg, een prototype, een tool of een presentatie. Soms iets fysieks. En soms gewoon een goede website.</p>
+          <p>Heb je een idee, product of technisch verhaal dat nog niet helemaal in vorm is? Dan help ik je uitzoeken wat het eigenlijk nodig heeft, en maak ik het concreet.</p>
+          <p>Soms wordt dat een interactieve uitleg, prototype, tool of presentatie. Soms iets fysieks. En soms gewoon een goede website.</p>
           <p>Je werkt rechtstreeks met mij: degene die meedenkt én maakt.</p>
+          <p>Waarom ik juist dit soort vragen leuk vind? Mijn achtergrond ligt op het snijvlak van techniek en commercie. Ik ben elektrotechnisch opgeleid en werk al jaren met verlichting, lichtsturing en slimme gebouwen. Daardoor kijk ik vaak van twee kanten naar een vraag: hoe werkt het echt, en hoe maken we het zo eenvoudig dat een ander het begrijpt, gebruikt of kan verkopen?</p>
           <p>Naast Denckh maak ik Deegh, ambachtelijk pizzadeeg. Ook dat begon als een idee.</p>
           <p><a className="link-draw" href="/downloads/denckh-achter-denckh.pdf" download>Meer over mijn achtergrond (pdf)</a></p>
         </div>
