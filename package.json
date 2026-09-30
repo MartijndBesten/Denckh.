@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "test:e2e": "node tests/interaction.mjs",
     "brand": "node --experimental-strip-types --no-warnings scripts/build-brand.mjs",
-    "prijslijst": "node --experimental-strip-types --no-warnings scripts/price-list.mjs"
+    "prijslijst": "node --experimental-strip-types --no-warnings scripts/price-list.mjs",
+    "achter": "node scripts/achter-denckh.mjs"
   },
   "dependencies": {
     "next": "^16.0.0",

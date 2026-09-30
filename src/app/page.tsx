@@ -135,6 +135,7 @@ export default function Home() {
           <p>Daardoor kijk ik van twee kanten naar een vraag: hoe werkt het echt, en hoe maak je het zo eenvoudig dat een ander het begrijpt, gebruikt of kan verkopen? Soms wordt dat een interactieve uitleg, een prototype, een tool of een presentatie. Soms iets fysieks. En soms gewoon een goede website.</p>
           <p>Je werkt rechtstreeks met mij: degene die meedenkt én maakt.</p>
           <p>Naast Denckh maak ik Deegh, ambachtelijk pizzadeeg. Ook dat begon als een idee.</p>
+          <p><a className="link-draw" href="/downloads/denckh-achter-denckh.pdf" download>Meer over mijn achtergrond (pdf)</a></p>
         </div>
       </section>
 

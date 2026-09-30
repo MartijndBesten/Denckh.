@@ -338,6 +338,8 @@ for (const [w, h, mobile] of [[320, 700, true], [393, 852, true], [1440, 900, fa
   await p.locator("#prijzen-titel").evaluate((el) => { el.tabIndex = -1; el.focus(); });
   await p.keyboard.press("Tab");
   check("prijsblok: toetsenbord gaat direct naar de richtprijzen", ((await p.evaluate(() => document.activeElement?.textContent)) ?? "") === "Bekijk de richtprijzen");
+  const achter = await p.request.get(new URL("downloads/denckh-achter-denckh.pdf", BASE).href);
+  check("achter Denckh: pdf-link bij het portret en bestand wordt geleverd", (await p.locator('.small a[href="/downloads/denckh-achter-denckh.pdf"]').count()) === 1 && achter.ok() && (await achter.body()).subarray(0, 5).toString() === "%PDF-");
   check("footer: link naar prijzen", (await p.locator(".site-footer a[href='/prijzen/']").count()) === 1);
   check("prijsblok: geen console-errors", errors.length === 0, errors.join(" | "));
   await ctx.close();
