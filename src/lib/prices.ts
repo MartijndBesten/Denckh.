@@ -111,7 +111,8 @@ export const WEB_ADDRESS = [
   "Is hosting nodig, dan help ik je die in te richten. Wat dat kost, hoor je vooraf.",
 ];
 
-export const HOURLY = { price: "€45", text: "Extra of los vervolgwerk: €45 per uur excl. btw.", note: "Alleen na overleg. Voor afgebakende projecten heeft een vaste prijs vooraf mijn voorkeur." };
+/** Meerwerk: geen uurtarief op de site (je koopt een resultaat met een vaste prijs), wel de afspraak vooraf. */
+export const EXTRA = { title: "Iets extra nodig?", text: "Werk buiten de afgesproken scope doe ik alleen na overleg. Je hoort vooraf wat het extra kost." };
 
 /** De prijslijst als PDF: pas zichtbaar als dit bestand in public/ staat (geen kapotte link). */
 export const PRICE_PDF = "/downloads/denckh-prijslijst.pdf";
