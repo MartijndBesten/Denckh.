@@ -136,7 +136,7 @@ export default function Home() {
           <p>Je werkt rechtstreeks met mij: degene die meedenkt én maakt.</p>
           <p>Waarom ik juist dit soort vragen leuk vind? Mijn achtergrond ligt op het snijvlak van techniek en commercie. Ik ben elektrotechnisch opgeleid en werk al jaren met verlichting, lichtsturing en slimme gebouwen. Daardoor kijk ik vaak van twee kanten naar een vraag: hoe werkt het echt, en hoe maken we het zo eenvoudig dat een ander het begrijpt, gebruikt of kan verkopen?</p>
           <p>Naast Denckh maak ik Deegh, ambachtelijk pizzadeeg. Ook dat begon als een idee.</p>
-          <p><a className="link-draw" href="/downloads/denckh-achter-denckh.pdf" download>Meer over mijn achtergrond (pdf)</a></p>
+          <p><a className="link-draw" href="/downloads/denckh-achter-denckh.pdf">Meer over mijn achtergrond →</a></p>
         </div>
       </section>
 
