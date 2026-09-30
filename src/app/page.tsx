@@ -26,7 +26,7 @@ export default function Home() {
         <SettleTitle id="idee-titel" text="Van idee naar vorm." className="story__title" />
         <div className="story__text">
           <p className="story__lead">Soms weet je precies wat je wilt. Soms heb je alleen een gedachte waarvan je denkt: hier zit iets in.</p>
-          <p>Je hoeft nog niet te weten wat het moet worden. Denckh denkt mee, zoekt de vorm die bij het idee past en maakt die concreet. Dat kan een website zijn, een prototype of een interactieve uitleg. Of iets waarvoor nog geen goede naam bestaat.</p>
+          <p>Je hoeft nog niet te weten wat het moet worden. Denckh denkt mee, zoekt de vorm die bij het idee past en maakt die concreet. Dat kan een interactieve uitleg zijn, een prototype, een presentatie of iets fysieks. Soms is het een website. Of iets waarvoor nog geen goede naam bestaat.</p>
         </div>
       </section>
 
@@ -96,7 +96,7 @@ export default function Home() {
       <section className="shell outcomes-section" aria-labelledby="uitkomst-titel">
         <header className="projects__head">
           <h2 id="uitkomst-titel">Wat kan een idee worden?</h2>
-          <p>Dat weet je niet altijd vooraf. De vorm volgt uit wat het idee nodig heeft.</p>
+          <p>Dat weet je niet altijd vooraf. De vorm volgt uit wat het idee nodig heeft. Juist iets technisch of ingewikkelds? Mooi. Daar begint het vaak.</p>
         </header>
         <Outcomes />
       </section>
@@ -131,8 +131,9 @@ export default function Home() {
         </figure>
         <div className="small__text">
           <h2 id="klein-titel">Denckh is klein. Bewust.</h2>
-          <p>Achter Denckh zit één persoon. Je werkt rechtstreeks met degene die meedenkt én maakt. Geen accountmanager, geen doorgeefluik.</p>
-          <p>Ik werk graag aan ideeën die nog niet vaststaan: techniek die uitgelegd moet worden, een product dat een plek nodig heeft, iets wat geregeld moet worden. Of gewoon uitzoeken wat de goede vorm is.</p>
+          <p>Ik ben Martijn. Elektrotechnisch opgeleid en al jaren aan het werk waar techniek en commercie elkaar raken: verlichting, lichtsturing en slimme gebouwen.</p>
+          <p>Daardoor kijk ik van twee kanten naar een vraag: hoe werkt het echt, en hoe maak je het zo eenvoudig dat een ander het begrijpt, gebruikt of kan verkopen? Soms wordt dat een interactieve uitleg, een prototype, een tool of een presentatie. Soms iets fysieks. En soms gewoon een goede website.</p>
+          <p>Je werkt rechtstreeks met mij: degene die meedenkt én maakt.</p>
           <p>Naast Denckh maak ik Deegh, ambachtelijk pizzadeeg. Ook dat begon als een idee.</p>
         </div>
       </section>

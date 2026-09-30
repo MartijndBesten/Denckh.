@@ -166,14 +166,14 @@ export const SHAPES: Record<string, (b: Box) => Shape> = {
 };
 
 export const OUTCOMES: { word: string; shape: keyof typeof SHAPES | "schets" }[] = [
-  { word: "website", shape: "website" },
+  { word: "interactieve uitleg", shape: "uitleg" },
   { word: "prototype", shape: "prototype" },
   { word: "tool", shape: "tool" },
-  { word: "presentatie", shape: "presentatie" },
-  { word: "interactieve demo", shape: "demo" },
-  { word: "spel", shape: "spel" },
   { word: "visualisatie", shape: "visualisatie" },
+  { word: "presentatie", shape: "presentatie" },
+  { word: "demo of showroomconcept", shape: "demo" },
+  { word: "website", shape: "website" },
   { word: "webshop", shape: "webshop" },
-  { word: "interactieve uitleg", shape: "uitleg" },
+  { word: "spel", shape: "spel" },
   { word: "iets waar nog geen naam voor is", shape: "schets" },
 ];

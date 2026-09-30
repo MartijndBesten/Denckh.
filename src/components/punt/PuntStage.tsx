@@ -370,7 +370,7 @@ export function PuntStage() {
           Mooi<span ref={homeRef} className="punt__home" aria-hidden="true" /><span className="visually-hidden">.</span>
         </h1>
         <p className="punt__intro">
-          Denckh is een kleine conceptstudio. Weet je nog niet wat het moet worden? Ook goed. Ik denk mee en maak het concreet.
+          Een technisch product, een ingewikkeld verhaal, een praktisch probleem of een goed idee. Denckh zoekt uit welke vorm het begrijpelijk, bruikbaar of zichtbaar maakt.
         </p>
       </div>
 

@@ -172,6 +172,7 @@ Pas de oude regel niet aan. *Voorstel* = wacht op akkoord van de eigenaar.
 | B-071 | 2026-09-30 | Geen uurtarief meer op de site en in de prijslijst-PDF. In plaats van "Los vervolgwerk: €45 per uur" staat *Iets extra nodig? Werk buiten de afgesproken scope doe ik alleen na overleg. Je hoort vooraf wat het extra kost.* Even Denckh (€45 voor 60 minuten) en de vanafprijzen blijven zichtbaar. Het uurtarief blijft de interne rekenbasis voor meerwerk in offertes. | Eigenaar: Denckh verkoopt een resultaat met een vaste prijs, geen uren; een zichtbaar uurtarief nodigt uit tot narekenen en positioneert als freelancer per uur. | Vast |
 | B-072 | 2026-09-30 | Eén principe op `/prijzen/`: eerst kennismaken, pas als we afspreken dat ik voor je aan het werk ga, kost het iets. Onder Kennismaken: *Kost niets. Wil je daarna echt samen aan de slag, dan spreken we dat eerst af.* Iets zonder naam: *We bespreken je idee. Daarna zoek ik het zelf verder uit en werk ik een concrete richting of voorstel voor je uit. Vooraf spreken we af wat je krijgt.* Geen administratieve taal over facturen. | Eigenaar: onduidelijk wanneer gratis kennismaken overgaat in betaald werk. | Vast |
 | B-073 | 2026-09-30 | (1) Btw: bij de prijskop op `/prijzen/` en in de prijslijst-PDF staat nu *Alle bedragen zijn vanafprijzen, exclusief btw. Voor particuliere opdrachten vermeld ik vooraf ook de prijs inclusief btw.* Denckh wordt niet beperkt tot ondernemers. (2) Domeinregel ook bij Uitgebreidere webshop: elke website en webshop heeft hem. Daarna geen extra prijsteksten meer. | Eigenaar: de site trekt ook particulieren, verenigingen en stichtingen; een prijs die later hoger blijkt, moet niet verrassen. Een uitgebreidere webshop zonder domein dat de kleinere wel heeft, is vreemd. | Vast |
+| B-074 | 2026-09-30 | Positionering aangescherpt, geen redesign: eerst begrijpen en concreet maken, website is één mogelijke vorm. Hero-intro: *Een technisch product, een ingewikkeld verhaal, een praktisch probleem of een goed idee. Denckh zoekt uit welke vorm het begrijpelijk, bruikbaar of zichtbaar maakt.* (ingekort: zo blijft "begin met een punt" op mobiel in het eerste scherm) Verhaal: voorbeelden beginnen met interactieve uitleg, website als "soms". *Wat kan een idee worden?*: *Juist iets technisch of ingewikkelds? Mooi. Daar begint het vaak.*; lijst begint met interactieve uitleg, website en webshop achteraan, "interactieve demo" heet "demo of showroomconcept". *Klein, bewust*: Martijn stelt zich voor (elektrotechniek, techniek en commercie in verlichting, lichtsturing en slimme gebouwen; hoe werkt het echt en hoe maak je het eenvoudig). Geen werkgever genoemd. Prijzen ongewijzigd. | Eigenaar: Denckh mag niet primair overkomen als websitebouwer; de technische en commerciële achtergrond moet zichtbaar zijn. Tekst over Martijn aangeleverd door de eigenaar. | Vast |
 
 ---
 
@@ -203,7 +204,6 @@ Pas de oude regel niet aan. *Voorstel* = wacht op akkoord van de eigenaar.
 | O-25 | **Beelden Loflijn en Deegh** (naam en link mogen, B-029). Deegh-logo is binnen (B-040, eigen werk B-053, echt bestand B-060). | Scherpere logoversie (SVG) en screenshots of foto's aanleveren; de schematische constructie eindigt dan in het echte beeld. |
 | O-30 | **Handelsnaam Denckh bij KvK.** De site noemt KvK 83176896 (de inschrijving van Deegh). | Controleren dat Denckh als handelsnaam bij deze inschrijving staat; zo niet, laten toevoegen bij KvK. |
 | O-26 | **Deegh-beelden:** welke foto's zijn echt en van jou? | Pas daarna echte beelden in de Deegh-case. |
-| O-27 | **Naam** in "klein, bewust" (portret staat er sinds B-043). | Naam tonen, of bewust weglaten. |
 | O-28 | **JS-gewicht:** 192 KB gzip, waarvan ca. 150 KB Next.js-runtime. Accepteren, of later naar Astro? | Accepteren; herzien als de site groeit. |
 | O-34 | **Logo-lab** (`denckh.nl/logo-lab/`): nu merkproefpagina (B-048). Woordmerk blijft; lettersnedes staan als archief onder "eerdere proeven". | Pagina weghalen of houden zodra de krul-toepassingen vaststaan. |
 | O-36 | **GitHub Pages meldt `http://denckh.nl/` als omgeving-URL.** Mogelijk staat "Enforce HTTPS" uit. | Eigenaar controleert in GitHub → Settings → Pages; niet door Claude aangepast (buiten scope). |
@@ -211,7 +211,7 @@ Pas de oude regel niet aan. *Voorstel* = wacht op akkoord van de eigenaar.
 | O-02 | Repo is publiek. | Op privé zetten kan alleen met betaald GitHub-plan voor Pages; anders bewust publiek laten en niets vertrouwelijks opnemen. |
 
 Afgehandeld: O-01 (repo hernoemd naar `denckh`), O-08 (live sites via geautoriseerde browsersessie bekeken, zie
-cases), O-14 (domein actief op GitHub Pages), O-31/O-32/O-33 (B-038), O-35 (B-053), O-38 (B-073), O-39 (B-067).
+cases), O-14 (domein actief op GitHub Pages), O-31/O-32/O-33 (B-038), O-27 (B-074), O-35 (B-053), O-38 (B-073), O-39 (B-067).
 
 ---
 

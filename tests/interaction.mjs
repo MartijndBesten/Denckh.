@@ -45,7 +45,7 @@ const browser = await chromium.launch();
 {
   const { p, ctx, errors } = await page(browser);
   check("hero: punt staat in de kop", (await p.locator(".punt--idle").count()) === 1);
-  check("hero: goedgekeurde intro", /Weet je nog niet wat het moet worden\? Ook goed\./.test((await p.locator(".punt__intro").textContent()) ?? ""));
+  check("hero: goedgekeurde intro", /Een technisch product, een ingewikkeld verhaal, een praktisch probleem of een goed idee\./.test((await p.locator(".punt__intro").textContent()) ?? ""));
   const ghost = await p.locator(".punt__ghost").getAttribute("d");
   check("hero: hulplijn is de Denckh-krul (vier bochten na de aanloop)", (ghost?.match(/C /g) ?? []).length === 5, `${(ghost?.match(/C /g) ?? []).length} bochten`);
   check("hero: favicon en OG-beeld ongewijzigd", (await p.locator('link[rel="icon"]').getAttribute("href")) === "/favicon.svg" && (await p.locator('meta[property="og:image"]').getAttribute("content")) === "https://denckh.nl/og.png");
